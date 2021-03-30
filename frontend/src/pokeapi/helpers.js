@@ -21,7 +21,6 @@ export const pipePromise = (...promiseFns) => promiseFns.reduce(pipe2PromiseFns,
 /**
  * OTHER HELPERS
  */
-
 export const mapPromise = (promiseFn) => (array) => Promise.all(array.map(promiseFn));
 
 export const prop = (key) => (keyable) => keyable[key];
