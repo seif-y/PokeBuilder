@@ -8,7 +8,7 @@ function App() {
         <Router>
             <div className="root">
                 <SideNavbar />
-                <div className="main-app">
+                <div className="main-content">
                     <Switch>
                         <Route path="/pokedex">
                             <div>look at all these pokemon</div>
