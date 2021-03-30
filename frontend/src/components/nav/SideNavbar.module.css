@@ -1,4 +1,7 @@
 .navbar {
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* The background colour is just for testing purposes rn, not the final colour lol */
     background-color: teal;
 }
