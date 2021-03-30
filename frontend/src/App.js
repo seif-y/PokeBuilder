@@ -1,19 +1,31 @@
-import logo from "./logo.svg";
 import "./App.css";
+import SideNavbar from "./components/nav/SideNavbar";
+import React from "react";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 
 function App() {
     return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-                    Learn React
-                </a>
-            </header>
-        </div>
+        <Router>
+            <div className="root">
+                <SideNavbar />
+                <div className="main-app">
+                    <Switch>
+                        <Route path="/pokedex">
+                            <div>look at all these pokemon</div>
+                        </Route>
+                        <Route path="/teams">
+                            <div>build your team</div>
+                        </Route>
+                        <Route path="/">
+                            <Redirect to="/pokedex" />
+                        </Route>
+                        <Route path="*">
+                            <div>syke! thats the wrong number!</div>
+                        </Route>
+                    </Switch>
+                </div>
+            </div>
+        </Router>
     );
 }
 
