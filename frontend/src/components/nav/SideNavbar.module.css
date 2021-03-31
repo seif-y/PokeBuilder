@@ -1,7 +1,17 @@
 .navbar {
     min-height: 100vh;
+    padding-top: 10px;
     display: flex;
     flex-direction: column;
     /* The background colour is just for testing purposes rn, not the final colour lol */
     background-color: teal;
+}
+
+.navbarIconContainer {
+    max-width: 50px;
+    margin: 10px 10px;
+}
+
+.navbarIconImage {
+    max-width: 100%;
 }
