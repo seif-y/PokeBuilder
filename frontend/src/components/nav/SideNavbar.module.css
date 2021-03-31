@@ -1,6 +1,5 @@
 .navbar {
     min-height: 100vh;
-    padding-top: 10px;
     display: flex;
     flex-direction: column;
     /* The background colour is just for testing purposes rn, not the final colour lol */
@@ -9,7 +8,7 @@
 
 .navbarIconContainer {
     max-width: 50px;
-    margin: 10px 10px;
+    margin: 20px 10px 0 10px;
 }
 
 .navbarIconImage {
