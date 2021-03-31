@@ -1,7 +1,9 @@
 import "./App.css";
-import SideNavbar from "./components/nav/SideNavbar";
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import SideNavbar from "./components/nav/SideNavbar";
+import Pokedex from "./components/pokedex/Pokedex";
+import TeamBuilder from "./components/team-builder/TeamBuilder";
 
 function App() {
     return (
@@ -11,10 +13,10 @@ function App() {
                 <div className="main-content">
                     <Switch>
                         <Route path="/pokedex">
-                            <div>look at all these pokemon</div>
+                            <Pokedex />
                         </Route>
                         <Route path="/teams">
-                            <div>build your team</div>
+                            <TeamBuilder />
                         </Route>
                         <Route path="/">
                             <Redirect to="/pokedex" />
