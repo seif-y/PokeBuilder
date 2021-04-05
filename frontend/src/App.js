@@ -18,7 +18,7 @@ function App() {
                         <Route path="/teams">
                             <TeamBuilder />
                         </Route>
-                        <Route path="/">
+                        <Route path="/" exact>
                             <Redirect to="/pokedex" />
                         </Route>
                         <Route path="*">
