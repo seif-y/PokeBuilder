@@ -5,8 +5,9 @@ import styles from "./PokeType.module.css";
  * Small icon representing an elemental type.
  * @param typeName: A string that is one of the 18 Pokemon types
  * @param onClick: An optional argument function that is run on click
+ * @param size: An optional string argument for either "small" or "medium" component sizes
  */
-export default function PokeType({ typeName, onClick, size }) {
+export default function PokeType({ typeName, onClick, size="medium" }) {
     const getGradientFormat = ([p0, p20, p40, p60, p80, p100]) =>
         `linear-gradient(225deg,${p0} 0%, ${p20} 20%, ${p40} 40%, ${p60} 60%, ${p80} 80%, ${p100} 100%`;
 
@@ -54,9 +55,6 @@ export default function PokeType({ typeName, onClick, size }) {
     // Set the size of the component
     if (size && sizeStyles.hasOwnProperty(size)) {
         sizeStyle = sizeStyles[size.toLowerCase()];
-    } else {
-        // Default to medium size
-        sizeStyle = sizeStyles["medium"];
     }
 
     return (
