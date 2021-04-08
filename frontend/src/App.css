@@ -7,3 +7,14 @@
     flex-grow: 1;
     text-align: center;
 }
+
+.not-found-image {
+    margin-top: 50px;
+    border: solid 5px black;
+}
+
+@media only screen and (max-width: 600px) {
+    .not-found-image {
+        width: 50%;
+    }
+}
