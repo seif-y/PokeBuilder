@@ -1,16 +1,17 @@
 .container {
-    margin: 5px;
+    margin: 10px;
     padding-bottom: 2px;
     width: 150px;
     max-width: 150px;
     border-radius: 4px;
     text-align: center;
-    transition: top ease 0.5s;
+    transition: 0.5s;
+    margin-right: 15px;
+    margin-left: 15px;
 }
 
 .container:hover {
     box-shadow: 0px 2px 6px #262626;
-    top: -10px;
 }
 
 .content {
@@ -27,11 +28,11 @@
     width: 120%;
     height: auto;
     image-rendering: smooth;
-    z-index: 5;
+    z-index: 1;
 }
 
 .bgCircle {
-    background: #e2e2e2;
+    background: linear-gradient(225deg, #f1f1f1 0%, #cacaca 100%);;
     width: 140px;
     height: 140px;
     z-index: -1;
@@ -41,14 +42,34 @@
     margin-bottom: -100%;
 }
 
+.idContainer {
+    width: 60px;
+    height: 25px;
+    background: linear-gradient(225deg, #e3e3e3 0%, #9F9F9F 100%);
+    border-radius: 4px;
+    text-align: center;
+    z-index: 2;
+    position: relative;
+    bottom: 200px;
+    left: 50px;
+    margin-bottom: -100%;
+    color: white;
+    font-family: "Segoe UI", serif;
+    font-weight: bold;
+    text-shadow: 0px 0px 3px #262626;
+    box-shadow: 0px 2px 3px #262626;
+}
+
 .name {
     display: block;
     font-size: 18px;
     font-weight: bold;
-    font-family: "Segoe UI";
+    font-family: "Roboto", serif;
+    width: 100%;
 }
 
 .types {
     display: flex;
-
+    width: 100%;
+    justify-content: center;
 }

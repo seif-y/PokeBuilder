@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-d
 import SideNavbar from "./components/nav/SideNavbar";
 import Pokedex from "./components/pokedex/Pokedex";
 import TeamBuilder from "./components/team-builder/TeamBuilder";
+import PokemonCardView from "./components/pokedex/PokemonCardView";
 
 function App() {
     return (
@@ -14,6 +15,24 @@ function App() {
                     <Switch>
                         <Route path="/pokedex">
                             <Pokedex />
+                            <PokemonCardView
+                                id={1}
+                                name="bulbasaur"
+                                sprite="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
+                                types={["grass", "poison"]}
+                            />
+                            <PokemonCardView
+                                id={4}
+                                name="charmander"
+                                sprite="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png"
+                                types={["fire"]}
+                            />
+                            <PokemonCardView
+                                id={7}
+                                name="squirtle"
+                                sprite="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png"
+                                types={["water"]}
+                            />
                         </Route>
                         <Route path="/teams">
                             <TeamBuilder />
