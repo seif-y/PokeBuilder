@@ -22,7 +22,10 @@ function App() {
                             <Redirect to="/pokedex" />
                         </Route>
                         <Route path="*">
-                            <div>syke! thats the wrong number!</div>
+                            <div>
+                                <img className="not-found-image" src="/images/missingno.gif" alt="MissingNo." />
+                                <h3>The page you're looking for was not found.</h3>
+                            </div>
                         </Route>
                     </Switch>
                 </div>
