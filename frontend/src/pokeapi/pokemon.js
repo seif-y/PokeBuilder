@@ -29,7 +29,7 @@ const formatToPokemonInformation = async (pokemonData) => {
             getDataFromUrl,
             prop("flavor_text_entries"),
             filter(pipe(prop("language"), propEq("en")("name"))),
-            last, // gets the most up-to-date english entry
+            last, // Of the english entries, get the one most up-to-date
             prop("flavor_text"),
             replace(/\n/g, " ")
         )(url);
@@ -45,7 +45,6 @@ const formatToPokemonInformation = async (pokemonData) => {
 
 // Returns a PokemonInformation object
 export async function getPokemonInformation(pokemonIdOrName) {
-    console.log(pokemonIdOrName);
     const url = `${DOMAIN}/pokemon/${pokemonIdOrName}`;
     return pipePromise(getDataFromUrl, formatToPokemonInformation)(url);
 }
