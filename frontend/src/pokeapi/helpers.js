@@ -21,6 +21,22 @@ export const pipePromise = (...promiseFns) => promiseFns.reduce(pipe2PromiseFns,
 /**
  * OTHER HELPERS
  */
+
+export const filter = (predicate) => (array) => array.filter(predicate);
+
+export const last = (array) => array[array.length - 1];
+
 export const mapPromise = (promiseFn) => (array) => Promise.all(array.map(promiseFn));
 
 export const prop = (key) => (keyable) => keyable[key];
+
+export const propEq = (value) => (key) => (keyable) => keyable[key] === value;
+
+export const replace = (regex, replacement) => (string) => string.replace(regex, replacement);
+
+// (["a", "b"], ["y", "z"]) => ({a: "y", b: "z"})
+export const zipToObject = (arrayOfKeys, arrayOfValues) =>
+    arrayOfKeys.reduce((object, key, index) => {
+        object[key] = arrayOfValues[index];
+        return object;
+    }, {});

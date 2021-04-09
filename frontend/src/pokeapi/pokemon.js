@@ -1,5 +1,7 @@
-import { mapPromise, pipe, pipePromise, prop } from "./helpers";
+import { filter, last, mapPromise, pipe, pipePromise, prop, propEq, replace, zipToObject } from "./helpers";
 import axios from "axios";
+
+const DOMAIN = "https://pokeapi.co/api/v2";
 
 // expects URL string and returns Promise(any)
 const getDataFromUrl =
@@ -14,11 +16,44 @@ const formatToPokemonView = (pokemonData) => ({
     types: pokemonData.types.map(pipe(prop("type"), prop("name"))),
 });
 
+// Larger data structure for more detail
+const formatToPokemonInformation = async (pokemonData) => {
+    const formatStats = (pokemonStats) => {
+        const statNamesInApiOrder = ["hp", "attack", "defense", "specialAttack", "specialDefense", "speed"];
+        const baseStats = pokemonStats.map(prop("base_stat"));
+        return zipToObject(statNamesInApiOrder, baseStats);
+    };
+    const getPokedexDescription = (pokemonId) => {
+        const url = `${DOMAIN}/pokemon-species/${pokemonId}`;
+        return pipePromise(
+            getDataFromUrl,
+            prop("flavor_text_entries"),
+            filter(pipe(prop("language"), propEq("en")("name"))),
+            last, // gets the most up-to-date english entry
+            prop("flavor_text"),
+            replace(/\n/g, " ")
+        )(url);
+    };
+
+    return Object.assign(
+        {},
+        formatToPokemonView(pokemonData),
+        { baseStats: formatStats(pokemonData.stats) },
+        { description: await getPokedexDescription(pokemonData.id) }
+    );
+};
+
+// Returns a PokemonInformation object
+export async function getPokemonInformation(pokemonIdOrName) {
+    console.log(pokemonIdOrName);
+    const url = `${DOMAIN}/pokemon/${pokemonIdOrName}`;
+    return pipePromise(getDataFromUrl, formatToPokemonInformation)(url);
+}
+
 // Returns a list of PokemonViews
 export async function getPokemonViewList() {
-    const domain = "https://pokeapi.co/api/v2/pokemon";
     const numberOfPokemon = 151;
-    const originalUrl = `${domain}?limit=${numberOfPokemon}`;
+    const originalUrl = `${DOMAIN}/pokemon?limit=${numberOfPokemon}`;
 
     return pipePromise(
         getDataFromUrl,
