@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-d
 import SideNavbar from "./components/nav/SideNavbar";
 import Pokedex from "./components/pokedex/Pokedex";
 import TeamBuilder from "./components/team-builder/TeamBuilder";
-import PokemonCardView from "./components/pokedex/PokemonCardView";
 
 function App() {
     return (
