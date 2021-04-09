@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "./PokemonCardView.module.css";
 import PokeType from "../global/PokeType";
 
@@ -10,23 +11,26 @@ import PokeType from "../global/PokeType";
  * @param types: An array of strings representing each type name in lowercase
  */
 export default function PokemonCardView({ id, name, sprite, types }) {
-    // Capitalise the name
-    name = name.charAt(0).toUpperCase() + name.slice(1)
+    let capitalisedName = name.charAt(0).toUpperCase() + name.slice(1)
 
     return (
         <div className={styles.container}>
-            <div className={styles.content}>
-                <img className={styles.sprite} src={sprite} alt={`Pokémon #${id}`}/>
-                <div className={styles.bgCircle}/>
-                <span className={styles.name}>{name}</span>
-                <div className={styles.types}>
-                    <PokeType typeName={types[0]} size="small"/>
-                    {types[1] ? <PokeType typeName={types[1]} size="small"/> : null}
+            <Link className={styles.link} to={`/pokedex/${name}`} >
+                <div className={styles.content}>
+
+                    <img className={styles.sprite} src={sprite} alt={`Pokémon #${id}`}/>
+                    <div className={styles.bgCircle}/>
+                    <span className={styles.name}>{capitalisedName}</span>
+                    <div className={styles.types}>
+                        <PokeType typeName={types[0]} size="small"/>
+                        {types[1] ? <PokeType typeName={types[1]} size="small"/> : null}
+                    </div>
+                    <div className={styles.idContainer}>
+                        <div>{`#${id}`}</div>
+                    </div>
+
                 </div>
-                <div className={styles.idContainer}>
-                    <div>{`#${id}`}</div>
-                </div>
-            </div>
+            </Link>
         </div>
     )
 }
