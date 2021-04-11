@@ -33,12 +33,3 @@ export function getGradientTypeColor(typeName) {
         return null;
     }
 }
-
-export function getSolidTypeColor(typeName) {
-    let type = typeName.toLowerCase();
-    if (gradientColors.hasOwnProperty(type)) {
-        return gradientColors[type][5];
-    } else {
-        return null;
-    }
-}
