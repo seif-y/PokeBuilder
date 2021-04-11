@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./PokeType.module.css";
-import { getSolidTypeColor } from "../../util/typeColors";
+import { getSolidTypeColor } from "../../util/types";
 
 /**
  * Small icon representing an elemental type.

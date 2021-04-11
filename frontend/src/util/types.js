@@ -20,6 +20,10 @@ const gradientColors = {
     water: ["#76baf0", "#64acee", "#549feb", "#4b95e4", "#4088d8", "#397cca"],
 };
 
+export function getAllTypes() {
+    return Object.keys(gradientColors);
+}
+
 export function getGradientTypeColor(typeName) {
     let type = typeName.toLowerCase();
     if (gradientColors.hasOwnProperty(type)) {
