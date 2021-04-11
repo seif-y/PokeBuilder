@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./PokeType.module.css";
-import { getSolidTypeColor } from "../../util/types";
+import { getGradientTypeColor } from "../../util/types";
 
 /**
  * Small icon representing an elemental type.
@@ -23,7 +23,7 @@ export default function PokeType({ typeName, onClick, size = "medium" }) {
 
     typeName = typeName.toLowerCase();
 
-    let typeColor = getSolidTypeColor(typeName);
+    let typeColor = getGradientTypeColor(typeName);
 
     // If the type color is not found, then the type is invalid, so return null
     if (typeColor === null) {
