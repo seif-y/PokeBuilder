@@ -20,7 +20,8 @@ const gradientColors = {
     water: ["#76baf0", "#64acee", "#549feb", "#4b95e4", "#4088d8", "#397cca"],
 };
 
-export function getGradientTypeColor(type) {
+export function getGradientTypeColor(typeName) {
+    let type = typeName.toLowerCase();
     if (gradientColors.hasOwnProperty(type)) {
         let gradient = gradientColors[type];
         return `linear-gradient(225deg,${gradient[0]} 0%, ${gradient[1]} 20%, ${gradient[2]} 40%, ${gradient[3]} 60%, ${gradient[4]} 80%, ${gradient[5]} 100%)`;
@@ -29,7 +30,8 @@ export function getGradientTypeColor(type) {
     }
 }
 
-export function getSolidTypeColor(type) {
+export function getSolidTypeColor(typeName) {
+    let type = typeName.toLowerCase();
     if (gradientColors.hasOwnProperty(type)) {
         return gradientColors[type][5];
     } else {
