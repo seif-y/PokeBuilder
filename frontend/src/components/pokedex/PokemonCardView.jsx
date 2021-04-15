@@ -11,19 +11,19 @@ import PokeType from "../global/PokeType";
  * @param types: An array of strings representing each type name in lowercase
  */
 export default function PokemonCardView({ id, name, sprite, types }) {
-    let capitalisedName = name.charAt(0).toUpperCase() + name.slice(1)
+    let capitalisedName = name.charAt(0).toUpperCase() + name.slice(1);
 
     return (
         <div className={styles.container}>
-            <Link className={styles.link} to={`/pokedex/${name}`} >
+            <Link className={styles.link} to={`/pokedex/${name}`}>
                 <div className={styles.content}>
 
-                    <img className={styles.sprite} src={sprite} alt={`Pokémon #${id}`}/>
-                    <div className={styles.bgCircle}/>
+                    <img className={styles.sprite} src={sprite} alt={`Pokémon #${id}`} />
+                    <div className={styles.bgCircle} />
                     <span className={styles.name}>{capitalisedName}</span>
                     <div className={styles.types}>
-                        <PokeType typeName={types[0]} size="small"/>
-                        {types[1] ? <PokeType typeName={types[1]} size="small"/> : null}
+                        <PokeType typeName={types[0]} size="small" />
+                        {types[1] ? <PokeType typeName={types[1]} size="small" /> : null}
                     </div>
                     <div className={styles.idContainer}>
                         <div>{`#${id}`}</div>
@@ -32,5 +32,5 @@ export default function PokemonCardView({ id, name, sprite, types }) {
                 </div>
             </Link>
         </div>
-    )
+    );
 }
