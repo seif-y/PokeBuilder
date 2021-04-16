@@ -20,7 +20,9 @@ export default function PokemonCardView({ id, name, sprite, types }) {
 
                     <img className={styles.sprite} src={sprite} alt={`Pokémon #${id}`} />
                     <div className={styles.bgCircle} />
-                    <span className={styles.name}>{capitalisedName}</span>
+                    <div className={styles.nameContainer}>
+                        <span className={styles.name}>{capitalisedName}</span>
+                    </div>
                     <div className={styles.types}>
                         <PokeType typeName={types[0]} size="small" />
                         {types[1] ? <PokeType typeName={types[1]} size="small" /> : null}
