@@ -35,8 +35,8 @@
 }
 
 .sprite {
-    width: 120%;
-    height: auto;
+    width: 180px;
+    height: 180px;
     image-rendering: smooth;
     z-index: 1;
 }
