@@ -1,0 +1,31 @@
+.barContainer {
+    position: relative;
+    width: 20rem;
+    --placeHolderColour: #a9a9a9;
+}
+
+input {
+    outline: none;
+    overflow: hidden;
+
+    height: 2rem;
+    width: 100%;
+    font-size: 1.1rem;
+
+    padding-right: 2rem;
+    padding-left: 0.75rem;
+
+    border-radius: 2rem;
+    border: 0.1rem solid black;
+}
+
+::placeholder {
+    color: var(--placeHolderColour);
+}
+
+.searchIcon {
+    position: absolute;
+    right: -2.5rem;
+    top: 0.4rem;
+    color: var(--placeHolderColour);
+}
