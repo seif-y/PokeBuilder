@@ -1,31 +1,11 @@
 import { useState } from "react";
+import { getAllTypes } from "../../../util/types";
 import styles from "./TypeFilter.module.css";
 import { FilterList as FilterIcon } from "@material-ui/icons";
 import Modal from "../../global/Modal";
 import PokeType from "../../global/PokeType";
 
-const allTypes = [
-    "bug",
-    "dark",
-    "dragon",
-    "electric",
-    "fairy",
-    "fighting",
-    "fire",
-    "flying",
-    "ghost",
-    "grass",
-    "ground",
-    "ice",
-    "normal",
-    "poison",
-    "psychic",
-    "rock",
-    "steel",
-    "water",
-];
-
-// TODO get rid of allTypes and call the function instead
+const allTypes = getAllTypes();
 
 export default function TypeFilter({ onFiltersUpdated }) {
     const [clickStates, setClickStates] = useState(Array(18).fill(false));
