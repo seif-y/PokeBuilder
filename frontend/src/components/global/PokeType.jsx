@@ -42,9 +42,9 @@ export default function PokeType({ typeName, onClick, size = "medium" }) {
             className={styles.container}
             style={{ background: typeColor, ...sizeStyle }}
             role="button"
-            onClick={onClick}
+            onClick={() => onClick(typeName)}
         >
-            <span>{(shortenedTypeName[typeName] || typeName).toUpperCase()}</span>
+            {(shortenedTypeName[typeName] || typeName).toUpperCase()}
         </div>
     );
 }
