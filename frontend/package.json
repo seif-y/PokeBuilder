@@ -4,6 +4,8 @@
   "private": true,
   "proxy": "http://localhost:3001/",
   "dependencies": {
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.3",
@@ -43,6 +45,7 @@
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
-    "react-cosmos": "^5.6.1"
+    "prettier": "^2.2.1",
+    "react-cosmos": "^5.6.2"
   }
 }
