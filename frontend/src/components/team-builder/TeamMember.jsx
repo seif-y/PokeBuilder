@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PokeType from "../global/PokeType";
 import Modal from "../global/Modal";
+import TeamMemberSearch from "./TeamMemberSearch";
 import styles from "./TeamMember.module.css";
 import CloseIcon from "@material-ui/icons/Close";
 
@@ -34,14 +35,8 @@ export default function TeamMemberSlot() {
         }
     }
 
-    function choosePokemon() {
-        setPokemon({
-            name: "dragonite",
-            id: 149,
-            sprite:
-                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/149.png",
-            types: ["dragon", "flying"],
-        });
+    function choosePokemon(pokemon) {
+        setPokemon(pokemon);
         setShowModal(false);
     }
 
@@ -56,7 +51,7 @@ export default function TeamMemberSlot() {
                 {renderPokemon()}
             </div>
             <Modal show={showModal} dismissOnClickOutside onCancel={() => setShowModal(false)}>
-                <button onClick={() => choosePokemon()}>yurt</button>
+                <TeamMemberSearch onSelect={(pokemon) => choosePokemon(pokemon)} />
             </Modal>
         </React.Fragment>
     );
