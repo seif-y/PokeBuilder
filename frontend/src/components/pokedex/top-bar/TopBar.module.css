@@ -1,5 +1,6 @@
 .topBar {
     display: flex;
+    position: relative;
     justify-content: flex-end;
     align-items: center;
     padding: 10px 20px;

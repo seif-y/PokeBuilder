@@ -6,3 +6,10 @@
     max-width: 80%;
     margin: 0 auto;
 }
+
+.title {
+    font-size: 40px;
+    font-weight: bold;
+    position: absolute;
+    left: 10px;
+}

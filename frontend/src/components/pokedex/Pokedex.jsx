@@ -61,6 +61,7 @@ export default function Pokedex() {
     return (
         <>
             <TopBar>
+                <span className={styles.title}>DEX</span>
                 <SearchBar onSearch={handleOnSearch} />
                 <TypeFilter onFiltersUpdated={handleOnFiltersUpdated} />
             </TopBar>
