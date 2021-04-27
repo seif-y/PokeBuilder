@@ -1,0 +1,25 @@
+.container {
+    border: 1px solid darkgray;
+    display: flex;
+    min-height: 120px;
+}
+
+.pokemonSprite {
+    max-height: 100px;
+    width: auto;
+}
+
+.pokemonInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.pokemonName {
+    margin: 0;
+}
+
+.typeContainer {
+    display: flex;
+    flex-direction: row;
+}

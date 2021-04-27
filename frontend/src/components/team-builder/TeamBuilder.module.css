@@ -1,0 +1,12 @@
+.teamBuilderContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 0 80px 0 80px;
+}
+
+.teamContainer {
+    display: grid;
+    grid-row-gap: 20px;
+    grid-column-gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+}
