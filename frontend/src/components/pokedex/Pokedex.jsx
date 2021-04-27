@@ -57,7 +57,6 @@ export default function Pokedex() {
         );
     }
 
-    // todo remove horizontal scroll when modal pops up
     return (
         <>
             <TopBar>

@@ -1,8 +1,13 @@
 .topBar {
+    box-sizing: border-box;
     display: flex;
-    position: relative;
     justify-content: flex-end;
     align-items: center;
-    padding: 10px 20px;
+    padding: 10px calc(var(--stickySpacing) / 2);
     background-color: red;
+
+    position: fixed;
+    top: 0;
+    width: calc(100% - var(--sideNavBarWidth));
+    z-index: 2;
 }
