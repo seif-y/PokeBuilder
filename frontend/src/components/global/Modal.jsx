@@ -4,8 +4,10 @@ import styles from "./Modal.module.css";
 
 export default function Modal({ dismissOnClickOutside, onCancel, children, show }) {
     if (!show) {
+        document.body.style.overflow = "unset";
         return null;
     }
+    document.body.style.overflow = "hidden";
     const modalRoot = document.querySelector("#modal-root");
 
     return ReactDOM.createPortal(
