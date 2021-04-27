@@ -8,7 +8,7 @@ import TeamBuilder from "./components/team-builder/TeamBuilder";
 function App() {
     return (
         <Router>
-            <div className="root">
+            <div id="modal-root" className="root">
                 <SideNavbar />
                 <div className="main-content">
                     <Switch>
