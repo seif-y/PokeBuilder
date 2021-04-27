@@ -21,6 +21,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    flex-grow: 1;
 }
 
 .pokemonName {
@@ -32,4 +33,16 @@
     flex-direction: row;
     margin-left: -5px;
     margin-bottom: 5px;
+}
+
+.closeButton {
+    border-radius: 8px;
+    margin-left: auto;
+    margin-top: 20px;
+    align-self: flex-start;
+    transition: 0.3s !important;
+}
+
+.closeButton:hover {
+    background-color: lightgray;
 }

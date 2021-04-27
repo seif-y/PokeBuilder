@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import PokeType from "../global/PokeType";
+import Modal from "../global/Modal";
 import styles from "./TeamMember.module.css";
+import CloseIcon from "@material-ui/icons/Close";
 
 export default function TeamMemberSlot() {
     const [pokemon, setPokemon] = useState(null);
+    const [showModal, setShowModal] = useState(false);
 
     function renderTypes() {
         return pokemon.types.map((type, index) => {
-            return <PokeType size="small" typeName={type} onClick={(e) => e.preventDefault()} />;
+            return <PokeType size="small" typeName={type} onClick={(e) => e.stopPropagation()} />;
         });
     }
 
@@ -23,12 +26,38 @@ export default function TeamMemberSlot() {
                             {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
                         </h3>
                         <div className={styles.typeContainer}>{renderTypes()}</div>
-                        <input type="text" placeholder="Notes" />
+                        <input type="text" placeholder="Notes" onClick={(e) => e.stopPropagation()} />
                     </div>
+                    <CloseIcon className={styles.closeButton} onClick={(e) => clearPokemon(e)} />
                 </React.Fragment>
             );
         }
     }
 
-    return <div className={styles.container}>{renderPokemon()}</div>;
+    function choosePokemon() {
+        setPokemon({
+            name: "dragonite",
+            id: 149,
+            sprite:
+                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/149.png",
+            types: ["dragon", "flying"],
+        });
+        setShowModal(false);
+    }
+
+    function clearPokemon(e) {
+        e.stopPropagation();
+        setPokemon(null);
+    }
+
+    return (
+        <React.Fragment>
+            <div className={styles.container} onClick={() => (pokemon ? null : setShowModal(true))}>
+                {renderPokemon()}
+            </div>
+            <Modal show={showModal} dismissOnClickOutside onCancel={() => setShowModal(false)}>
+                <button onClick={() => choosePokemon()}>yurt</button>
+            </Modal>
+        </React.Fragment>
+    );
 }
