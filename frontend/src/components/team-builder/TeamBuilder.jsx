@@ -1,5 +1,5 @@
 import React from "react";
-import TeamMember from "./TeamMember";
+import TeamMember from "./team-selector/TeamMember";
 import styles from "./TeamBuilder.module.css";
 
 export default function TeamBuilder() {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import PokeType from "../global/PokeType";
-import Modal from "../global/Modal";
+import PokeType from "../../global/PokeType";
+import Modal from "../../global/Modal";
 import TeamMemberSearch from "./TeamMemberSearch";
 import styles from "./TeamMember.module.css";
 import CloseIcon from "@material-ui/icons/Close";
