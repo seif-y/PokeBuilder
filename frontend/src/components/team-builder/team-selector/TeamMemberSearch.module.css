@@ -1,12 +1,33 @@
-.pokemonList {
+.tableContainer {
     margin-top: 20px;
+    border: 2px solid lightgray;
     height: 400px;
     overflow-x: auto;
-    border: solid 1px gray;
 }
 
-.pokemonListItem {
-    border: solid gray;
-    border-width: 1px 0 1px 0;
-    padding: 4px 0 4px 0;
+.table {
+    width: 100%;
+}
+
+.tableRow {
+    background-color: whitesmoke;
+}
+
+.tableRow:nth-of-type(even) {
+    background-color: white;
+}
+
+.tableRow:hover {
+    cursor: pointer;
+    background-color: lightgray;
+}
+
+.pokemonName {
+    text-align: left;
+}
+
+.pokemonSprite {
+    height: 32px;
+    width: auto;
+    margin: 4px 0 4px 0;
 }

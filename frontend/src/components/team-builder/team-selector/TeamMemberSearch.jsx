@@ -21,17 +21,29 @@ export default function TeamMemberSearch({ onSelect }) {
     }
 
     function renderPokemonList() {
+        if (displayedPokemon.length < 1) {
+            return <p>No results found</p>;
+        }
+
         return displayedPokemon.map((pokemon) => (
-            <div className={styles.pokemonListItem} onClick={() => onSelect(pokemon)}>
-                #{pokemon.id} - {pokemon.name}
-            </div>
+            <tr className={styles.tableRow} onClick={() => onSelect(pokemon)}>
+                <td>
+                    <img className={styles.pokemonSprite} src={pokemon.sprite} alt={pokemon.name} />
+                </td>
+                <td className={styles.pokemonName}>{pokemon.name}</td>
+                <td>#{pokemon.id}</td>
+            </tr>
         ));
     }
 
     return (
         <div>
             <SearchBar onSearch={(searchTerm) => filterResults(searchTerm)} />
-            <div className={styles.pokemonList}>{displayedPokemon ? renderPokemonList() : "..."}</div>
+            <div className={styles.tableContainer}>
+                <table className={styles.table} cellSpacing="0">
+                    {displayedPokemon ? renderPokemonList() : "..."}
+                </table>
+            </div>
         </div>
     );
 }
