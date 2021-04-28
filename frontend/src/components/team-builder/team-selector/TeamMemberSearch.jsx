@@ -25,25 +25,27 @@ export default function TeamMemberSearch({ onSelect }) {
             return <p>No results found</p>;
         }
 
-        return displayedPokemon.map((pokemon) => (
-            <tr key={pokemon.name} className={styles.tableRow} onClick={() => onSelect(pokemon)}>
-                <td className={styles.pokemonSprite}>
-                    <img src={pokemon.sprite} alt={pokemon.name} />
-                </td>
-                <td className={styles.pokemonName}>{pokemon.name}</td>
-                <td className={styles.pokemonID}>#{pokemon.id}</td>
-            </tr>
-        ));
+        return (
+            <table className={styles.table} cellSpacing="0">
+                <tbody>
+                    {displayedPokemon.map((pokemon) => (
+                        <tr key={pokemon.name} className={styles.tableRow} onClick={() => onSelect(pokemon)}>
+                            <td className={styles.pokemonSprite}>
+                                <img src={pokemon.sprite} alt={pokemon.name} />
+                            </td>
+                            <td className={styles.pokemonName}>{pokemon.name}</td>
+                            <td className={styles.pokemonID}>#{pokemon.id}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        );
     }
 
     return (
         <div>
             <SearchBar onSearch={(searchTerm) => filterResults(searchTerm)} />
-            <div className={styles.tableContainer}>
-                <table className={styles.table} cellSpacing="0">
-                    <tbody>{displayedPokemon ? renderPokemonList() : <p>...</p>}</tbody>
-                </table>
-            </div>
+            <div className={styles.tableContainer}>{displayedPokemon ? renderPokemonList() : <p>...</p>}</div>
         </div>
     );
 }
