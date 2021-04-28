@@ -12,9 +12,9 @@ export default function TypeFilter({ onFiltersUpdated }) {
     const [showModal, setShowModal] = useState(false);
     const [typeFilters, setTypeFilters] = useState(new Set());
 
-    function handleOnCancel() {
+    function handleOnCancel(typeFiltersHaveBeenRemoved) {
         if (onFiltersUpdated) {
-            onFiltersUpdated(Array.from(typeFilters));
+            onFiltersUpdated(typeFiltersHaveBeenRemoved ? [] : Array.from(typeFilters));
         }
         setShowModal(() => false);
     }
@@ -49,17 +49,29 @@ export default function TypeFilter({ onFiltersUpdated }) {
         ));
     }
 
+    // We wrap handleOnCancel inside another function
+    // This ensures the correct boolean argument is passed
+    // E.g. onClick would otherwise pass an object (which is truthy)
+
     return (
         <>
             <FilterIcon className={styles.filter} onClick={() => setShowModal((modalIsShown) => !modalIsShown)} />
-            <Modal show={showModal} dismissOnClickOutside onCancel={handleOnCancel}>
+            <Modal show={showModal} dismissOnClickOutside onCancel={() => handleOnCancel(false)}>
                 <div className={styles.typeGrid}>
                     <div>Filter by Types</div>
                     <PokeTypes />
-                    <button className={styles.leftButton} onClick={handleOnCancel}>
+                    <button className={styles.leftButton} onClick={() => handleOnCancel(false)}>
                         Apply Filters
                     </button>
-                    <button className={styles.rightButton} onClick={handleOnRemove}>
+                    <button
+                        className={styles.rightButton}
+                        onClick={() => {
+                            handleOnRemove();
+                            // There's a race condition when setting state
+                            // So we assert that it's true that types have been removed
+                            handleOnCancel(true);
+                        }}
+                    >
                         Remove Filters
                     </button>
                 </div>

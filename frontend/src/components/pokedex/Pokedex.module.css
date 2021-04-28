@@ -1,0 +1,17 @@
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.pokemonDisplay {
+    max-width: 80%;
+    margin: 0 auto;
+    margin-top: calc(var(--stickySpacing) + 10px);
+}
+
+.title {
+    font-size: 40px;
+    font-weight: bold;
+    position: absolute;
+    left: 10px;
+}

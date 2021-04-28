@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import SearchBar from "../../pokedex/SearchBar";
+import SearchBar from "../../global/SearchBar";
 import { getPokemonViewList } from "../../../pokeapi/pokemon";
 import styles from "./TeamMemberSearch.module.css";
 
