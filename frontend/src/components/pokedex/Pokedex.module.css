@@ -1,8 +1,9 @@
-.pokemonGrid {
+.grid {
     display: grid;
-    justify-items: center;
     grid-template-columns: repeat(3, 1fr);
+}
 
+.pokemonDisplay {
     max-width: 80%;
     margin: 0 auto;
     margin-top: calc(var(--stickySpacing) + 10px);

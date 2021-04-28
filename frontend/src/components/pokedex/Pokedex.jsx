@@ -7,8 +7,11 @@ import TopBar from "./top-bar/TopBar";
 import TypeFilter from "./top-bar/TypeFilter";
 
 function GridOfPokemon({ pokemon }) {
-    return (
-        <div className={styles.pokemonGrid}>
+    const isEmpty = pokemon.length === 0;
+    return isEmpty ? (
+        <div className={styles.pokemonDisplay}>No results found</div>
+    ) : (
+        <div className={`${styles.pokemonDisplay} ${styles.grid}`}>
             {pokemon.map(({ id, name, sprite, types }) => (
                 <PokemonCard key={id} id={id} name={name} sprite={sprite} types={types} />
             ))}
