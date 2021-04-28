@@ -27,11 +27,11 @@ export default function TeamMemberSearch({ onSelect }) {
 
         return displayedPokemon.map((pokemon) => (
             <tr className={styles.tableRow} onClick={() => onSelect(pokemon)}>
-                <td>
-                    <img className={styles.pokemonSprite} src={pokemon.sprite} alt={pokemon.name} />
+                <td className={styles.pokemonSprite}>
+                    <img src={pokemon.sprite} alt={pokemon.name} />
                 </td>
                 <td className={styles.pokemonName}>{pokemon.name}</td>
-                <td>#{pokemon.id}</td>
+                <td className={styles.pokemonID}>#{pokemon.id}</td>
             </tr>
         ));
     }
