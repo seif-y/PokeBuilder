@@ -1,7 +1,22 @@
 .teamBuilderContainer {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    gap: 20px;
     padding: 0 80px 0 80px;
+}
+
+.titleContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.saveButton {
+    height: max-content;
+    font-size: large;
+    padding: 8px;
 }
 
 .teamContainer {
@@ -9,4 +24,39 @@
     grid-row-gap: 20px;
     grid-column-gap: 20px;
     grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+}
+
+.teamNameInput {
+    width: 400px;
+    font-size: x-large;
+    border-width: 0 0 2px 0;
+    border-color: lightgray;
+}
+
+.teamNameInput:focus {
+    outline: none;
+}
+
+.teamNameInput::placeholder {
+    color: lightgray;
+}
+
+.descriptionInput {
+    resize: none;
+    height: 80px;
+    width: 75%;
+    font-family: inherit;
+    font-size: large;
+    border-radius: 20px;
+    border: 2px solid lightgray;
+    padding: 10px;
+}
+
+.descriptionInput:focus {
+    outline: none;
+}
+
+.descriptionInput::placeholder {
+    color: lightgray;
 }

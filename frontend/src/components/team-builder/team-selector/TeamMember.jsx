@@ -27,7 +27,11 @@ export default function TeamMemberSlot() {
                             {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
                         </h3>
                         <div className={styles.typeContainer}>{renderTypes()}</div>
-                        <input type="text" placeholder="Notes" onClick={(e) => e.stopPropagation()} />
+                        <textarea
+                            className={styles.notesArea}
+                            placeholder="Notes"
+                            onClick={(e) => e.stopPropagation()}
+                        />
                     </div>
                     <CloseIcon className={styles.closeButton} onClick={(e) => clearPokemon(e)} />
                 </React.Fragment>

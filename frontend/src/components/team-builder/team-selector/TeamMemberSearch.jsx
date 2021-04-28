@@ -26,7 +26,7 @@ export default function TeamMemberSearch({ onSelect }) {
         }
 
         return displayedPokemon.map((pokemon) => (
-            <tr className={styles.tableRow} onClick={() => onSelect(pokemon)}>
+            <tr key={pokemon.name} className={styles.tableRow} onClick={() => onSelect(pokemon)}>
                 <td className={styles.pokemonSprite}>
                     <img src={pokemon.sprite} alt={pokemon.name} />
                 </td>
@@ -41,7 +41,7 @@ export default function TeamMemberSearch({ onSelect }) {
             <SearchBar onSearch={(searchTerm) => filterResults(searchTerm)} />
             <div className={styles.tableContainer}>
                 <table className={styles.table} cellSpacing="0">
-                    {displayedPokemon ? renderPokemonList() : "..."}
+                    <tbody>{displayedPokemon ? renderPokemonList() : <p>...</p>}</tbody>
                 </table>
             </div>
         </div>
