@@ -1,10 +1,11 @@
 .barContainer {
     position: relative;
-    width: 20rem;
+    width: 18rem;
     --placeHolderColour: #a9a9a9;
 }
 
 input {
+    box-sizing: border-box;
     outline: none;
     overflow: hidden;
 
@@ -12,7 +13,7 @@ input {
     width: 100%;
     font-size: 1.1rem;
 
-    padding-right: 2rem;
+    padding-right: 2rem; /* Leave room for the searchIcon */
     padding-left: 0.75rem;
 
     border-radius: 2rem;
@@ -25,7 +26,7 @@ input {
 
 .searchIcon {
     position: absolute;
-    right: -2.5rem;
-    top: 0.4rem;
+    top: 0.3rem;
+    right: 0.3rem;
     color: var(--placeHolderColour);
 }
