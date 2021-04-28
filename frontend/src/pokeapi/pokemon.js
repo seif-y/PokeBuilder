@@ -1,4 +1,15 @@
-import { filter, last, mapPromise, pipe, pipePromise, prop, propEq, replace, zipToObject } from "./helpers";
+import {
+    filter,
+    last,
+    mapPromise,
+    pipe,
+    pipePromise,
+    prop,
+    propEq,
+    replace,
+    zipToObject,
+    getJsonPath,
+} from "./helpers";
 import axios from "axios";
 
 const DOMAIN = "https://pokeapi.co/api/v2";
@@ -9,10 +20,10 @@ const getDataFromUrl =
     pipePromise(axios.get, prop("data"));
 
 // Use our own data structure for simplification
-const formatToPokemonView = (pokemonData) => ({
+const formatToPokemonView = (spritePath = "other.official-artwork.front_default") => (pokemonData) => ({
     id: pokemonData.id,
     name: pokemonData.name,
-    sprite: pokemonData.sprites.other["official-artwork"].front_default,
+    sprite: getJsonPath(pokemonData.sprites, spritePath),
     types: pokemonData.types.map(pipe(prop("type"), prop("name"))),
 });
 
@@ -50,7 +61,7 @@ export async function getPokemonInformation(pokemonIdOrName) {
 }
 
 // Returns a list of PokemonViews
-export async function getPokemonViewList() {
+export async function getPokemonViewList(spritePath) {
     const numberOfPokemon = 151;
     const originalUrl = `${DOMAIN}/pokemon?limit=${numberOfPokemon}`;
 
@@ -61,7 +72,7 @@ export async function getPokemonViewList() {
             pipePromise(
                 prop("url"), // Each Pokemon has their own endpoint for their data
                 getDataFromUrl,
-                formatToPokemonView
+                formatToPokemonView(spritePath)
             )
         )
     )(originalUrl);

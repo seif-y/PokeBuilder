@@ -61,3 +61,15 @@ export const zipToObject = (arrayOfKeys, arrayOfValues) =>
         object[key] = arrayOfValues[index];
         return object;
     }, {});
+
+/**
+ * Given an object "O", and a path as a string "a.b.c",
+ * Return the item from that object with the given path "O.a.b.c"
+ */
+export const getJsonPath = (jsonObject, path) => {
+    let currentObj = jsonObject;
+    for (let pathComponent of path.split(".")) {
+        currentObj = currentObj[pathComponent];
+    }
+    return currentObj;
+};
