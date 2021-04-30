@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SearchBar from "../../global/SearchBar";
 import { getPokemonViewList } from "../../../pokeapi/pokemon";
+import { formatName } from "../../../util/names";
 import styles from "./TeamMemberSearch.module.css";
 
 let allPokemon = [];
@@ -33,7 +34,7 @@ export default function TeamMemberSearch({ onSelect }) {
                             <td className={styles.pokemonSprite}>
                                 <img src={pokemon.sprite} alt={pokemon.name} />
                             </td>
-                            <td className={styles.pokemonName}>{pokemon.name}</td>
+                            <td className={styles.pokemonName}>{formatName(pokemon.name)}</td>
                             <td className={styles.pokemonID}>#{pokemon.id}</td>
                         </tr>
                     ))}
