@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import PokemonCard from "./PokemonCardView";
 import { getPokemonViewList } from "../../pokeapi/pokemon";
 import styles from "./Pokedex.module.css";
-import SearchBar from "./top-bar/SearchBar";
+import SearchBar from "../global/SearchBar";
 import TopBar from "./top-bar/TopBar";
 import TypeFilter from "./top-bar/TypeFilter";
 
