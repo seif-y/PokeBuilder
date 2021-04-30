@@ -5,6 +5,7 @@ import TeamMemberSearch from "./TeamMemberSearch";
 import styles from "./TeamMember.module.css";
 import CloseIcon from "@material-ui/icons/Close";
 import AddIcon from "@material-ui/icons/Add";
+import { formatName } from "../../../util/names";
 
 export default function TeamMember({ index, onUpdate }) {
     const [pokemon, setPokemon] = useState(null);
@@ -45,9 +46,7 @@ export default function TeamMember({ index, onUpdate }) {
                 <React.Fragment>
                     <img src={pokemon.sprite} alt={pokemon.name} className={styles.pokemonSprite} />
                     <div className={styles.pokemonInfo}>
-                        <h3 className={styles.pokemonName}>
-                            {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
-                        </h3>
+                        <h3 className={styles.pokemonName}>{formatName(pokemon.name)}</h3>
                         <div className={styles.typeContainer}>{renderTypes()}</div>
                         <textarea
                             className={styles.notesArea}
