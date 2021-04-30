@@ -43,7 +43,7 @@ export default function TeamBuilder() {
         <div id="modal-root" className={styles.teamBuilderContainer}>
             <div className={styles.titleContainer}>
                 <h1> Team Builder </h1>
-                <Button variant="contained" className={styles.saveButton} onClick={() => saveTeam()}>
+                <Button variant="contained" onClick={() => saveTeam()}>
                     Save
                 </Button>
             </div>

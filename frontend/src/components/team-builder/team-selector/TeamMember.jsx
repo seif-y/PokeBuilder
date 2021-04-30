@@ -4,6 +4,7 @@ import Modal from "../../global/Modal";
 import TeamMemberSearch from "./TeamMemberSearch";
 import styles from "./TeamMember.module.css";
 import CloseIcon from "@material-ui/icons/Close";
+import AddIcon from "@material-ui/icons/Add";
 
 export default function TeamMember({ index, onUpdate }) {
     const [pokemon, setPokemon] = useState(null);
@@ -34,7 +35,11 @@ export default function TeamMember({ index, onUpdate }) {
 
     function renderPokemon() {
         if (pokemon === null) {
-            return "+";
+            return (
+                <div className={styles.addIconContainer}>
+                    <AddIcon fontSize="large" color="action" />
+                </div>
+            );
         } else {
             return (
                 <React.Fragment>
@@ -51,7 +56,7 @@ export default function TeamMember({ index, onUpdate }) {
                             onChange={(e) => setNotes(e.target.value)}
                         />
                     </div>
-                    <CloseIcon className={styles.closeButton} onClick={(e) => clearPokemon(e)} />
+                    <CloseIcon color="action" className={styles.closeButton} onClick={(e) => clearPokemon(e)} />
                 </React.Fragment>
             );
         }

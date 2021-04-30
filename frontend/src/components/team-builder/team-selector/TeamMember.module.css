@@ -13,6 +13,15 @@
     cursor: pointer;
 }
 
+.addIconContainer {
+    width: 100%;
+}
+
+.addIcon > * {
+    font-size: 2em;
+    color: lightgray;
+}
+
 .pokemonSprite {
     max-height: 100px;
     width: auto;

@@ -13,12 +13,6 @@
     width: 100%;
 }
 
-.saveButton {
-    height: max-content;
-    font-size: large;
-    padding: 8px;
-}
-
 .teamContainer {
     display: grid;
     grid-row-gap: 20px;
