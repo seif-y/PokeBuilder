@@ -4,7 +4,7 @@
     --placeHolderColour: #a9a9a9;
 }
 
-input {
+.searchBar {
     box-sizing: border-box;
     outline: none;
     overflow: hidden;
