@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-d
 import SideNavbar from "./components/nav/SideNavbar";
 import Pokedex from "./components/pokedex/Pokedex";
 import TeamBuilder from "./components/team-builder/TeamBuilder";
+import TeamViewer from "./components/team-viewer/TeamViewer";
 
 function App() {
     return (
@@ -15,8 +16,11 @@ function App() {
                         <Route path="/pokedex">
                             <Pokedex />
                         </Route>
-                        <Route path="/teams">
+                        <Route path="/team-builder">
                             <TeamBuilder />
+                        </Route>
+                        <Route path="/teams">
+                            <TeamViewer />
                         </Route>
                         <Route path="/" exact>
                             <Redirect to="/pokedex" />

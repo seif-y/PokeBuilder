@@ -9,6 +9,9 @@ export default function SideNavbar() {
             <NavLink to="/pokedex" activeClassName={styles.activeNavLink}>
                 <NavbarIcon imageName="demo.png" />
             </NavLink>
+            <NavLink to="/team-builder" activeClassName={styles.activeNavLink}>
+                <NavbarIcon imageName="demo.png" />
+            </NavLink>
             <NavLink to="/teams" activeClassName={styles.activeNavLink}>
                 <NavbarIcon imageName="demo.png" />
             </NavLink>
