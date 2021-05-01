@@ -4,32 +4,40 @@ import { retrieveTeam } from "../../teams/team-dao";
 
 const HTTP_CREATED = 201;
 const HTTP_NOT_FOUND = 404;
+const HTTP_BAD_REQUEST = 400;
 
 const router = express.Router();
 
 // Create new comment
 router.post("/:id/comments", async (req, res) => {
-    const { id } = req.params;
+    try {
+        const { id } = req.params;
 
-    const newComment = await createComment({
-        comment: req.body.comment,
-        teamID: id,
-    });
+        const newComment = await createComment({
+            comment: req.body.comment,
+            teamID: id,
+        });
 
-    res.status(HTTP_CREATED).header("Location", `/team/${id}/comments/${newComment._id}`).json(newComment);
+        res.status(HTTP_CREATED).header("Location", `/api/teams/${id}/comments/${newComment._id}`).json(newComment);
+    } catch {
+        res.status(HTTP_BAD_REQUEST).send("Invalid team id");
+    }
 });
 
 // Retrieve comments by team
 router.get("/:id/comments", async (req, res) => {
-    const { id } = req.params;
+    try {
+        const { id } = req.params;
 
-    const team = await retrieveTeam(id);
-    const comments = retrieveCommentsByTeam(team);
+        const comments = await retrieveCommentsByTeam(id);
 
-    if (comments) {
-        res.json(comments);
-    } else {
-        res.sendStatus(HTTP_NOT_FOUND);
+        if (comments) {
+            res.json(comments);
+        } else {
+            res.sendStatus(HTTP_NOT_FOUND);
+        }
+    } catch {
+        res.status(HTTP_BAD_REQUEST).send("Invalid team id");
     }
 });
 

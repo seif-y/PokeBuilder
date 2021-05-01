@@ -4,32 +4,47 @@ import { createUser, retrieveUser, getTeamsByUser, deleteUser } from "../../user
 const HTTP_CREATED = 201;
 const HTTP_NOT_FOUND = 404;
 const HTTP_NO_CONTENT = 204;
+const HTTP_BAD_REQUEST = 400;
+const HTTP_INTERNAL_SERVER_ERROR = 500;
 
 const router = express.Router();
 
 // Create new user
 router.post("/", async (req, res) => {
-    const newUser = await createUser({
-        username: req.body.username,
-        password: req.body.password,
-        comments: req.body.comments,
-        upVotedTeams: req.body.upVotedTeams,
-    });
+    try {
+        const newUser = await createUser({
+            username: req.body.username,
+            password: req.body.password,
+            comments: [],
+            upVotedTeams: [],
+        });
 
-    res.status(HTTP_CREATED).header("Location", `/user/${newUser._id}`).json(newUser);
+        res.status(HTTP_CREATED).header("Location", `/api/users/${newUser._id}`).json(newUser);
+    } catch (error) {
+        switch (error.code) {
+            case 11000:
+                res.status(HTTP_BAD_REQUEST).send("The username is already taken. Please choose a different username.");
+
+            default:
+                res.status(HTTP_INTERNAL_SERVER_ERROR).send(error.message);
+        }
+    }
 });
 
 // Retrieve single user
 router.get("/:id", async (req, res) => {
     const { id } = req.params;
 
-    const user = await retrieveUser(id);
-    const teams = await getTeamsByUser(user);
+    try {
+        const user = await retrieveUser(id);
 
-    if (teams) {
-        res.json(user);
-    } else {
-        res.sendStatus(HTTP_NOT_FOUND);
+        if (user) {
+            res.json(user);
+        } else {
+            res.sendStatus(HTTP_NOT_FOUND);
+        }
+    } catch {
+        res.status(HTTP_BAD_REQUEST).send("Invalid user id");
     }
 });
 
@@ -37,21 +52,28 @@ router.get("/:id", async (req, res) => {
 router.get("/:id/teams", async (req, res) => {
     const { id } = req.params;
 
-    const user = await retrieveUser(id);
-    const teams = await getTeamsByUser(user);
+    try {
+        const teams = await getTeamsByUser(id);
 
-    if (user) {
-        res.json(teams);
-    } else {
-        res.sendStatus(HTTP_NOT_FOUND);
+        if (teams) {
+            res.json(teams);
+        } else {
+            res.sendStatus(HTTP_NOT_FOUND);
+        }
+    } catch {
+        res.status(HTTP_BAD_REQUEST).send("Invalid user id");
     }
 });
 
 // Delete user
 router.delete("/:id", async (req, res) => {
-    const { id } = req.params;
-    await deleteUser(id);
-    res.sendStatus(HTTP_NO_CONTENT);
+    try {
+        const { id } = req.params;
+        await deleteUser(id);
+        res.sendStatus(HTTP_NO_CONTENT);
+    } catch {
+        res.status(HTTP_BAD_REQUEST).send("Invalid user id");
+    }
 });
 
 export default router;
