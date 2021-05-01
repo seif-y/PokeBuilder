@@ -4,8 +4,12 @@ const TeamSchema = mongoose.Schema;
 
 const teamSchema = new TeamSchema(
     {
-        creator: { type: String, required: true },
-        teamName: { type: String, required: true },
+        creator: {
+            type: TeamSchema.Types.ObjectId,
+            ref: "User",
+            required: [true, "A reference to a user is required"],
+        },
+        teamName: { type: String, required: [true, "A team name is required"] },
         description: String,
         upVotes: Number,
 
