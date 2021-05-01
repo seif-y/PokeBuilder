@@ -12,7 +12,7 @@ const CONNECTION_STRING =
     USERNAME +
     ":" +
     PASSWORD +
-    "@cluster0.ipbwg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+    "@cluster0.ipbwg.mongodb.net/pokeBuilder?retryWrites=true&w=majority";
 
 // Setup body-parser
 app.use(express.json());
