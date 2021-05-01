@@ -6,8 +6,8 @@ async function createComment(comment) {
     return dbComment;
 }
 
-async function retrieveCommentsByTeam(team) {
-    await Comment.find({ teamID: team._id });
+async function retrieveCommentsByTeam(teamID) {
+    return Comment.find({ teamID: teamID });
 }
 
 export { createComment, retrieveCommentsByTeam };
