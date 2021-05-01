@@ -13,7 +13,8 @@
     "scripts": {
         "start": "node -r esm ./src/server.js",
         "server": "npm run start",
-        "production": "cross-env NODE_ENV=production PORT=3000 node -r esm ./src/server.js"
+        "production": "cross-env NODE_ENV=production PORT=3000 node -r esm ./src/server.js",
+        "live": "nodemon -r esm ./src/server.js"
     },
     "devDependencies": {
         "cross-env": "^7.0.3",
