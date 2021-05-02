@@ -7,7 +7,7 @@
     flex-grow: 1;
     text-align: center;
     /* Same as width of sidebar*/
-    margin-left: 70px;
+    margin-left: var(--sideNavBarWidth);
 }
 
 .not-found-image {
