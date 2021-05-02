@@ -16,6 +16,7 @@ router.post("/:id/comments", async (req, res) => {
         const newComment = await createComment({
             comment: req.body.comment,
             teamID: id,
+            postedBy: req.body.postedBy,
         });
 
         res.status(HTTP_CREATED).header("Location", `/api/teams/${id}/comments/${newComment._id}`).json(newComment);
