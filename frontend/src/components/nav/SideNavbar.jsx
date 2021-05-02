@@ -10,10 +10,10 @@ export default function SideNavbar() {
                 <NavbarIcon imageName="pokedex.png" />
             </NavLink>
             <NavLink to="/team-builder" activeClassName={styles.activeNavLink}>
-                <NavbarIcon imageName="demo.png" />
+                <NavbarIcon imageName="builder.png" />
             </NavLink>
             <NavLink to="/teams" activeClassName={styles.activeNavLink}>
-                <NavbarIcon imageName="builder.png" />
+                <NavbarIcon imageName="teams.png" />
             </NavLink>
             <div className={styles.bottomSpacer}/>
             <img
