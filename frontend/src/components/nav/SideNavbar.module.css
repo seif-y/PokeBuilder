@@ -1,8 +1,9 @@
 .navbar {
+    min-height: 100vh;
+    width: var(--sideNavBarWidth);
     display: flex;
     flex-direction: column;
     height: 100%;
-    width: 70px;
     background: linear-gradient(225deg, rgba(29, 29, 29, 0.8) 0%, rgba(62, 62, 62, 0.8) 100%);
     position: fixed;
     overflow-x: hidden;
