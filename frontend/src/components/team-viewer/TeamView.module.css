@@ -1,17 +1,5 @@
-* {
-    --headlineFontSize: 18px;
-    --descriptionFontSize: 14px;
-}
-
-.headline {
+.title {
     justify-content: space-between;
-    font-size: var(--headlineFontSize);
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.description {
-    font-size: var(--descriptionFontSize);
 }
 
 .partySprite {

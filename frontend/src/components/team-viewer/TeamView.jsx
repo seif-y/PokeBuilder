@@ -1,18 +1,18 @@
+import Body from "./util/Body";
+import Headline from "./util/Headline";
 import UpvotableContent from "./util/UpvotableContent";
 import styles from "./TeamView.module.css";
 
 function Details({ creator, teamName, description }) {
     const CHAR_LIMIT = 400;
     return (
-        <div>
-            <div className={`flex ${styles.headline}`}>
+        <>
+            <Headline classes={`flex ${styles.tytle}`}>
                 <span>{teamName}</span>
                 <span>{`creator: ${creator}`}</span>
-            </div>
-            <div className={styles.description}>
-                {description < CHAR_LIMIT ? description : `${description.slice(0, CHAR_LIMIT)}...`}
-            </div>
-        </div>
+            </Headline>
+            <Body>{description < CHAR_LIMIT ? description : `${description.slice(0, CHAR_LIMIT)}...`}</Body>
+        </>
     );
 }
 
