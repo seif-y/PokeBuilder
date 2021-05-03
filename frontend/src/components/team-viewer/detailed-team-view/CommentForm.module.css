@@ -1,0 +1,35 @@
+.flex {
+    display: flex;
+}
+
+.commentForm {
+    padding: 10px;
+    flex-flow: column nowrap;
+    align-items: flex-end;
+}
+
+.commentForm * {
+    outline: none;
+}
+
+.textArea {
+    box-sizing: border-box;
+    resize: vertical;
+    font-family: inherit; /* Gets <body> font-family */
+    width: 100%;
+    font-size: 14px;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.submitButton {
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+    background-color: red;
+    border: none;
+    border-radius: 8px;
+    width: 80px;
+    height: 40px;
+}

@@ -1,7 +1,6 @@
 .barContainer {
     position: relative;
     width: 18rem;
-    --placeHolderColour: #a9a9a9;
 }
 
 .searchBar {
