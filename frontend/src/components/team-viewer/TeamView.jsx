@@ -1,5 +1,5 @@
-import Body from "./util/Body";
-import Headline from "./util/Headline";
+import Body from "./util/style-components/Body";
+import Headline from "./util/style-components/Headline";
 import UpvotableContent from "./util/upvotes/UpvotableContent";
 import styles from "./TeamView.module.css";
 
