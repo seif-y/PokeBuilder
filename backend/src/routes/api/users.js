@@ -1,4 +1,6 @@
 import express from "express";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 import { createUser, retrieveUser, getTeamsByUser, deleteUser } from "../../users/user-dao";
 
 const HTTP_CREATED = 201;
@@ -10,6 +12,19 @@ const HTTP_INTERNAL_SERVER_ERROR = 500;
 const DUPLICATE_USERNAME_ERROR_CODE = 11000;
 
 const router = express.Router();
+
+function hashPassword(password) {
+    bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
+            if (err) throw err;
+            newUser.password = hash;
+            newUser
+                .save()
+                .then((user) => res.json(user))
+                .catch((err) => console.log(err));
+        });
+    });
+}
 
 // Create new user
 router.post("/", async (req, res) => {

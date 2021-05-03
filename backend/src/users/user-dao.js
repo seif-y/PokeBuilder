@@ -1,8 +1,22 @@
 import { User } from "./userSchema";
 import { Team } from "../teams/teamSchema";
+import bcrypt from "bcryptjs";
 
 async function createUser(user) {
     const dbUser = new User(user);
+
+    // Store user password as a hash before saving it
+    bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
+            if (err) throw err;
+            newUser.password = hash;
+            newUser
+                .save()
+                .then((user) => res.json(user))
+                .catch((err) => console.log(err));
+        });
+    });
+
     await dbUser.save();
     return dbUser;
 }
