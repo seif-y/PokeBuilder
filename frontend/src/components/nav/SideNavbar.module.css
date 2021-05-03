@@ -18,7 +18,6 @@
 
 .navbarIconContainer:hover {
     background: rgba(255, 255, 255, 0.26);
-    border-radius: 10px;
 }
 
 .navbarIconContainer:active {
@@ -27,18 +26,11 @@
 
 .navbarIconImage {
     max-width: 100%;
-    user-drag: none;
-    user-select: none;
-    -moz-user-select: none;
-    -webkit-user-drag: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
 }
 
 .activeNavLink {
     /* This class will be applied to a nav link in the sidebar when it is active */
     background: #ffdda5;
-    border-radius: 10px;
     transition: 0.3s;
 }
 
@@ -49,6 +41,9 @@
 .logo {
     max-width: 30px;
     padding: 18px;
+}
+
+.unselectable {
     user-drag: none;
     user-select: none;
     -moz-user-select: none;
