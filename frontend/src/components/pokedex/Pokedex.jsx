@@ -5,6 +5,7 @@ import styles from "./Pokedex.module.css";
 import SearchBar from "../global/SearchBar";
 import TopBar from "./top-bar/TopBar";
 import TypeFilter from "./top-bar/TypeFilter";
+import PokeType from "../global/PokeType";
 
 function GridOfPokemon({ pokemon }) {
     const isEmpty = pokemon.length === 0;
@@ -12,9 +13,13 @@ function GridOfPokemon({ pokemon }) {
         <div className={styles.pokemonDisplay}>No results found</div>
     ) : (
         <div className={`${styles.pokemonDisplay} ${styles.grid}`}>
-            {pokemon.map(({ id, name, sprite, types }) => (
-                <PokemonCard key={id} id={id} name={name} sprite={sprite} types={types} />
-            ))}
+            {pokemon.map(({ id, name, sprite, types }) => {
+                return (
+                    <div className={styles.pokemonCard}>
+                        <PokemonCard key={id} id={id} name={name} sprite={sprite} types={types} />
+                    </div>
+                );
+            })}
         </div>
     );
 }
@@ -24,7 +29,7 @@ let allPokemonViews = [];
 // Global object used to decide which pokemon to display
 const filter = {
     name: "",
-    types: [],
+    types: []
 };
 
 export default function Pokedex() {
@@ -60,6 +65,8 @@ export default function Pokedex() {
         );
     }
 
+    const filtersOn = filter.types.length > 0
+
     return (
         <>
             <TopBar>
@@ -67,6 +74,16 @@ export default function Pokedex() {
                 <SearchBar onSearch={handleOnSearch} />
                 <TypeFilter onFiltersUpdated={handleOnFiltersUpdated} />
             </TopBar>
+            <div className={filtersOn ? styles.filtersBarActive : styles.filtersBar}>
+                {
+                    filter.types.map(type => {
+                        return (
+                            <div>
+                                <PokeType typeName={type} size={"small"}/>
+                            </div>
+                        );
+                    })}
+            </div>
             <GridOfPokemon pokemon={pokemonViews} />
         </>
     );

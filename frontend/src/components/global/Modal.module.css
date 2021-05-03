@@ -14,6 +14,16 @@
     z-index: 100;
     outline: none;
     border: none;
+    animation: fade-in 0.3s both;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 .modalContainer {
@@ -21,4 +31,18 @@
     background: white;
     padding: 30px;
     border-radius: 10px;
+    animation: expand-in 0.3s both;
+}
+
+@keyframes expand-in {
+    0% {
+        -webkit-transform: scale(0.8);
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        opacity: 1;
+    }
 }

@@ -1,6 +1,7 @@
 .filter {
     margin-left: 20px;
     cursor: pointer;
+    color: white;
 }
 
 /* 3 rows of 6 = 18 types */
