@@ -13,9 +13,9 @@ function truncateVote(number) {
 export default function UpvoteBox({ upvotes }) {
     return (
         <div className={`flex ${styles.upvoteBox}`}>
-            <Arrow fontSize="large" className={styles.clickable} />
+            <Arrow fontSize="large" className={`${styles.arrow} ${styles.clickable}`} />
             {truncateVote(upvotes)}
-            <Arrow fontSize="large" className={`${styles.reversed} ${styles.clickable}`} />
+            <Arrow fontSize="large" className={`${styles.arrow} ${styles.reversed} ${styles.clickable}`} />
         </div>
     );
 }

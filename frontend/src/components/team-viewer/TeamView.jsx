@@ -1,6 +1,6 @@
 import Body from "./util/Body";
 import Headline from "./util/Headline";
-import UpvotableContent from "./util/UpvotableContent";
+import UpvotableContent from "./util/upvotes/UpvotableContent";
 import styles from "./TeamView.module.css";
 
 function Details({ creator, teamName, description }) {

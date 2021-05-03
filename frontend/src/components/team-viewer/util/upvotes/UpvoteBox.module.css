@@ -6,15 +6,15 @@
     font-size: 20px;
 }
 
-svg.clickable {
+.arrow.clickable {
     cursor: pointer;
 }
 
-svg {
+.arrow {
     --up: 270deg;
     transform: rotate(var(--up));
 }
 
-svg.reversed {
+.arrow.reversed {
     transform: rotate(calc(360deg - var(--up)));
 }

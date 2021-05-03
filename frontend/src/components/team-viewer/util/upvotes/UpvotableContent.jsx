@@ -1,5 +1,5 @@
 import UpvoteBox from "./UpvoteBox";
-import "../../../index.css"; // .flex {display: flex}
+import "../../../../index.css"; // .flex {display: flex}
 import styles from "./UpvotableContent.module.css";
 
 export default function UpvotableContent({ upvotes, children }) {
