@@ -19,6 +19,7 @@ router.post("/", async (req, res) => {
             password: req.body.password,
             comments: [],
             upVotedTeams: [],
+            downVotedTeams: [],
         });
 
         res.status(HTTP_CREATED).header("Location", `/api/users/${newUser._id}`).json(newUser);
