@@ -37,7 +37,7 @@ async function deleteUser(id) {
 async function getJwtForUser(username, password, callback) {
     User.findOne({ username }).then((dbUser) => {
         if (!dbUser) {
-            callback("No user found");
+            callback({ success: false, errMsg: "Could not find user" });
         }
 
         bcrypt.compare(password, dbUser.password).then((isMatch) => {
@@ -47,10 +47,10 @@ async function getJwtForUser(username, password, callback) {
                     name: dbUser.username,
                 };
                 return jwt.sign(payload, "secret", { expiresIn: 31556926 }, (err, token) => {
-                    callback(token);
+                    callback({ success: true, token: token });
                 });
             } else {
-                callback("Wrong password");
+                callback({ success: false, errMsg: "Incorrect password" });
             }
         });
     });

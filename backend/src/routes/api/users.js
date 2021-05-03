@@ -40,8 +40,12 @@ router.post("/", async (req, res) => {
 
 router.post("/login", async (req, res) => {
     try {
-        getJwtForUser(req.body.username, req.body.password, (jwt) => {
-            res.status(201).send(jwt);
+        getJwtForUser(req.body.username, req.body.password, (body) => {
+            if (body.success) {
+                res.status(201).send(body);
+            } else {
+                res.status(400).send(body);
+            }
         });
     } catch (error) {
         res.status(500).send(error);
