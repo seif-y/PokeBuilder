@@ -1,26 +1,11 @@
-import { Forward as Arrow } from "@material-ui/icons";
+import UpvotableContent from "./util/UpvotableContent";
 import styles from "./TeamView.module.css";
-
-function UpvoteBox({ upvotes }) {
-    const truncate = (number) => {
-        // Always round down to 1dp unless that dp is 0
-        const format = `${Math.floor((number * 10) / 1000) / 10}k`;
-        return number < 1000 ? number : format;
-    };
-    return (
-        <div className={`${styles.flex} ${styles.upvoteBox}`}>
-            <Arrow fontSize="large" className={styles.clickable} />
-            {truncate(upvotes)}
-            <Arrow fontSize="large" className={`${styles.reversed} ${styles.clickable}`} />
-        </div>
-    );
-}
 
 function Details({ creator, teamName, description }) {
     const CHAR_LIMIT = 400;
     return (
-        <div className={styles.details}>
-            <div className={`${styles.flex} ${styles.headline}`}>
+        <div>
+            <div className={`flex ${styles.headline}`}>
                 <span>{teamName}</span>
                 <span>{`creator: ${creator}`}</span>
             </div>
@@ -33,7 +18,7 @@ function Details({ creator, teamName, description }) {
 
 function PartySprites({ party }) {
     return (
-        <div className={styles.flex}>
+        <div>
             {party.map(({ pokemonID, name, sprite }) => (
                 <img
                     key={pokemonID}
@@ -47,17 +32,11 @@ function PartySprites({ party }) {
     );
 }
 
-// todo refacotr
-// todo add upvote downvote functionality
-
 export default function TeamView({ creator, teamName, description, party, upvotes }) {
     return (
-        <div className={`${styles.flex} ${styles.teamView}`}>
-            <UpvoteBox upvotes={upvotes} />
-            <div className={styles.preview}>
-                <Details creator={creator} teamName={teamName} description={description} />
-                <PartySprites party={party} />
-            </div>
-        </div>
+        <UpvotableContent upvotes={upvotes}>
+            <Details creator={creator} teamName={teamName} description={description} />
+            <PartySprites party={party} />
+        </UpvotableContent>
     );
 }

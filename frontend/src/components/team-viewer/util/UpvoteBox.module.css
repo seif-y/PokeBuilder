@@ -1,0 +1,20 @@
+.upvoteBox {
+    flex-flow: column nowrap;
+    align-items: center;
+
+    text-align: center;
+    font-size: 20px;
+}
+
+svg.clickable {
+    cursor: pointer;
+}
+
+svg {
+    --up: 270deg;
+    transform: rotate(var(--up));
+}
+
+svg.reversed {
+    transform: rotate(calc(360deg - var(--up)));
+}
