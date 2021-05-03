@@ -1,24 +1,24 @@
 import { User } from "./userSchema";
 import { Team } from "../teams/teamSchema";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import { ExtractJwt } from "passport-jwt";
 
-async function createUser(user) {
+async function createUser(user, callback) {
     const dbUser = new User(user);
 
-    // Store user password as a hash before saving it
+    // Create password hash using bcrypt, with salt
     bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(newUser.password, salt, (err, hash) => {
+        bcrypt.hash(user.password, salt, (err, hash) => {
             if (err) throw err;
-            newUser.password = hash;
-            newUser
-                .save()
-                .then((user) => res.json(user))
-                .catch((err) => console.log(err));
+            dbUser.password = hash;
+
+            // After hashing password, save user and return them
+            dbUser.save().then(() => {
+                callback(dbUser);
+            });
         });
     });
-
-    await dbUser.save();
-    return dbUser;
 }
 
 async function retrieveUser(id) {
@@ -34,4 +34,26 @@ async function deleteUser(id) {
     await Team.deleteMany({ creator: id });
 }
 
-export { createUser, retrieveUser, getTeamsByUser, deleteUser };
+async function getJwtForUser(username, password, callback) {
+    User.findOne({ username }).then((dbUser) => {
+        if (!dbUser) {
+            callback("No user found");
+        }
+
+        bcrypt.compare(password, dbUser.password).then((isMatch) => {
+            if (isMatch) {
+                const payload = {
+                    id: dbUser._id,
+                    name: dbUser.username,
+                };
+                return jwt.sign(payload, "secret", { expiresIn: 31556926 }, (err, token) => {
+                    callback(token);
+                });
+            } else {
+                callback("Wrong password");
+            }
+        });
+    });
+}
+
+export { createUser, retrieveUser, getTeamsByUser, deleteUser, getJwtForUser };

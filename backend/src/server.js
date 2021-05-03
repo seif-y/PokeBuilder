@@ -1,6 +1,8 @@
 import express from "express";
 import path from "path";
 import mongoose from "mongoose";
+import passport from "passport";
+import configPassport from "./config/passport";
 
 // Setup Express
 const app = express();
@@ -36,6 +38,10 @@ if (process.env.NODE_ENV === "production") {
         res.sendFile(path.join(__dirname, "../../frontend/build/index.html"));
     });
 }
+
+// Set up passport
+app.use(passport.initialize());
+configPassport(passport);
 
 // Start the DB running. Then, once it's connected, start the server.
 mongoose

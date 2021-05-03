@@ -1,7 +1,7 @@
 import express from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { createUser, retrieveUser, getTeamsByUser, deleteUser } from "../../users/user-dao";
+import { createUser, retrieveUser, getTeamsByUser, deleteUser, getJwtForUser } from "../../users/user-dao";
 
 const HTTP_CREATED = 201;
 const HTTP_NOT_FOUND = 404;
@@ -13,30 +13,20 @@ const DUPLICATE_USERNAME_ERROR_CODE = 11000;
 
 const router = express.Router();
 
-function hashPassword(password) {
-    bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(newUser.password, salt, (err, hash) => {
-            if (err) throw err;
-            newUser.password = hash;
-            newUser
-                .save()
-                .then((user) => res.json(user))
-                .catch((err) => console.log(err));
-        });
-    });
-}
-
 // Create new user
 router.post("/", async (req, res) => {
     try {
-        const newUser = await createUser({
-            username: req.body.username,
-            password: req.body.password,
-            comments: [],
-            upVotedTeams: [],
-        });
-
-        res.status(HTTP_CREATED).header("Location", `/api/users/${newUser._id}`).json(newUser);
+        const newUser = await createUser(
+            {
+                username: req.body.username,
+                password: req.body.password,
+                comments: [],
+                upVotedTeams: [],
+            },
+            (newUser) => {
+                res.status(HTTP_CREATED).header("Location", `/api/users/${newUser._id}`).json(newUser);
+            }
+        );
     } catch (error) {
         switch (error.code) {
             case DUPLICATE_USERNAME_ERROR_CODE:
@@ -45,6 +35,16 @@ router.post("/", async (req, res) => {
             default:
                 res.status(HTTP_INTERNAL_SERVER_ERROR).send(error.message);
         }
+    }
+});
+
+router.post("/login", async (req, res) => {
+    try {
+        getJwtForUser(req.body.username, req.body.password, (jwt) => {
+            res.status(201).send(jwt);
+        });
+    } catch (error) {
+        res.status(500).send(error);
     }
 });
 
