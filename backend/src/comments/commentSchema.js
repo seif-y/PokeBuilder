@@ -6,7 +6,8 @@ const commentSchema = new CommentSchema(
     {
         comment: { type: String, required: true },
         teamID: { type: CommentSchema.Types.ObjectId, ref: "Team", required: true },
-        postedBy: { type: CommentSchema.Types.ObjectId, ref: "User", required: true },
+        userID: { type: CommentSchema.Types.ObjectId, ref: "User", required: true },
+        username: { type: String },
     },
     {
         timestamps: {},

@@ -1,4 +1,5 @@
 import { Team } from "./teamSchema";
+import { User } from "../users/userSchema";
 
 async function createTeam(team) {
     const dbTeam = new Team(team);
@@ -14,24 +15,20 @@ async function retrieveTeam(id) {
     return Team.findById(id);
 }
 
-async function updateTeam(team) {
-    const dbTeam = await Team.findById(team._id);
-    if (dbTeam) {
-        dbTeam.creator = team.creator;
-        dbTeam.teamName = team.teamName;
-        dbTeam.description = team.description;
-        dbTeam.upVotes = team.upVotes;
-        dbTeam.party = team.party;
-
-        await dbTeam.save();
-        return true;
-    }
-
-    return false;
-}
-
 async function deleteTeam(id) {
     await Team.deleteOne({ _id: id });
 }
 
-export { createTeam, retrieveTeam, retrieveTeamList, updateTeam, deleteTeam };
+async function updateTeamUpVotes(id, upVotes, userID) {
+    await Team.updateOne({ _id: id }, { $inc: { upVotes: upVotes } });
+    await User.updateOne({ _id: userID }, { $push: { upVotedTeams: id } });
+}
+
+async function updateTeamDownVotes(id, downVotes, userID) {
+    // The downvotes must decrease the upVote value of a team. Therefore, the value is a negative value is added
+    downVotes = downVotes * -1;
+    await Team.updateOne({ _id: id }, { $inc: { upVotes: downVotes } });
+    await User.updateOne({ _id: userID }, { $push: { downVotedTeams: id } });
+}
+
+export { createTeam, retrieveTeam, retrieveTeamList, deleteTeam, updateTeamUpVotes, updateTeamDownVotes };

@@ -9,6 +9,7 @@ const userSchema = new UserSchema(
 
         comments: [{ type: UserSchema.Types.ObjectId, ref: "Comment" }],
         upVotedTeams: [{ type: UserSchema.Types.ObjectId, ref: "Team" }],
+        downVotedTeams: [{ type: UserSchema.Types.ObjectId, ref: "Team" }],
     },
     {
         timestamps: {},

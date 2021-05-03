@@ -1,5 +1,12 @@
 import express from "express";
-import { createTeam, retrieveTeam, retrieveTeamList, updateTeam, deleteTeam } from "../../teams/team-dao";
+import {
+    createTeam,
+    retrieveTeam,
+    retrieveTeamList,
+    deleteTeam,
+    updateTeamUpVotes,
+    updateTeamDownVotes,
+} from "../../teams/team-dao";
 
 const HTTP_CREATED = 201;
 const HTTP_NOT_FOUND = 404;
@@ -52,24 +59,41 @@ router.get("/:id", async (req, res) => {
     }
 });
 
-// Update team
-router.put("/:id", async (req, res) => {
-    try {
-        const { id } = req.params;
-        const team = req.body;
-        team._id = id;
-        const success = await updateTeam(team);
-        res.sendStatus(success ? HTTP_NO_CONTENT : HTTP_NOT_FOUND);
-    } catch {
-        res.status(HTTP_BAD_REQUEST).send("Invalid team id");
-    }
-});
-
 // Delete team
 router.delete("/:id", async (req, res) => {
     try {
         const { id } = req.params;
         await deleteTeam(id);
+        res.sendStatus(HTTP_NO_CONTENT);
+    } catch {
+        res.status(HTTP_BAD_REQUEST).send("Invalid team id");
+    }
+});
+
+// Increase the team upvotes
+router.patch("/:id/upvotes", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const upVotes = req.body.upVotes;
+        const userID = req.body.userID;
+
+        await updateTeamUpVotes(id, upVotes, userID);
+
+        res.sendStatus(HTTP_NO_CONTENT);
+    } catch {
+        res.status(HTTP_BAD_REQUEST).send("Invalid team id");
+    }
+});
+
+// Increase the team downvotes
+router.patch("/:id/downvotes", async (req, res) => {
+    try {
+        const { id } = req.params;
+        let downVotes = req.body.downVotes;
+        const userID = req.body.userID;
+
+        await updateTeamDownVotes(id, downVotes, userID);
+
         res.sendStatus(HTTP_NO_CONTENT);
     } catch {
         res.status(HTTP_BAD_REQUEST).send("Invalid team id");
