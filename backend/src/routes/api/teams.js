@@ -21,7 +21,7 @@ const router = express.Router();
 router.post("/", passportRequestHandler, async (req, res) => {
     try {
         const newTeam = await createTeam({
-            creator: req.body.creator,
+            creator: req.user._id,
             teamName: req.body.teamName,
             description: req.body.description,
             upVotes: 0,
@@ -76,7 +76,7 @@ router.patch("/:id/upvotes", passportRequestHandler, async (req, res) => {
     try {
         const { id } = req.params;
         const upVotes = req.body.upVotes;
-        const userID = req.body.userID;
+        const userID = req.user._id;
 
         await updateTeamUpVotes(id, upVotes, userID);
 
@@ -91,7 +91,7 @@ router.patch("/:id/downvotes", passportRequestHandler, async (req, res) => {
     try {
         const { id } = req.params;
         let downVotes = req.body.downVotes;
-        const userID = req.body.userID;
+        const userID = req.user._id;
 
         await updateTeamDownVotes(id, downVotes, userID);
 

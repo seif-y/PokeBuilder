@@ -15,9 +15,9 @@ router.post("/:id/comments", passportRequestHandler, async (req, res) => {
 
         const newComment = await createComment({
             comment: req.body.comment,
-            userID: req.body.userID,
+            userID: req.user._id,
             teamID: id,
-            username: "",
+            username: req.user.username,
         });
 
         res.status(HTTP_CREATED).header("Location", `/api/teams/${id}/comments/${newComment._id}`).json(newComment);
