@@ -1,4 +1,5 @@
 import express from "express";
+import passportRequestHandler from "../../auth/passportHandler";
 import {
     createTeam,
     retrieveTeam,
@@ -17,10 +18,10 @@ const HTTP_INTERNAL_SERVER_ERROR = 500;
 const router = express.Router();
 
 // Create new team
-router.post("/", async (req, res) => {
+router.post("/", passportRequestHandler, async (req, res) => {
     try {
         const newTeam = await createTeam({
-            creator: req.body.creator,
+            creator: req.user._id,
             teamName: req.body.teamName,
             description: req.body.description,
             upVotes: 0,
@@ -60,7 +61,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // Delete team
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", passportRequestHandler, async (req, res) => {
     try {
         const { id } = req.params;
         await deleteTeam(id);
@@ -71,11 +72,11 @@ router.delete("/:id", async (req, res) => {
 });
 
 // Increase the team upvotes
-router.patch("/:id/upvotes", async (req, res) => {
+router.patch("/:id/upvotes", passportRequestHandler, async (req, res) => {
     try {
         const { id } = req.params;
         const upVotes = req.body.upVotes;
-        const userID = req.body.userID;
+        const userID = req.user._id;
 
         await updateTeamUpVotes(id, upVotes, userID);
 
@@ -86,11 +87,11 @@ router.patch("/:id/upvotes", async (req, res) => {
 });
 
 // Increase the team downvotes
-router.patch("/:id/downvotes", async (req, res) => {
+router.patch("/:id/downvotes", passportRequestHandler, async (req, res) => {
     try {
         const { id } = req.params;
         let downVotes = req.body.downVotes;
-        const userID = req.body.userID;
+        const userID = req.user._id;
 
         await updateTeamDownVotes(id, downVotes, userID);
 

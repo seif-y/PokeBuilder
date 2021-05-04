@@ -1,5 +1,5 @@
 import express from "express";
-import { createUser, retrieveUser, getTeamsByUser, deleteUser } from "../../users/user-dao";
+import { createUser, retrieveUser, getTeamsByUser, deleteUser, getJwtForUser } from "../../users/user-dao";
 
 const HTTP_CREATED = 201;
 const HTTP_NOT_FOUND = 404;
@@ -12,25 +12,44 @@ const DUPLICATE_USERNAME_ERROR_CODE = 11000;
 const router = express.Router();
 
 // Create new user
-router.post("/", async (req, res) => {
-    try {
-        const newUser = await createUser({
+router.post("/register", async (req, res) => {
+    await createUser(
+        {
             username: req.body.username,
             password: req.body.password,
             comments: [],
             upVotedTeams: [],
             downVotedTeams: [],
-        });
+        },
+        (newUser, error) => {
+            if (error) {
+                switch (error.code) {
+                    case DUPLICATE_USERNAME_ERROR_CODE:
+                        res.status(HTTP_BAD_REQUEST).send(
+                            "The username is already taken. Please choose a different username."
+                        );
 
-        res.status(HTTP_CREATED).header("Location", `/api/users/${newUser._id}`).json(newUser);
-    } catch (error) {
-        switch (error.code) {
-            case DUPLICATE_USERNAME_ERROR_CODE:
-                res.status(HTTP_BAD_REQUEST).send("The username is already taken. Please choose a different username.");
+                    default:
+                        res.status(HTTP_INTERNAL_SERVER_ERROR).send(error.message);
+                }
+            }
 
-            default:
-                res.status(HTTP_INTERNAL_SERVER_ERROR).send(error.message);
+            res.status(HTTP_CREATED).header("Location", `/api/users/${newUser._id}`).json(newUser);
         }
+    );
+});
+
+router.post("/login", async (req, res) => {
+    try {
+        getJwtForUser(req.body.username, req.body.password, (body) => {
+            if (body.success) {
+                res.status(HTTP_CREATED).send(body);
+            } else {
+                res.status(HTTP_BAD_REQUEST).send(body);
+            }
+        });
+    } catch (error) {
+        res.status(HTTP_INTERNAL_SERVER_ERROR).send(error);
     }
 });
 

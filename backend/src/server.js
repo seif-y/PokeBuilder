@@ -1,6 +1,8 @@
 import express from "express";
 import path from "path";
 import mongoose from "mongoose";
+import passport from "passport";
+import configPassport from "./auth/passport";
 
 // Setup Express
 const app = express();
@@ -41,3 +43,6 @@ if (process.env.NODE_ENV === "production") {
 mongoose
     .connect(CONNECTION_STRING, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
     .then(() => app.listen(port, () => console.log(`App server listening on port ${port}!`)));
+
+// Add our custom passport JWT config to passport, to handle authentication
+configPassport(passport);
