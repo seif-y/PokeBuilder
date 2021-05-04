@@ -12,7 +12,7 @@ const DUPLICATE_USERNAME_ERROR_CODE = 11000;
 const router = express.Router();
 
 // Create new user
-router.post("/", async (req, res) => {
+router.post("/register", async (req, res) => {
     try {
         const newUser = await createUser(
             {
