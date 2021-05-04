@@ -12,14 +12,10 @@
     outline: none;
 }
 
-.textArea {
-    box-sizing: border-box;
-    resize: vertical;
-    font-family: inherit; /* Gets <body> font-family */
+.form {
     width: 100%;
+    resize: vertical;
     font-size: 14px;
-    padding: 10px;
-    border-radius: 10px;
     margin-bottom: 10px;
 }
 
