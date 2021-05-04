@@ -5,9 +5,8 @@
 
 .main-content {
     flex-grow: 1;
-    text-align: center;
-    /* Same as width of sidebar*/
     margin-left: var(--sideNavBarWidth);
+    /* Same as width of sidebar*/
 }
 
 .not-found-image {
