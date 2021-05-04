@@ -1,4 +1,9 @@
 .formContainer {
     display: flex;
     flex-direction: column;
+    text-align: center;
+}
+
+.errMsg {
+    color: darkred;
 }
