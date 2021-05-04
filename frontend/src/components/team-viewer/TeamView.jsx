@@ -7,7 +7,7 @@ function Details({ creator, teamName, description }) {
     const CHAR_LIMIT = 400;
     return (
         <>
-            <Headline classes={`flex ${styles.tytle}`}>
+            <Headline classes={`flex ${styles.title}`}>
                 <span>{teamName}</span>
                 <span>{`creator: ${creator}`}</span>
             </Headline>
@@ -34,7 +34,7 @@ function PartySprites({ party }) {
 
 export default function TeamView({ creator, teamName, description, party, upvotes }) {
     return (
-        <UpvotableContent upvotes={upvotes}>
+        <UpvotableContent classes={styles.clickable} upvotes={upvotes}>
             <Details creator={creator} teamName={teamName} description={description} />
             <PartySprites party={party} />
         </UpvotableContent>

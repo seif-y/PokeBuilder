@@ -60,6 +60,10 @@ export async function getPokemonInformation(pokemonIdOrName) {
     return pipePromise(getDataFromUrl, formatToPokemonInformation)(url);
 }
 
+export async function getPokemonView(pokemonIdOrName, spritePath) {
+    return pipePromise(getDataFromUrl, formatToPokemonView(spritePath))(`${DOMAIN}/pokemon/${pokemonIdOrName}`);
+}
+
 // Returns a list of PokemonViews
 export async function getPokemonViewList(spritePath) {
     const numberOfPokemon = 151;
