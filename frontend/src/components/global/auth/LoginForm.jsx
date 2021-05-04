@@ -35,11 +35,27 @@ export default function LoginForm({ onComplete }) {
 
     return (
         <div className={styles.formContainer}>
-            <input type="text" id="username" placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
-            <input type="password" id="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
-            <Button onClick={() => logIn()}>Log In</Button>
-            <Button onClick={() => signUp()}>Sign Up</Button>
-            <p className={styles.errMsg}>{errorMessage}</p>
+            <input
+                className={styles.formInput}
+                type="text"
+                id="username"
+                placeholder="Username"
+                onChange={(e) => setUsername(e.target.value)}
+            />
+            <input
+                className={styles.formInput}
+                type="password"
+                id="password"
+                placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)}
+            />
+            <Button className={styles.formButton} variant="contained" color="primary" onClick={() => logIn()}>
+                Log In
+            </Button>
+            <Button className={styles.formButton} variant="contained" color="primary" onClick={() => signUp()}>
+                Sign Up
+            </Button>
+            <div className={styles.errMsg}>{errorMessage}</div>
         </div>
     );
 }

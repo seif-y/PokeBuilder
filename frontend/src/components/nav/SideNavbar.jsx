@@ -28,7 +28,12 @@ export default function SideNavbar() {
             <div onClick={() => setShowModal(true)}>
                 <NavbarIcon imageName="user.png" />
             </div>
-            <Modal show={showModal} dismissOnClickOutside onCancel={() => setShowModal(false)}>
+            <Modal
+                className={styles.loginModal}
+                show={showModal}
+                dismissOnClickOutside
+                onCancel={() => setShowModal(false)}
+            >
                 <LoginForm onComplete={() => setShowModal(false)} />
             </Modal>
         </div>

@@ -51,3 +51,8 @@
     -webkit-user-select: none;
     -ms-user-select: none;
 }
+
+.loginModal {
+    width: 80%;
+    max-width: 360px;
+}

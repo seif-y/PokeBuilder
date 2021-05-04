@@ -1,9 +1,30 @@
 .formContainer {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    gap: 8px;
     text-align: center;
 }
 
 .errMsg {
-    color: darkred;
+    color: red;
+    font-size: 0.75em;
+    height: 40px;
+    margin-top: 8px;
+    width: 320px;
+}
+
+.formInput {
+    font-size: 1em;
+    border-radius: 8px;
+    height: 32px;
+    max-width: 320px;
+}
+
+.formInput:focus {
+    outline: none;
+}
+
+.formButton {
+    width: 160px;
 }
