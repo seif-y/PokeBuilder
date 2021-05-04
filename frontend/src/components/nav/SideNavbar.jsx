@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./SideNavbar.module.css";
 import { NavLink } from "react-router-dom";
 import NavbarIcon from "./NavbarIcon";
+import Modal from "../global/Modal";
+import LoginForm from "../global/auth/LoginForm";
 
 export default function SideNavbar() {
+    const [showModal, setShowModal] = useState(false);
+
     return (
         <div className={styles.navbar}>
             <NavLink to="/pokedex" activeClassName={styles.activeNavLink}>
@@ -15,15 +19,18 @@ export default function SideNavbar() {
             <NavLink to="/teams" activeClassName={styles.activeNavLink}>
                 <NavbarIcon imageName="teams.png" />
             </NavLink>
-            <div className={styles.bottomSpacer}/>
+            <div className={styles.bottomSpacer} />
             <img
                 className={`${styles.logo} ${styles.unselectable}`}
                 src={`${process.env.PUBLIC_URL}/icons/logo.png`}
                 alt={"Logo"}
             />
-            <NavLink to="/user" activeClassName={styles.activeNavLink}>
+            <div onClick={() => setShowModal(true)}>
                 <NavbarIcon imageName="user.png" />
-            </NavLink>
+            </div>
+            <Modal show={showModal} dismissOnClickOutside onCancel={() => setShowModal(false)}>
+                <LoginForm onComplete={() => setShowModal(false)} />
+            </Modal>
         </div>
     );
 }

@@ -3,7 +3,7 @@ import { Button } from "@material-ui/core";
 import styles from "./LoginForm.module.css";
 import axios from "axios";
 
-export default function LoginForm() {
+export default function LoginForm({ onComplete }) {
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
     const [errorMessage, setErrorMessage] = useState();
@@ -14,7 +14,7 @@ export default function LoginForm() {
             .then((res) => {
                 if (res.data.success) {
                     localStorage.setItem("pokebuilderAuthToken", res.data.token);
-                    console.log(localStorage.getItem("pokebuilderAuthToken"));
+                    onComplete();
                 }
             })
             .catch((err) => {
