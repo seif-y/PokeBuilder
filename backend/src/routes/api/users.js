@@ -1,6 +1,4 @@
 import express from "express";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
 import { createUser, retrieveUser, getTeamsByUser, deleteUser, getJwtForUser } from "../../users/user-dao";
 
 const HTTP_CREATED = 201;
@@ -22,6 +20,7 @@ router.post("/", async (req, res) => {
                 password: req.body.password,
                 comments: [],
                 upVotedTeams: [],
+                downVotedTeams: [],
             },
             (newUser) => {
                 res.status(HTTP_CREATED).header("Location", `/api/users/${newUser._id}`).json(newUser);

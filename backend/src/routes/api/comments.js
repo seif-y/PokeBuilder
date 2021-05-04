@@ -1,6 +1,5 @@
 import express from "express";
 import { createComment, retrieveCommentsByTeam } from "../../comments/comment-dao";
-import { retrieveTeam } from "../../teams/team-dao";
 import passportRequestHandler from "../../auth/passportHandler";
 
 const HTTP_CREATED = 201;
@@ -16,8 +15,9 @@ router.post("/:id/comments", passportRequestHandler, async (req, res) => {
 
         const newComment = await createComment({
             comment: req.body.comment,
+            userID: req.body.userID,
             teamID: id,
-            postedBy: req.body.postedBy,
+            username: "",
         });
 
         res.status(HTTP_CREATED).header("Location", `/api/teams/${id}/comments/${newComment._id}`).json(newComment);
