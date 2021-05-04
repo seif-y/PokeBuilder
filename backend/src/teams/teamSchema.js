@@ -9,9 +9,10 @@ const teamSchema = new TeamSchema(
             ref: "User",
             required: [true, "A reference to a user is required"],
         },
+        creatorUsername: String,
         teamName: { type: String, required: [true, "A team name is required"] },
         description: String,
-        upVotes: Number,
+        upvotes: Number,
 
         party: [
             {

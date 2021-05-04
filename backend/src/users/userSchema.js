@@ -8,8 +8,8 @@ const userSchema = new UserSchema(
         password: { type: String, required: [true, "A password is required"] },
 
         comments: [{ type: UserSchema.Types.ObjectId, ref: "Comment" }],
-        upVotedTeams: [{ type: UserSchema.Types.ObjectId, ref: "Team" }],
-        downVotedTeams: [{ type: UserSchema.Types.ObjectId, ref: "Team" }],
+        upvotedTeams: [{ type: UserSchema.Types.ObjectId, ref: "Team" }],
+        downvotedTeams: [{ type: UserSchema.Types.ObjectId, ref: "Team" }],
     },
     {
         timestamps: {},
