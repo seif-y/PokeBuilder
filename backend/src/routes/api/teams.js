@@ -1,5 +1,6 @@
 import express from "express";
 import { createTeam, retrieveTeam, retrieveTeamList, updateTeam, deleteTeam } from "../../teams/team-dao";
+import passportRequestHandler from "../../auth/passportHandler";
 
 const HTTP_CREATED = 201;
 const HTTP_NOT_FOUND = 404;
@@ -10,7 +11,7 @@ const HTTP_INTERNAL_SERVER_ERROR = 500;
 const router = express.Router();
 
 // Create new team
-router.post("/", async (req, res) => {
+router.post("/", passportRequestHandler, async (req, res) => {
     try {
         const newTeam = await createTeam({
             creator: req.body.creator,
@@ -53,7 +54,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // Update team
-router.put("/:id", async (req, res) => {
+router.put("/:id", passportRequestHandler, async (req, res) => {
     try {
         const { id } = req.params;
         const team = req.body;
@@ -66,7 +67,7 @@ router.put("/:id", async (req, res) => {
 });
 
 // Delete team
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", passportRequestHandler, async (req, res) => {
     try {
         const { id } = req.params;
         await deleteTeam(id);

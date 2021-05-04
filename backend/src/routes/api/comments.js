@@ -1,6 +1,7 @@
 import express from "express";
 import { createComment, retrieveCommentsByTeam } from "../../comments/comment-dao";
 import { retrieveTeam } from "../../teams/team-dao";
+import passportRequestHandler from "../../auth/passportHandler";
 
 const HTTP_CREATED = 201;
 const HTTP_NOT_FOUND = 404;
@@ -9,7 +10,7 @@ const HTTP_BAD_REQUEST = 400;
 const router = express.Router();
 
 // Create new comment
-router.post("/:id/comments", async (req, res) => {
+router.post("/:id/comments", passportRequestHandler, async (req, res) => {
     try {
         const { id } = req.params;
 
