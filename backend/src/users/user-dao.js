@@ -3,6 +3,9 @@ import { Team } from "../teams/teamSchema";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
+// Value to set for time before a user's JWT token expires. 31556926 is around a year.
+const jwtExpiryTime = 31556926;
+
 async function createUser(user, callback) {
     const dbUser = new User(user);
 
@@ -50,7 +53,7 @@ async function getJwtForUser(username, password, callback) {
                     id: dbUser._id,
                     name: dbUser.username,
                 };
-                return jwt.sign(payload, "secret", { expiresIn: 31556926 }, (err, token) => {
+                return jwt.sign(payload, "secret", { expiresIn: jwtExpiryTime }, (err, token) => {
                     callback({ success: true, token: token });
                 });
             } else {

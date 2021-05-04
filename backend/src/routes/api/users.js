@@ -43,13 +43,13 @@ router.post("/login", async (req, res) => {
     try {
         getJwtForUser(req.body.username, req.body.password, (body) => {
             if (body.success) {
-                res.status(201).send(body);
+                res.status(HTTP_CREATED).send(body);
             } else {
-                res.status(400).send(body);
+                res.status(HTTP_BAD_REQUEST).send(body);
             }
         });
     } catch (error) {
-        res.status(500).send(error);
+        res.status(HTTP_INTERNAL_SERVER_ERROR).send(error);
     }
 });
 

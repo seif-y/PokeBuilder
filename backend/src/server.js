@@ -39,10 +39,6 @@ if (process.env.NODE_ENV === "production") {
     });
 }
 
-// Set up passport
-// app.use(passport.initialize());
-// configPassport(passport);
-
 // Start the DB running. Then, once it's connected, start the server.
 mongoose
     .connect(CONNECTION_STRING, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
