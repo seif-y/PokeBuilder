@@ -5,7 +5,7 @@ export default function NavbarIcon({ imageName, altText }) {
     return (
         <div className={styles.navbarIconContainer}>
             <img
-                className={styles.navbarIconImage}
+                className={`${styles.navbarIconImage} ${styles.unselectable}`}
                 src={`${process.env.PUBLIC_URL}/icons/${imageName}`}
                 alt={altText}
             />

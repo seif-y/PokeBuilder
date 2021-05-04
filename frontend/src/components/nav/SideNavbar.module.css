@@ -3,13 +3,25 @@
     width: var(--sideNavBarWidth);
     display: flex;
     flex-direction: column;
-    /* The background colour is just for testing purposes rn, not the final colour lol */
-    background-color: teal;
+    height: 100%;
+    background: linear-gradient(225deg, rgba(29, 29, 29, 0.8) 0%, rgba(62, 62, 62, 0.8) 100%);
+    position: fixed;
+    overflow-x: hidden;
+    z-index: 99;
 }
 
 .navbarIconContainer {
     max-width: 50px;
-    margin: 20px 10px 0 10px;
+    padding: 10px;
+    transition: 0.1s;
+}
+
+.navbarIconContainer:hover {
+    background: rgba(255, 255, 255, 0.26);
+}
+
+.navbarIconContainer:active {
+    transform: scale(0.9, 0.9);
 }
 
 .navbarIconImage {
@@ -18,4 +30,24 @@
 
 .activeNavLink {
     /* This class will be applied to a nav link in the sidebar when it is active */
+    background: #ffdda5;
+    transition: 0.3s;
+}
+
+.bottomSpacer {
+    height: 100%;
+}
+
+.logo {
+    max-width: 30px;
+    padding: 18px;
+}
+
+.unselectable {
+    user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
