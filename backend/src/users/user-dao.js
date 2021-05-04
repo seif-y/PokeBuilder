@@ -2,7 +2,6 @@ import { User } from "./userSchema";
 import { Team } from "../teams/teamSchema";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { ExtractJwt } from "passport-jwt";
 
 async function createUser(user, callback) {
     const dbUser = new User(user);
@@ -10,13 +9,18 @@ async function createUser(user, callback) {
     // Create password hash using bcrypt, with salt
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(user.password, salt, (err, hash) => {
-            if (err) throw err;
+            if (err) callback(null, err);
             dbUser.password = hash;
 
             // After hashing password, save user and return them
-            dbUser.save().then(() => {
-                callback(dbUser);
-            });
+            dbUser
+                .save()
+                .then(() => {
+                    callback(dbUser);
+                })
+                .catch((err) => {
+                    callback(null, err);
+                });
         });
     });
 }

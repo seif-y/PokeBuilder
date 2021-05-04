@@ -13,28 +13,30 @@ const router = express.Router();
 
 // Create new user
 router.post("/register", async (req, res) => {
-    try {
-        const newUser = await createUser(
-            {
-                username: req.body.username,
-                password: req.body.password,
-                comments: [],
-                upVotedTeams: [],
-                downVotedTeams: [],
-            },
-            (newUser) => {
-                res.status(HTTP_CREATED).header("Location", `/api/users/${newUser._id}`).json(newUser);
-            }
-        );
-    } catch (error) {
-        switch (error.code) {
-            case DUPLICATE_USERNAME_ERROR_CODE:
-                res.status(HTTP_BAD_REQUEST).send("The username is already taken. Please choose a different username.");
+    await createUser(
+        {
+            username: req.body.username,
+            password: req.body.password,
+            comments: [],
+            upVotedTeams: [],
+            downVotedTeams: [],
+        },
+        (newUser, error) => {
+            if (error) {
+                switch (error.code) {
+                    case DUPLICATE_USERNAME_ERROR_CODE:
+                        res.status(HTTP_BAD_REQUEST).send(
+                            "The username is already taken. Please choose a different username."
+                        );
 
-            default:
-                res.status(HTTP_INTERNAL_SERVER_ERROR).send(error.message);
+                    default:
+                        res.status(HTTP_INTERNAL_SERVER_ERROR).send(error.message);
+                }
+            }
+
+            res.status(HTTP_CREATED).header("Location", `/api/users/${newUser._id}`).json(newUser);
         }
-    }
+    );
 });
 
 router.post("/login", async (req, res) => {
