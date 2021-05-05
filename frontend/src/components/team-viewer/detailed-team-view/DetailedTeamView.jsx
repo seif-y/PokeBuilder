@@ -5,6 +5,9 @@ import styles from "./DetailedTeamView.module.css";
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
 import ImmutableTeamMember from "./ImmutableTeamMember";
+import Body from "../util/style-components/Body";
+import Headline from "../util/style-components/Headline";
+import ShadowedBox from "../util/style-components/ShadowedBox";
 
 function TeamTitle({ title, author }) {
     return <h1>{title && author ? `${title} by ${author}` : "Loading..."}</h1>;
@@ -28,6 +31,15 @@ function Party({ party = [] }) {
                 <ImmutableTeamMember key={_id} name={name} notes={notes} sprite={sprite} types={types} />
             ))}
         </div>
+    );
+}
+
+function Description({ text }) {
+    return (
+        <ShadowedBox>
+            <Headline>Description</Headline>
+            <Body>{text}</Body>
+        </ShadowedBox>
     );
 }
 
@@ -57,6 +69,7 @@ export default function DetailedTeamView({ teamData }) {
         <div className={styles.wrapper}>
             <TeamTitle title={teamData.teamName} author={teamData.creatorUsername} />
             <Party party={teamData.party} />
+            <Description text={teamData.description} />
             <CommentForm onSubmitComment={handleOnSubmitComment} />
             <>
                 {comments.map(({ _id, comment: body, username }) => (
