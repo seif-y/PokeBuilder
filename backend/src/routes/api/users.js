@@ -1,5 +1,6 @@
 import express from "express";
 import { createUser, retrieveUser, getTeamsByUser, deleteUser, getJwtForUser } from "../../users/user-dao";
+import passportRequestHandler from "../../auth/passportHandler";
 
 const HTTP_CREATED = 201;
 const HTTP_NOT_FOUND = 404;
@@ -18,8 +19,7 @@ router.post("/register", async (req, res) => {
             username: req.body.username,
             password: req.body.password,
             comments: [],
-            upvotedTeams: [],
-            downvotedTeams: [],
+            upvotedTeams: new Set(),
         },
         (newUser, error) => {
             if (error) {
@@ -54,7 +54,7 @@ router.post("/login", async (req, res) => {
 });
 
 // Retrieve single user
-router.get("/:id", async (req, res) => {
+router.get("/:id", passportRequestHandler, async (req, res) => {
     const { id } = req.params;
 
     try {
