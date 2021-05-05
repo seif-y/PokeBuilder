@@ -17,7 +17,7 @@ export default function SideNavbar() {
             </NavLink>
             <div className={styles.bottomSpacer}/>
             <img
-                className={styles.logo}
+                className={`${styles.logo} ${styles.unselectable}`}
                 src={`${process.env.PUBLIC_URL}/icons/logo.png`}
                 alt={"Logo"}
             />
