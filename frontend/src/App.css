@@ -9,6 +9,10 @@
     /* Same as width of sidebar*/
 }
 
+.not-found {
+    text-align: center;
+}
+
 .not-found-image {
     margin-top: 50px;
     border: solid 5px black;

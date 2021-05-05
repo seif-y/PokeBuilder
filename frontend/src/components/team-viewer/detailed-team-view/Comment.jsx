@@ -1,13 +1,13 @@
 import Body from "../util/style-components/Body";
 import Headline from "../util/style-components/Headline";
-import UpvotableContent from "../util/upvotes/UpvotableContent";
+import ShadowedBox from "../util/style-components/ShadowedBox";
 
 // todo time posted
-export default function Comment({ body, poster, upvotes }) {
+export default function Comment({ body, username }) {
     return (
-        <UpvotableContent upvotes={upvotes}>
-            <Headline>{poster}</Headline>
+        <ShadowedBox>
+            <Headline>{username}</Headline>
             <Body>{body}</Body>
-        </UpvotableContent>
+        </ShadowedBox>
     );
 }

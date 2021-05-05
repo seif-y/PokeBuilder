@@ -7,10 +7,8 @@ export default function CommentForm({ onSubmitComment }) {
     const EMPTY = "";
     const [comment, setComment] = useState(EMPTY);
     const submitAndClear = () => {
-        setComment((currentComment) => {
-            onSubmitComment(currentComment);
-            return EMPTY;
-        });
+        onSubmitComment(comment);
+        setComment(EMPTY);
     };
     return (
         <ShadowedBox classes={`${styles.flex} ${styles.commentForm}`}>

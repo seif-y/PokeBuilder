@@ -54,14 +54,23 @@ const formatToPokemonInformation = async (pokemonData) => {
     );
 };
 
+const getPokemonView = async (pokemonIdOrName, spritePath) => {
+    return pipePromise(getDataFromUrl, formatToPokemonView(spritePath))(`${DOMAIN}/pokemon/${pokemonIdOrName}`);
+};
+
 // Returns a PokemonInformation object
 export async function getPokemonInformation(pokemonIdOrName) {
     const url = `${DOMAIN}/pokemon/${pokemonIdOrName}`;
     return pipePromise(getDataFromUrl, formatToPokemonInformation)(url);
 }
 
-export async function getPokemonView(pokemonIdOrName, spritePath) {
-    return pipePromise(getDataFromUrl, formatToPokemonView(spritePath))(`${DOMAIN}/pokemon/${pokemonIdOrName}`);
+export async function formatParty(party) {
+    return Promise.all(
+        party.map(async (pokemon) => {
+            const pokemonView = await getPokemonView(pokemon.pokemonID);
+            return Object.assign({}, pokemon, pokemonView);
+        })
+    );
 }
 
 // Returns a list of PokemonViews

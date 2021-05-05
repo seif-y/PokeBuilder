@@ -7,7 +7,3 @@
     border-radius: 10px;
     margin-bottom: 20px;
 }
-
-.shadowedBox:last-child {
-    margin-bottom: 0;
-}
