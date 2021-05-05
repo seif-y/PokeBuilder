@@ -30,6 +30,7 @@ async function updateTeamUpvotes(id, increment, userID) {
         // Decrement the upvotes
         upvotes = upvotes * -1;
 
+        // Remove the team id from the upvotedTeams set
         await User.updateOne({ _id: userID }, { $pullAll: { upvotedTeams: [id] } });
     }
 
