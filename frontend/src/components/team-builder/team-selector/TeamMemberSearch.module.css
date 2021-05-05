@@ -1,0 +1,45 @@
+.tableContainer {
+    margin-top: 20px;
+    border: 2px solid lightgray;
+    height: 400px;
+    width: 80vw;
+    max-width: 500px;
+    overflow-x: auto;
+    text-align: center;
+}
+
+.table {
+    width: 100%;
+}
+
+.tableRow {
+    background-color: whitesmoke;
+}
+
+.tableRow:nth-of-type(even) {
+    background-color: white;
+}
+
+.tableRow:hover {
+    cursor: pointer;
+    background-color: lightgray;
+}
+
+.pokemonName {
+    text-align: left;
+}
+
+.pokemonID {
+    text-align: center;
+}
+
+.pokemonSprite {
+    text-align: center;
+}
+
+.pokemonSprite > img {
+    height: 32px;
+    width: auto;
+    margin: 4px 0 4px 0;
+    text-align: center;
+}
