@@ -10,18 +10,24 @@ import { Snackbar } from "@material-ui/core";
 export default function SideNavbar() {
     const [showModal, setShowModal] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState("");
+    const [showSnackbar, setShowSnackbar] = useState(false);
 
     const [loggedIn, setLoggedIn] = useContext(AuthContext);
 
     function logOut() {
         localStorage.removeItem("pokebuilderAuthToken");
         setLoggedIn(false);
-        setSnackbarMessage("Successfully logged out");
+        revealSnackbar("Successfully logged out");
     }
 
     function handleLogIn() {
-        setSnackbarMessage("Successfully logged in");
         setShowModal(false);
+        revealSnackbar("Successfully logged in");
+    }
+
+    function revealSnackbar(message) {
+        setSnackbarMessage(message);
+        setShowSnackbar(true);
     }
 
     function renderAccountButton() {
@@ -66,7 +72,7 @@ export default function SideNavbar() {
             >
                 <LoginForm onComplete={() => handleLogIn()} />
             </Modal>
-            <Snackbar open={snackbarMessage} autoHideDuration={3000} onClose={() => setSnackbarMessage(false)}>
+            <Snackbar open={showSnackbar} autoHideDuration={3000} onClose={() => setShowSnackbar(false)}>
                 <div className={styles.snackbarMessage}>{snackbarMessage}</div>
             </Snackbar>
         </div>
