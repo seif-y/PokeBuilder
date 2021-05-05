@@ -4,10 +4,11 @@ import { getPokemonViewList } from "../../../pokeapi/pokemon";
 import { formatName } from "../../../util/names";
 import styles from "./TeamMemberSearch.module.css";
 import LoadingAnimation from "../../global/LoadingAnimation";
+import Modal from "../../global/Modal";
 
 let allPokemon = [];
 
-export default function TeamMemberSearch({ onSelect }) {
+export default function TeamMemberSearch({ onSelect, showModal, hideModal }) {
     const [displayedPokemon, setDisplayedPokemon] = useState(null);
 
     useEffect(() => {
@@ -45,16 +46,23 @@ export default function TeamMemberSearch({ onSelect }) {
     }
 
     return (
-        <div>
-            <SearchBar onSearch={(searchTerm) => filterResults(searchTerm)} />
-            <div className={styles.tableContainer}>
-                {
-                    displayedPokemon ?
-                        renderPokemonList() :
-                        <div className={styles.centerContent}>
-                            <LoadingAnimation size="small"/>
-                        </div>
-                }</div>
-        </div>
+        <Modal
+            show={showModal}
+            dismissOnClickOutside
+            onCancel={() => hideModal()}
+            title={"Add Pokémon"}
+            titleBarChildren={ <SearchBar onSearch={(searchTerm) => filterResults(searchTerm)} />}
+        >
+            <div>
+                <div className={styles.tableContainer}>
+                    {
+                        displayedPokemon ?
+                            renderPokemonList() :
+                            <div className={styles.centerContent}>
+                                <LoadingAnimation size="small"/>
+                            </div>
+                    }</div>
+            </div>
+        </Modal>
     );
 }

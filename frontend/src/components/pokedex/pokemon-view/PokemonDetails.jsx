@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getPokemonInformation, getPokemonViewList } from "../../../pokeapi/pokemon";
+import { getPokemonInformation } from "../../../pokeapi/pokemon";
 import LoadingAnimation from "../../global/LoadingAnimation";
 import styles from "./PokemonDetails.module.css";
 

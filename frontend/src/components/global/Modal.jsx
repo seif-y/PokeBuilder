@@ -20,8 +20,8 @@ export default function Modal({ dismissOnClickOutside, onCancel, children, show,
         >
             <div className={styles.modalContainer}>
                 <div className={styles.titleBar}>
-                    <span className={styles.text}>{title}</span>
-                    {titleBarChildren}
+                    <div className={styles.text}>{title}</div>
+                    {titleBarChildren ? <div className={styles.titleBarChildren}> {titleBarChildren} </div> : null}
                 </div>
                 <div className={styles.content}>
                     {children}

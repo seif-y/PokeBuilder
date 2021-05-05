@@ -8,7 +8,7 @@ export default function SearchBar({ onSearch }) {
             <input
                 className={styles.searchBar}
                 type="text"
-                placeholder="Search for a pokemon's name"
+                placeholder="Search by Pokémon name"
                 onKeyUp={(e) => onSearch(e.target.value)}
             />
             <SearchIcon className={styles.searchIcon} />

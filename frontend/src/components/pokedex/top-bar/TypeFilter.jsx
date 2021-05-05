@@ -56,7 +56,13 @@ export default function TypeFilter({ onFiltersUpdated }) {
     return (
         <>
             <FilterIcon className={styles.filter} onClick={() => setShowModal((modalIsShown) => !modalIsShown)} />
-            <Modal show={showModal} dismissOnClickOutside onCancel={() => handleOnCancel(false)} title="Filter by Types">
+            <Modal
+                show={showModal}
+                dismissOnClickOutside
+                onCancel={() => handleOnCancel(false)}
+                title="Filter by Types"
+                titleBarChildren={null}
+            >
                 <div className={styles.typeGrid}>
                     <PokeTypes />
                     <button className={styles.leftButton} onClick={() => handleOnCancel(false)}>
