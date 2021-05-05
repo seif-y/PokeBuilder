@@ -18,8 +18,8 @@ router.post("/register", async (req, res) => {
             username: req.body.username,
             password: req.body.password,
             comments: [],
-            upVotedTeams: [],
-            downVotedTeams: [],
+            upvotedTeams: [],
+            downvotedTeams: [],
         },
         (newUser, error) => {
             if (error) {

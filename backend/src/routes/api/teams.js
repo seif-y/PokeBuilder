@@ -5,8 +5,8 @@ import {
     retrieveTeam,
     retrieveTeamList,
     deleteTeam,
-    updateTeamUpVotes,
-    updateTeamDownVotes,
+    updateTeamUpvotes,
+    updateTeamDownvotes,
 } from "../../teams/team-dao";
 
 const HTTP_CREATED = 201;
@@ -22,9 +22,10 @@ router.post("/", passportRequestHandler, async (req, res) => {
     try {
         const newTeam = await createTeam({
             creator: req.user._id,
+            creatorUsername: req.user.username,
             teamName: req.body.teamName,
             description: req.body.description,
-            upVotes: 0,
+            upvotes: 0,
             party: req.body.party,
         });
 
@@ -75,10 +76,10 @@ router.delete("/:id", passportRequestHandler, async (req, res) => {
 router.patch("/:id/upvotes", passportRequestHandler, async (req, res) => {
     try {
         const { id } = req.params;
-        const upVotes = req.body.upVotes;
+        const upvotes = req.body.upvotes;
         const userID = req.user._id;
 
-        await updateTeamUpVotes(id, upVotes, userID);
+        await updateTeamUpvotes(id, upvotes, userID);
 
         res.sendStatus(HTTP_NO_CONTENT);
     } catch {
@@ -90,10 +91,10 @@ router.patch("/:id/upvotes", passportRequestHandler, async (req, res) => {
 router.patch("/:id/downvotes", passportRequestHandler, async (req, res) => {
     try {
         const { id } = req.params;
-        let downVotes = req.body.downVotes;
+        let downvotes = req.body.downvotes;
         const userID = req.user._id;
 
-        await updateTeamDownVotes(id, downVotes, userID);
+        await updateTeamDownvotes(id, downvotes, userID);
 
         res.sendStatus(HTTP_NO_CONTENT);
     } catch {
