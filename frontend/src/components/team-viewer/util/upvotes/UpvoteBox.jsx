@@ -7,15 +7,19 @@ function truncateVote(number) {
     return number < 1000 ? number : format;
 }
 
-// todo add upvote downvote functionality
-// perhaps an onVote function prop
+export default function UpvoteBox({ isUpvoted, upvotes = 0, onVote = () => {} }) {
+    function handleOnClick() {
+        onVote(!isUpvoted);
+    }
 
-export default function UpvoteBox({ upvotes }) {
     return (
         <div className={`flex ${styles.upvoteBox}`}>
-            <Arrow fontSize="large" className={`${styles.arrow} ${styles.clickable}`} />
+            <Arrow
+                fontSize="large"
+                className={`${isUpvoted ? styles.upvotedColor : ""} ${styles.arrow} ${styles.clickable}`}
+                onClick={handleOnClick}
+            />
             {truncateVote(upvotes)}
-            <Arrow fontSize="large" className={`${styles.arrow} ${styles.reversed} ${styles.clickable}`} />
         </div>
     );
 }

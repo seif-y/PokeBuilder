@@ -4,9 +4,14 @@ import { useEffect, useState } from "react";
 import { formatParty } from "../../pokeapi/pokemon";
 import TeamView from "./TeamView";
 
+function handleOnVote(isUpvoted, teamID) {
+    const UPVOTE_ENDPOINT = `/api/teams/${teamID}/upvotes`;
+    console.log(isUpvoted, teamID);
+}
+
 // todo refactor useEffect into a useFetch hook
 
-function RenderTeamView({ _id, creatorUsername: creatorName, teamName, description, party, upvotes }) {
+function RenderTeamView({ _id, creatorUsername: creatorName, teamName, description, party, isUpvoted, upvotes }) {
     const [formattedParty, setFormattedParty] = useState([]);
     useEffect(() => {
         async function fetchData() {
@@ -26,13 +31,22 @@ function RenderTeamView({ _id, creatorUsername: creatorName, teamName, descripti
             teamName={teamName}
             description={description}
             party={formattedParty}
+            onVote={handleOnVote}
+            isUpvoted={isUpvoted}
             upvotes={upvotes}
         />
     );
 }
 
-function TeamViewList({ teamViews }) {
-    return <div className={styles.wrapper}>{teamViews.map(RenderTeamView)}</div>;
+function TeamViewList({ teamViews, upvotedTeams }) {
+    return (
+        <div className={styles.wrapper}>
+            {teamViews.map((teamView) => {
+                teamView.isUpvoted = upvotedTeams.includes(teamView._id);
+                return RenderTeamView(teamView);
+            })}
+        </div>
+    );
 }
 
 export default function TeamViewer() {
@@ -44,5 +58,17 @@ export default function TeamViewer() {
         }
         fetchData();
     }, []);
-    return <TeamViewList teamViews={teamViews} />;
+
+    const userID = "6091dee9a3277378e0a9f0b9"; // provide token instead
+    const USER_ENDPOINT = `/api/users/${userID}`;
+    const [upvotedTeams, setUpvotedTeams] = useState([]);
+    useEffect(() => {
+        async function fetchData() {
+            const res = await axios.get(USER_ENDPOINT);
+            setUpvotedTeams(res?.data?.upvotedTeams);
+        }
+        fetchData();
+    }, [USER_ENDPOINT]);
+
+    return <TeamViewList teamViews={teamViews} upvotedTeams={upvotedTeams} />;
 }

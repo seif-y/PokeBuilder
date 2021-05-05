@@ -33,13 +33,18 @@ function PartySprites({ party }) {
     );
 }
 
-export default function TeamView({ teamID, creatorName, teamName, description, party, upvotes }) {
+export default function TeamView({ teamID, creatorName, teamName, description, party, onVote, isUpvoted, upvotes }) {
     return (
-        <Link className={styles.link} to={`/teams/${teamID}`}>
-            <UpvotableContent classes={styles.clickable} upvotes={upvotes}>
+        <UpvotableContent
+            classes={styles.clickable}
+            isUpvoted={isUpvoted}
+            onVote={(isUpvoted) => onVote(isUpvoted, teamID)}
+            upvotes={upvotes}
+        >
+            <Link className={styles.link} to={`/teams/${teamID}`}>
                 <Details creatorName={creatorName} teamName={teamName} description={description} />
                 <PartySprites party={party} />
-            </UpvotableContent>
-        </Link>
+            </Link>
+        </UpvotableContent>
     );
 }

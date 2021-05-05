@@ -4,6 +4,7 @@
 
     text-align: center;
     font-size: 20px;
+    width: 60px;
 }
 
 .arrow.clickable {
@@ -15,6 +16,6 @@
     transform: rotate(var(--up));
 }
 
-.arrow.reversed {
-    transform: rotate(calc(360deg - var(--up)));
+.arrow.upvotedColor {
+    color: #52d593;
 }
