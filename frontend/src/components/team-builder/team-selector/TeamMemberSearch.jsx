@@ -3,6 +3,7 @@ import SearchBar from "../../global/SearchBar";
 import { getPokemonViewList } from "../../../pokeapi/pokemon";
 import { formatName } from "../../../util/names";
 import styles from "./TeamMemberSearch.module.css";
+import LoadingAnimation from "../../global/LoadingAnimation";
 
 let allPokemon = [];
 
@@ -29,15 +30,15 @@ export default function TeamMemberSearch({ onSelect }) {
         return (
             <table className={styles.table} cellSpacing="0">
                 <tbody>
-                    {displayedPokemon.map((pokemon) => (
-                        <tr key={pokemon.name} className={styles.tableRow} onClick={() => onSelect(pokemon)}>
-                            <td className={styles.pokemonSprite}>
-                                <img src={pokemon.sprite} alt={pokemon.name} />
-                            </td>
-                            <td className={styles.pokemonName}>{formatName(pokemon.name)}</td>
-                            <td className={styles.pokemonID}>#{pokemon.id}</td>
-                        </tr>
-                    ))}
+                {displayedPokemon.map((pokemon) => (
+                    <tr key={pokemon.name} className={styles.tableRow} onClick={() => onSelect(pokemon)}>
+                        <td className={styles.pokemonSprite}>
+                            <img src={pokemon.sprite} alt={pokemon.name} />
+                        </td>
+                        <td className={styles.pokemonName}>{formatName(pokemon.name)}</td>
+                        <td className={styles.pokemonID}>#{pokemon.id}</td>
+                    </tr>
+                ))}
                 </tbody>
             </table>
         );
@@ -46,7 +47,14 @@ export default function TeamMemberSearch({ onSelect }) {
     return (
         <div>
             <SearchBar onSearch={(searchTerm) => filterResults(searchTerm)} />
-            <div className={styles.tableContainer}>{displayedPokemon ? renderPokemonList() : <p>...</p>}</div>
+            <div className={styles.tableContainer}>
+                {
+                    displayedPokemon ?
+                        renderPokemonList() :
+                        <div className={styles.centerContent}>
+                            <LoadingAnimation size="small"/>
+                        </div>
+                }</div>
         </div>
     );
 }

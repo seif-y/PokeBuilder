@@ -43,3 +43,10 @@
     margin: 4px 0 4px 0;
     text-align: center;
 }
+
+.centerContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}

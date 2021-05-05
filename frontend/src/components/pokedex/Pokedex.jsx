@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import PokemonCard from "./PokemonCardView";
 import { getPokemonViewList } from "../../pokeapi/pokemon";
 import styles from "./Pokedex.module.css";
@@ -6,9 +6,18 @@ import SearchBar from "../global/SearchBar";
 import TopBar from "./top-bar/TopBar";
 import TypeFilter from "./top-bar/TypeFilter";
 import PokeType from "../global/PokeType";
+import LoadingAnimation from "../global/LoadingAnimation";
+
+let allPokemonViews = [];
 
 function GridOfPokemon({ pokemon }) {
     const isEmpty = pokemon.length === 0;
+    if (allPokemonViews.length === 0) {
+        return <div className={styles.centerContent}>
+            <LoadingAnimation />
+        </div>
+    }
+
     return isEmpty ? (
         <div className={styles.pokemonDisplay}>No results found</div>
     ) : (
@@ -23,8 +32,6 @@ function GridOfPokemon({ pokemon }) {
         </div>
     );
 }
-
-let allPokemonViews = [];
 
 // Global object used to decide which pokemon to display
 const filter = {

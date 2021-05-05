@@ -5,9 +5,17 @@
     align-items: center;
     padding: 10px;
 }
+
 .pokemonDisplay {
     max-width: 100%;
     margin: 85px auto 30px;
+}
+
+.centerContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 .title {

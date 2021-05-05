@@ -1,10 +1,11 @@
 import "./App.css";
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect, useParams } from "react-router-dom";
 import SideNavbar from "./components/nav/SideNavbar";
 import Pokedex from "./components/pokedex/Pokedex";
 import TeamBuilder from "./components/team-builder/TeamBuilder";
 import TeamViewer from "./components/team-viewer/TeamViewer";
+import PokemonDetails from "./components/pokedex/pokemon-view/PokemonDetails";
 
 function App() {
     return (
@@ -13,6 +14,9 @@ function App() {
                 <SideNavbar />
                 <div className="main-content">
                     <Switch>
+                        <Route path ="/pokedex/:name">
+                            <GetPokemonDetails />
+                        </Route>
                         <Route path="/pokedex">
                             <Pokedex />
                         </Route>
@@ -36,6 +40,11 @@ function App() {
             </div>
         </Router>
     );
+}
+
+function GetPokemonDetails() {
+    const {name} = useParams()
+    return <PokemonDetails name={name}></PokemonDetails>
 }
 
 export default App;
