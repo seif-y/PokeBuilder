@@ -1,13 +1,6 @@
 import express from "express";
 import passportRequestHandler from "../../auth/passportHandler";
-import {
-    createTeam,
-    retrieveTeam,
-    retrieveTeamList,
-    deleteTeam,
-    updateTeamUpvotes,
-    updateTeamDownvotes,
-} from "../../teams/team-dao";
+import { createTeam, retrieveTeam, retrieveTeamList, deleteTeam, updateTeamUpvotes } from "../../teams/team-dao";
 
 const HTTP_CREATED = 201;
 const HTTP_NOT_FOUND = 404;
@@ -76,9 +69,10 @@ router.delete("/:id", passportRequestHandler, async (req, res) => {
 router.patch("/:id/upvotes", passportRequestHandler, async (req, res) => {
     try {
         const { id } = req.params;
-        const upvotes = req.body.upvotes;
+        const increment = req.body.increment;
         const userID = req.user._id;
 
+        await updateTeamUpvotes(id, increment, userID);
 
         res.sendStatus(HTTP_NO_CONTENT);
     } catch {
