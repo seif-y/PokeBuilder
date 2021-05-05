@@ -3,14 +3,11 @@ import { Button } from "@material-ui/core";
 import styles from "./LoginForm.module.css";
 import axios from "axios";
 import { AuthContext } from "../../../App";
-import { Snackbar } from "@material-ui/core";
-import SnackbarMessage from "../SnackbarMessage";
 
 export default function LoginForm({ onComplete }) {
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
     const [errorMessage, setErrorMessage] = useState("");
-    const [showLoginMsg, setShowLoginMsg] = useState(false);
     const [, setLoggedIn] = useContext(AuthContext);
 
     function logIn() {
@@ -20,7 +17,6 @@ export default function LoginForm({ onComplete }) {
                 if (res.data.success) {
                     localStorage.setItem("pokebuilderAuthToken", res.data.token);
                     setLoggedIn(true);
-                    setShowLoginMsg(true);
                     onComplete();
                 }
             })
@@ -63,9 +59,6 @@ export default function LoginForm({ onComplete }) {
                 Sign Up
             </Button>
             <div className={styles.errMsg}>{errorMessage}</div>
-            <Snackbar open={showLoginMsg} autoHideDuration={3000} onClose={() => setShowLoginMsg(false)}>
-                <SnackbarMessage message="Successfully logged out" />
-            </Snackbar>
         </div>
     );
 }
