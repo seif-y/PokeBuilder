@@ -72,7 +72,7 @@ function SpecificTeam() {
     } else if (teamRes?.status) {
         return <NOT_FOUND />;
     } else {
-        return <div>Loading...</div>;
+        return null;
     }
 }
 

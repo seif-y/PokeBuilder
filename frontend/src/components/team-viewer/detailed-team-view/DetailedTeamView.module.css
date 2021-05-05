@@ -5,6 +5,10 @@
     margin-right: auto;
 }
 
+.heading {
+    align-items: center;
+}
+
 .sixPack {
     display: grid;
     grid-row-gap: 20px;

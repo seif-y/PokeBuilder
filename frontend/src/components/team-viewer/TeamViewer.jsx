@@ -1,25 +1,9 @@
-import axios from "axios";
-import jwt_decode from "jwt-decode";
 import styles from "./TeamViewer.module.css";
+import axios from "axios";
+import { getToken, getAuthConfig, getUserID } from "../../util/auth";
 import { AuthContext } from "../../App.js";
 import { useContext, useEffect, useState } from "react";
 import TeamView from "./TeamView";
-
-const getToken = () => localStorage.getItem("pokebuilderAuthToken");
-
-const getAuthConfig = (token) => ({
-    headers: {
-        Authorization: `Bearer ${token}`,
-    },
-});
-
-const getUserID = (token) => {
-    let userID = "";
-    try {
-        userID = jwt_decode(token).id;
-    } catch {}
-    return userID;
-};
 
 // todo refactor useEffect into a useFetch hook
 
