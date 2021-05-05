@@ -1,6 +1,8 @@
 import Body from "./util/style-components/Body";
 import Headline from "./util/style-components/Headline";
 import UpvotableContent from "./util/upvotes/UpvotableContent";
+import { formatParty } from "../../pokeapi/pokemon";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./TeamView.module.css";
 
@@ -34,6 +36,17 @@ function PartySprites({ party }) {
 }
 
 export default function TeamView({ teamID, creatorName, teamName, description, party, onVote, isUpvoted, upvotes }) {
+    const [formattedParty, setFormattedParty] = useState([]);
+    useEffect(() => {
+        async function fetchData() {
+            const newParty = await formatParty(party);
+            setFormattedParty(() => newParty);
+        }
+        if (party.length !== 0) {
+            fetchData();
+        }
+    }, [party]);
+
     return (
         <UpvotableContent
             classes={styles.clickable}
@@ -43,7 +56,7 @@ export default function TeamView({ teamID, creatorName, teamName, description, p
         >
             <Link className={styles.link} to={`/teams/${teamID}`}>
                 <Details creatorName={creatorName} teamName={teamName} description={description} />
-                <PartySprites party={party} />
+                <PartySprites party={formattedParty} />
             </Link>
         </UpvotableContent>
     );

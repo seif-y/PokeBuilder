@@ -11,7 +11,7 @@ import DetailedTeamView from "./components/team-viewer/detailed-team-view/Detail
 export const AuthContext = createContext("pokebuilderAuthToken" in localStorage);
 
 function App() {
-    const [loggedIn, setLoggedIn] = useState(false);
+    const [loggedIn, setLoggedIn] = useState("pokebuilderAuthToken" in localStorage);
 
     return (
         <Router>

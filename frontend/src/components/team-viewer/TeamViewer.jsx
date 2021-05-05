@@ -1,74 +1,84 @@
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 import styles from "./TeamViewer.module.css";
-import { useEffect, useState } from "react";
-import { formatParty } from "../../pokeapi/pokemon";
+import { AuthContext } from "../../App.js";
+import { useContext, useEffect, useState } from "react";
 import TeamView from "./TeamView";
 
-function handleOnVote(isUpvoted, teamID) {
-    const UPVOTE_ENDPOINT = `/api/teams/${teamID}/upvotes`;
-    console.log(isUpvoted, teamID);
-}
+const getToken = () => localStorage.getItem("pokebuilderAuthToken");
+
+const getAuthConfig = (token) => ({
+    headers: {
+        Authorization: `Bearer ${token}`,
+    },
+});
+
+const getUserID = (token) => {
+    let userID = "";
+    try {
+        userID = jwt_decode(token).id;
+    } catch {}
+    return userID;
+};
 
 // todo refactor useEffect into a useFetch hook
 
-function RenderTeamView({ _id, creatorUsername: creatorName, teamName, description, party, isUpvoted, upvotes }) {
-    const [formattedParty, setFormattedParty] = useState([]);
+export default function TeamViewer() {
+    const [loggedIn] = useContext(AuthContext);
+
+    /* Most of the data that's needed to render a TeamView component is fetched here */
+    const [teamViews, setTeamViews] = useState([]);
+    async function fetchAndSetTeamViews() {
+        const res = await axios.get("/api/teams");
+        setTeamViews(res.data);
+    }
     useEffect(() => {
-        async function fetchData() {
-            const newParty = await formatParty(party);
-            setFormattedParty(() => newParty);
-        }
-        if (party.length !== 0) {
-            fetchData();
-        }
-    }, [party]);
+        fetchAndSetTeamViews();
+    }, [loggedIn]);
 
-    return (
-        <TeamView
-            key={_id}
-            teamID={_id}
-            creatorName={creatorName}
-            teamName={teamName}
-            description={description}
-            party={formattedParty}
-            onVote={handleOnVote}
-            isUpvoted={isUpvoted}
-            upvotes={upvotes}
-        />
-    );
-}
+    /* We highlight upvotes by detecting whether a teamID is included in upvotedTeams */
+    const [upvotedTeams, setUpvotedTeams] = useState([]);
+    async function fetchAndSetUpvotedTeams(token) {
+        const userID = getUserID(token);
+        const USER_ENDPOINT = `/api/users/${userID}`;
+        const res = await axios.get(USER_ENDPOINT, getAuthConfig(token));
+        setUpvotedTeams(res.data.upvotedTeams);
+    }
+    useEffect(() => {
+        if (loggedIn) {
+            const token = getToken();
+            fetchAndSetUpvotedTeams(token);
+        } else {
+            setUpvotedTeams([]);
+        }
+    }, [loggedIn]);
 
-function TeamViewList({ teamViews, upvotedTeams }) {
+    async function handleOnVote(isUpvoted, teamID) {
+        const UPVOTE_ENDPOINT = `/api/teams/${teamID}/upvotes`;
+        const token = getToken();
+        if (token) {
+            const body = { increment: isUpvoted };
+            await axios.patch(UPVOTE_ENDPOINT, body, getAuthConfig(token));
+            fetchAndSetUpvotedTeams(token); // renders the highlights
+            fetchAndSetTeamViews(); // gets the upvotes fresh from the server
+        }
+    }
+
     return (
         <div className={styles.wrapper}>
-            {teamViews.map((teamView) => {
-                teamView.isUpvoted = upvotedTeams.includes(teamView._id);
-                return RenderTeamView(teamView);
-            })}
+            {teamViews.map((teamView) => (
+                <TeamView
+                    key={teamView._id}
+                    teamID={teamView._id}
+                    creatorName={teamView.creatorUsername}
+                    teamName={teamView.teamName}
+                    description={teamView.description}
+                    party={teamView.party}
+                    onVote={handleOnVote}
+                    isUpvoted={upvotedTeams.includes(teamView._id)}
+                    upvotes={teamView.upvotes}
+                />
+            ))}
         </div>
     );
-}
-
-export default function TeamViewer() {
-    const [teamViews, setTeamViews] = useState([]);
-    useEffect(() => {
-        async function fetchData() {
-            const res = await axios.get("/api/teams");
-            setTeamViews(res.data);
-        }
-        fetchData();
-    }, []);
-
-    const userID = "6091dee9a3277378e0a9f0b9"; // provide token instead
-    const USER_ENDPOINT = `/api/users/${userID}`;
-    const [upvotedTeams, setUpvotedTeams] = useState([]);
-    useEffect(() => {
-        async function fetchData() {
-            const res = await axios.get(USER_ENDPOINT);
-            setUpvotedTeams(res?.data?.upvotedTeams);
-        }
-        fetchData();
-    }, [USER_ENDPOINT]);
-
-    return <TeamViewList teamViews={teamViews} upvotedTeams={upvotedTeams} />;
 }
