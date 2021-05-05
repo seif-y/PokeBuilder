@@ -76,7 +76,7 @@ export default function TeamMember({ index, onUpdate }) {
             <div className={styles.container} onClick={() => (pokemon ? null : setShowModal(true))}>
                 {renderPokemon()}
             </div>
-            <Modal show={showModal} dismissOnClickOutside onCancel={() => setShowModal(false)}>
+            <Modal show={showModal} dismissOnClickOutside onCancel={() => setShowModal(false)} title={"Add Pokémon"}>
                 <TeamMemberSearch onSelect={(pokemon) => choosePokemon(pokemon)} />
             </Modal>
         </React.Fragment>
