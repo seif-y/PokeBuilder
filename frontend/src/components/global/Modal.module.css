@@ -74,4 +74,6 @@
     background: white;
     border-radius: 0px 0px 10px 10px;
     box-shadow: 0px 2px 3px #262626;
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
 }
