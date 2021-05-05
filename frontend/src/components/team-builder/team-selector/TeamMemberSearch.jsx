@@ -50,8 +50,15 @@ export default function TeamMemberSearch({ onSelect, showModal, hideModal }) {
             show={showModal}
             dismissOnClickOutside
             onCancel={() => hideModal()}
-            title={"Add Pokémon"}
-            titleBarChildren={ <SearchBar onSearch={(searchTerm) => filterResults(searchTerm)} />}
+            title={""}
+            titleBarChildren={
+                <div className={styles.topBarContainer}>
+                    <div className={styles.text}>Add Pokémon</div>
+                    <div className={styles.searchBar}>
+                        <SearchBar onSearch={(searchTerm) => filterResults(searchTerm)} />
+                    </div>
+                </div>
+            }
         >
             <div>
                 <div className={styles.tableContainer}>

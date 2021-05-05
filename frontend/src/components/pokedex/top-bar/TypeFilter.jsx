@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { getAllTypes } from "../../../util/types";
 import styles from "./TypeFilter.module.css";
 import { FilterList as FilterIcon } from "@material-ui/icons";
@@ -60,8 +60,9 @@ export default function TypeFilter({ onFiltersUpdated }) {
                 show={showModal}
                 dismissOnClickOutside
                 onCancel={() => handleOnCancel(false)}
-                title="Filter by Types"
-                titleBarChildren={null}
+                titleBarChildren={
+                    <div className={styles.text}>Filter by Types</div>
+                }
             >
                 <div className={styles.typeGrid}>
                     <PokeTypes />
