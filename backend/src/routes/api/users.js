@@ -19,7 +19,6 @@ router.post("/register", async (req, res) => {
             password: req.body.password,
             comments: [],
             upvotedTeams: [],
-            downvotedTeams: [],
         },
         (newUser, error) => {
             if (error) {

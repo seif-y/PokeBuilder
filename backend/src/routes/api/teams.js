@@ -79,22 +79,6 @@ router.patch("/:id/upvotes", passportRequestHandler, async (req, res) => {
         const upvotes = req.body.upvotes;
         const userID = req.user._id;
 
-        await updateTeamUpvotes(id, upvotes, userID);
-
-        res.sendStatus(HTTP_NO_CONTENT);
-    } catch {
-        res.status(HTTP_BAD_REQUEST).send("Invalid team id");
-    }
-});
-
-// Increase the team downvotes
-router.patch("/:id/downvotes", passportRequestHandler, async (req, res) => {
-    try {
-        const { id } = req.params;
-        let downvotes = req.body.downvotes;
-        const userID = req.user._id;
-
-        await updateTeamDownvotes(id, downvotes, userID);
 
         res.sendStatus(HTTP_NO_CONTENT);
     } catch {
