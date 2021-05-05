@@ -22,6 +22,7 @@ router.post("/", passportRequestHandler, async (req, res) => {
     try {
         const newTeam = await createTeam({
             creator: req.user._id,
+            creatorUsername: req.user.username,
             teamName: req.body.teamName,
             description: req.body.description,
             upvotes: 0,

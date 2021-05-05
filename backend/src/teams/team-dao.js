@@ -4,11 +4,6 @@ import { retrieveUser } from "../users/user-dao";
 import { Comment } from "../comments/commentSchema";
 
 async function createTeam(team) {
-    const user = await retrieveUser(team.creator);
-
-    // Store the username of the team creator in the Team document
-    team.creatorUsername = user.username;
-
     const dbTeam = new Team(team);
     await dbTeam.save();
     return dbTeam;
