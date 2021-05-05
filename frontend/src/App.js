@@ -16,29 +16,30 @@ function App() {
     return (
         <Router>
             <AuthContext.Provider value={[loggedIn, setLoggedIn]}>
-            <div id="modal-root" className="root">
-                <SideNavbar />
-                <div className="main-content">
-                    <Switch>
-                        <Route path="/pokedex">
-                            <Pokedex />
-                        </Route>
-                        <Route path="/team-builder">
-                            <TeamBuilder />
-                        </Route>
-                        <Route path="/teams/:id">
-                            <SpecificTeam />
-                        </Route>
-                        <Route path="/teams">
-                            <TeamViewer />
-                        </Route>
-                        <Route path="/" exact>
-                            <Redirect to="/pokedex" />
-                        </Route>
-                        <Route path="*">
-                            <NOT_FOUND />
-                        </Route>
-                    </Switch>
+                <div id="modal-root" className="root">
+                    <SideNavbar />
+                    <div className="main-content">
+                        <Switch>
+                            <Route path="/pokedex">
+                                <Pokedex />
+                            </Route>
+                            <Route path="/team-builder">
+                                <TeamBuilder />
+                            </Route>
+                            <Route path="/teams/:id">
+                                <SpecificTeam />
+                            </Route>
+                            <Route path="/teams">
+                                <TeamViewer />
+                            </Route>
+                            <Route path="/" exact>
+                                <Redirect to="/pokedex" />
+                            </Route>
+                            <Route path="*">
+                                <NOT_FOUND />
+                            </Route>
+                        </Switch>
+                    </div>
                 </div>
             </AuthContext.Provider>
         </Router>
