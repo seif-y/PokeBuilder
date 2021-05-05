@@ -24,13 +24,16 @@ async function deleteTeam(id) {
 async function updateTeamUpvotes(id, increment, userID) {
     let upvotes = NUM_OF_UPVOTES_PER_USER;
 
-    if (!increment) {
+    if (increment) {
+        await User.updateOne({ _id: userID }, { $addToSet: { upvotedTeams: id } });
+    } else {
         // Decrement the upvotes
         upvotes = upvotes * -1;
+
+        await User.updateOne({ _id: userID }, { $pullAll: { upvotedTeams: [id] } });
     }
 
     await Team.updateOne({ _id: id }, { $inc: { upvotes: upvotes } });
-    await User.updateOne({ _id: userID }, { $addToSet: { upvotedTeams: id } });
 }
 
 export { createTeam, retrieveTeam, retrieveTeamList, deleteTeam, updateTeamUpvotes };
