@@ -28,13 +28,13 @@ export default function SideNavbar() {
         if (loggedIn) {
             return (
                 <div onClick={() => logOut()}>
-                    <NavbarIcon imageName="builder.png" />
+                    <NavbarIcon imageName="logout.png" />
                 </div>
             );
         } else {
             return (
                 <div onClick={() => setShowModal(true)}>
-                    <NavbarIcon imageName="user.png" />
+                    <NavbarIcon imageName="login.png" />
                 </div>
             );
         }
