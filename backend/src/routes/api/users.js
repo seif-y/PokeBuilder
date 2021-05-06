@@ -12,8 +12,17 @@ const DUPLICATE_USERNAME_ERROR_CODE = 11000;
 
 const router = express.Router();
 
+process.on("unhandledRejection", (reason, promise) => {
+    console.log("promise: ", promise);
+});
+
 // Create new user
 router.post("/register", async (req, res) => {
+    if (!req.body.username || !req.body.password) {
+        res.status(HTTP_BAD_REQUEST).send("Empty username and/or password");
+        return;
+    }
+
     await createUser(
         {
             username: req.body.username,
@@ -28,13 +37,13 @@ router.post("/register", async (req, res) => {
                         res.status(HTTP_BAD_REQUEST).send(
                             "The username is already taken. Please choose a different username."
                         );
-
+                        break;
                     default:
                         res.status(HTTP_INTERNAL_SERVER_ERROR).send(error.message);
                 }
+            } else {
+                res.status(HTTP_CREATED).header("Location", `/api/users/${newUser._id}`).json(newUser);
             }
-
-            res.status(HTTP_CREATED).header("Location", `/api/users/${newUser._id}`).json(newUser);
         }
     );
 });
