@@ -1,37 +1,33 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import SearchBar from "../../global/SearchBar";
-import { getPokemonViewList } from "../../../pokeapi/pokemon";
 import { formatName } from "../../../util/names";
 import styles from "./TeamMemberSearch.module.css";
 import LoadingAnimation from "../../global/LoadingAnimation";
 import Modal from "../../global/Modal";
-
-let allPokemon = [];
+import { PokemonDataContext } from "../../../pokeapi/PokemonDataContextProvider";
 
 export default function TeamMemberSearch({ onSelect, showModal, hideModal }) {
-    const [displayedPokemon, setDisplayedPokemon] = useState(null);
+    let allPokemonViews = useContext(PokemonDataContext);
+    const [pokemonViews, setPokemonViews] = useState(null);
 
     useEffect(() => {
-        const updatePokemonViews = async () => {
-            allPokemon = await getPokemonViewList();
-            setDisplayedPokemon(allPokemon);
-        };
-        updatePokemonViews();
-    }, []);
+        setPokemonViews(allPokemonViews);
+    }, [allPokemonViews]);
+
 
     function filterResults(query) {
-        setDisplayedPokemon(allPokemon.filter((pokemon) => pokemon.name.startsWith(query)));
+        setPokemonViews(allPokemonViews.filter((pokemon) => pokemon.name.startsWith(query)));
     }
 
     function renderPokemonList() {
-        if (displayedPokemon.length < 1) {
+        if (pokemonViews.length < 1) {
             return <p>No results found</p>;
         }
 
         return (
             <table className={styles.table} cellSpacing="0">
                 <tbody>
-                {displayedPokemon.map((pokemon) => (
+                {pokemonViews.map((pokemon) => (
                     <tr key={pokemon.name} className={styles.tableRow} onClick={() => onSelect(pokemon)}>
                         <td className={styles.pokemonSprite}>
                             <img src={pokemon.sprite} alt={pokemon.name} />
@@ -63,12 +59,13 @@ export default function TeamMemberSearch({ onSelect, showModal, hideModal }) {
             <div>
                 <div className={styles.tableContainer}>
                     {
-                        displayedPokemon ?
+                        pokemonViews ?
                             renderPokemonList() :
                             <div className={styles.centerContent}>
-                                <LoadingAnimation size="small"/>
+                                <LoadingAnimation size="small" />
                             </div>
-                    }</div>
+                    }
+                </div>
             </div>
         </Modal>
     );
