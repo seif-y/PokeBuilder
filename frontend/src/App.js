@@ -15,10 +15,12 @@ function App() {
                 <SideNavbar />
                 <div className="main-content">
                     <PokemonDataContextProvider>
+
+                        <Route path ="/pokedex/:name">
+                            <GetPokemonDetails />
+                        </Route>
+
                         <Switch>
-                            <Route path ="/pokedex/:name">
-                                <GetPokemonDetails />
-                            </Route>
                             <Route path="/pokedex">
                                 <Pokedex />
                             </Route>
