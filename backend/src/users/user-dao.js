@@ -12,7 +12,10 @@ async function createUser(user, callback) {
     // Create password hash using bcrypt, with salt
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(user.password, salt, (err, hash) => {
-            if (err) callback(null, err);
+            if (err) {
+                callback(null, err);
+                return;
+            }
             dbUser.password = hash;
 
             // After hashing password, save user and return them

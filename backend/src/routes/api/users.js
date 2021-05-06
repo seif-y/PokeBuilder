@@ -18,6 +18,11 @@ process.on("unhandledRejection", (reason, promise) => {
 
 // Create new user
 router.post("/register", async (req, res) => {
+    if (!req.body.username || !req.body.password) {
+        res.status(HTTP_BAD_REQUEST).send("Empty username and/or password");
+        return;
+    }
+
     await createUser(
         {
             username: req.body.username,
