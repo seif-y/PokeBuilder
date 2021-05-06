@@ -1,13 +1,12 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import PokemonCard from "./PokemonCardView";
-import { getPokemonViewList } from "../../pokeapi/pokemon";
 import styles from "./Pokedex.module.css";
 import SearchBar from "../global/SearchBar";
 import TopBar from "./top-bar/TopBar";
 import TypeFilter from "./top-bar/TypeFilter";
 import PokeType from "../global/PokeType";
 import LoadingAnimation from "../global/LoadingAnimation";
-import { PokemonDataContext } from "../../pokeapi/PokemonDataContextProvider"
+import { PokemonDataContext } from "../../pokeapi/PokemonDataContextProvider";
 
 
 function GridOfPokemon({ pokemon }) {

@@ -8,9 +8,7 @@ const PokemonDataContextProvider = ({ children }) => {
 
     let pokemon = [];
     const updatePokemonViews = async () => {
-        console.log("loading pokemon")
         pokemon = await getPokemonViewList();
-        console.log("done loading pokemon")
         setPokemonViewsMap(pokemon);
     };
 
@@ -18,7 +16,6 @@ const PokemonDataContextProvider = ({ children }) => {
         updatePokemonViews();
     }, []);
 
-    console.log(pokemonViewsMap)
     return (
         <PokemonDataContext.Provider value={pokemonViewsMap}>
             {children}
