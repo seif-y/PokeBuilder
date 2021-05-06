@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import PokemonCard from "./PokemonCardView";
 import { getPokemonViewList } from "../../pokeapi/pokemon";
 import styles from "./Pokedex.module.css";
@@ -7,16 +7,18 @@ import TopBar from "./top-bar/TopBar";
 import TypeFilter from "./top-bar/TypeFilter";
 import PokeType from "../global/PokeType";
 import LoadingAnimation from "../global/LoadingAnimation";
+import { PokemonDataContext } from "../../pokeapi/PokemonDataContextProvider"
 
-let allPokemonViews = [];
 
 function GridOfPokemon({ pokemon }) {
-    const isEmpty = pokemon.length === 0;
-    if (allPokemonViews.length === 0) {
-        return <div className={styles.centerContent}>
-            <LoadingAnimation />
-        </div>
+    if (pokemon === null) {
+        return (
+            <div className={styles.centerContent}>
+                <LoadingAnimation />
+            </div>
+        );
     }
+    const isEmpty = pokemon.length === 0;
 
     return isEmpty ? (
         <div className={styles.pokemonDisplay}>No results found</div>
@@ -40,14 +42,12 @@ const filter = {
 };
 
 export default function Pokedex() {
-    const [pokemonViews, setPokemonViews] = useState([]);
+    let allPokemonViews = useContext(PokemonDataContext)
+    const [pokemonViews, setPokemonViews] = useState(null);
+
     useEffect(() => {
-        const updatePokemonViews = async () => {
-            allPokemonViews = await getPokemonViewList();
-            setPokemonViews(allPokemonViews);
-        };
-        updatePokemonViews();
-    }, []);
+        setPokemonViews(allPokemonViews)
+    }, [allPokemonViews])
 
     function handleOnSearch(query) {
         filter.name = query;
@@ -60,6 +60,9 @@ export default function Pokedex() {
     }
 
     function runFilters() {
+        if (!pokemonViews) {
+            return
+        }
         // Always show the pokemon if filter properties are empty
         const nameMatches = (filterName, name) => filterName === "" || name.startsWith(filterName);
         const typesMatch = (filterTypes, types) =>

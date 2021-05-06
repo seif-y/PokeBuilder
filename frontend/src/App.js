@@ -6,6 +6,7 @@ import Pokedex from "./components/pokedex/Pokedex";
 import TeamBuilder from "./components/team-builder/TeamBuilder";
 import TeamViewer from "./components/team-viewer/TeamViewer";
 import PokemonDetails from "./components/pokedex/pokemon-view/PokemonDetails";
+import PokemonDataContextProvider from "./pokeapi/PokemonDataContextProvider";
 
 function App() {
     return (
@@ -13,29 +14,31 @@ function App() {
             <div id="modal-root" className="root">
                 <SideNavbar />
                 <div className="main-content">
-                    <Switch>
-                        <Route path ="/pokedex/:name">
-                            <GetPokemonDetails />
-                        </Route>
-                        <Route path="/pokedex">
-                            <Pokedex />
-                        </Route>
-                        <Route path="/team-builder">
-                            <TeamBuilder />
-                        </Route>
-                        <Route path="/teams">
-                            <TeamViewer />
-                        </Route>
-                        <Route path="/" exact>
-                            <Redirect to="/pokedex" />
-                        </Route>
-                        <Route path="*">
-                            <div>
-                                <img className="not-found-image" src="/images/missingno.gif" alt="MissingNo." />
-                                <h3>The page you're looking for was not found.</h3>
-                            </div>
-                        </Route>
-                    </Switch>
+                    <PokemonDataContextProvider>
+                        <Switch>
+                            <Route path ="/pokedex/:name">
+                                <GetPokemonDetails />
+                            </Route>
+                            <Route path="/pokedex">
+                                <Pokedex />
+                            </Route>
+                            <Route path="/team-builder">
+                                <TeamBuilder />
+                            </Route>
+                            <Route path="/teams">
+                                <TeamViewer />
+                            </Route>
+                            <Route path="/" exact>
+                                <Redirect to="/pokedex" />
+                            </Route>
+                            <Route path="*">
+                                <div>
+                                    <img className="not-found-image" src="/images/missingno.gif" alt="MissingNo." />
+                                    <h3>The page you're looking for was not found.</h3>
+                                </div>
+                            </Route>
+                        </Switch>
+                    </PokemonDataContextProvider>
                 </div>
             </div>
         </Router>
