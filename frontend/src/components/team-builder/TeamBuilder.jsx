@@ -3,25 +3,29 @@ import React, { useState } from "react";
 import TextArea from "../global/TextArea";
 import TeamMember from "./team-selector/TeamMember";
 import styles from "./TeamBuilder.module.css";
+import { getAuthConfig, getToken } from "../../util/auth";
+import axios from "axios";
+import { useHistory } from "react-router";
 
 export default function TeamBuilder() {
     const [team, setTeam] = useState(Array(6));
     const [name, setName] = useState();
     const [description, setDescription] = useState();
-
+    const history = useHistory();
     function saveTeam() {
-        // TODO: Once user auth is implemented, set 'creator' to the username of the logged in user
         let body = {
-            creator: "anonymous",
-            name: name,
+            teamName: name,
             description: description,
             party: team,
         };
 
-        //TODO: Do any required data verification on the frontend.
-
-        //TODO: Make POST request to teams endpoint.
-        console.log(body);
+        // Make POST request to teams endpoint.
+        axios
+            .post("/api/teams", body, getAuthConfig(getToken()))
+            .then((res) => {
+                history.push(`/teams/${res.data._id}`);
+            })
+            .catch((err) => {});
     }
 
     function updateTeam(index, teamMember) {
