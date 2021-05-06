@@ -1,5 +1,6 @@
 import { Button } from "@material-ui/core";
 import React, { useState } from "react";
+import TextArea from "../global/TextArea";
 import TeamMember from "./team-selector/TeamMember";
 import styles from "./TeamBuilder.module.css";
 
@@ -49,11 +50,7 @@ export default function TeamBuilder() {
             </div>
             <input className={styles.teamNameInput} placeholder="Team Name" onChange={(e) => setName(e.target.value)} />
             <div className={styles.teamContainer}>{renderTeamSlots()}</div>
-            <textarea
-                className={styles.descriptionInput}
-                placeholder="Team description"
-                onChange={(e) => setDescription(e.target.value)}
-            />
+            <TextArea classes={styles.descriptionInput} placeholder="Team description" onChange={setDescription} />
         </div>
     );
 }

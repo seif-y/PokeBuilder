@@ -1,4 +1,5 @@
 body {
+    --placeHolderColour: #a9a9a9;
     --sideNavBarWidth: 70px;
     --stickySpacing: 40px;
     margin: 0;
@@ -10,4 +11,8 @@ body {
 
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+.flex {
+    display: flex;
 }

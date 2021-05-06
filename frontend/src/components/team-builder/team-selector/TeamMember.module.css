@@ -59,17 +59,9 @@
 }
 
 .notesArea {
-    resize: none;
     width: 90%;
+    height: 62px;
+    padding: 0;
     font-family: inherit;
     border-radius: 4px;
-    border: 2px solid lightgray;
-}
-
-.notesArea::placeholder {
-    color: lightgray;
-}
-
-.notesArea:focus {
-    outline: none;
 }

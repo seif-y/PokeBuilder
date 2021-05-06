@@ -1,5 +1,6 @@
 .teamBuilderContainer {
     display: flex;
+    text-align: center;
     flex-direction: column;
     align-items: center;
     gap: 20px;
@@ -38,13 +39,10 @@
 
 .descriptionInput {
     resize: none;
-    height: 80px;
+    height: 100px;
     width: 75%;
     font-family: inherit;
     font-size: large;
-    border-radius: 20px;
-    border: 2px solid lightgray;
-    padding: 10px;
 }
 
 .descriptionInput:focus {

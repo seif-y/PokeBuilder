@@ -1,6 +1,7 @@
 import "./App.css";
 import React, { useState, createContext } from "react";
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import NOT_FOUND from "./components/global/NOT_FOUND";
 import SideNavbar from "./components/nav/SideNavbar";
 import Pokedex from "./components/pokedex/Pokedex";
 import TeamBuilder from "./components/team-builder/TeamBuilder";
@@ -9,7 +10,7 @@ import TeamViewer from "./components/team-viewer/TeamViewer";
 export const AuthContext = createContext("pokebuilderAuthToken" in localStorage);
 
 function App() {
-    const [loggedIn, setLoggedIn] = useState(false);
+    const [loggedIn, setLoggedIn] = useState("pokebuilderAuthToken" in localStorage);
 
     return (
         <Router>
@@ -31,10 +32,7 @@ function App() {
                                 <Redirect to="/pokedex" />
                             </Route>
                             <Route path="*">
-                                <div>
-                                    <img className="not-found-image" src="/images/missingno.gif" alt="MissingNo." />
-                                    <h3>The page you're looking for was not found.</h3>
-                                </div>
+                                <NOT_FOUND />
                             </Route>
                         </Switch>
                     </div>
