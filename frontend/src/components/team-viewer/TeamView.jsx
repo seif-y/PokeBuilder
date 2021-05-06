@@ -6,13 +6,13 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./TeamView.module.css";
 
-function Details({ creatorName, teamName, description }) {
+function Details({ creatorUsername, teamName, description }) {
     const CHAR_LIMIT = 400;
     return (
         <>
             <Headline classes={`flex ${styles.title}`}>
                 <span>{teamName}</span>
-                <span>{`creator: ${creatorName}`}</span>
+                <span>{`creator: ${creatorUsername}`}</span>
             </Headline>
             <Body>{description < CHAR_LIMIT ? description : `${description.slice(0, CHAR_LIMIT)}...`}</Body>
         </>
@@ -36,7 +36,7 @@ function PartySprites({ party }) {
 }
 
 export default function TeamView({
-    teamData: { _id: teamID, creatorName, teamName, description, party },
+    teamData: { _id: teamID, creatorUsername, teamName, description, party },
     onVote,
     isUpvoted,
     upvotes,
@@ -60,7 +60,7 @@ export default function TeamView({
             upvotes={upvotes}
         >
             <Link className={styles.link} to={`/teams/${teamID}`}>
-                <Details creatorName={creatorName} teamName={teamName} description={description} />
+                <Details creatorUsername={creatorUsername} teamName={teamName} description={description} />
                 <PartySprites party={formattedParty} />
             </Link>
         </UpvotableContent>
