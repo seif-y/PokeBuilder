@@ -90,7 +90,11 @@ function Description({ text }) {
     );
 }
 
-export default function DetailedTeamView({ teamData }) {
+export default function Render({ teamData }) {
+    return teamData ? <DetailedTeamView teamData={teamData} /> : null;
+}
+
+function DetailedTeamView({ teamData }) {
     const [loggedIn] = useContext(AuthContext);
 
     const COMMENTS_ENDPOINT = `/api/teams/${teamData._id}/comments`;

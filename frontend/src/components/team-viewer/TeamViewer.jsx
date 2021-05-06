@@ -1,9 +1,12 @@
 import styles from "./TeamViewer.module.css";
 import axios from "axios";
+import { useContext, useEffect, useState } from "react";
+import { Switch, Route, useParams } from "react-router-dom";
 import { getToken, getAuthConfig, getUserID } from "../../util/auth";
 import { AuthContext } from "../../App.js";
-import { useContext, useEffect, useState } from "react";
+import DetailedTeamView from "./detailed-team-view/DetailedTeamView";
 import TeamView from "./TeamView";
+import NOT_FOUND from "../global/NOT_FOUND";
 
 // todo refactor useEffect into a useFetch hook
 
@@ -48,21 +51,47 @@ export default function TeamViewer() {
         }
     }
 
+    function IdentifyTeamView() {
+        const { id: teamID } = useParams();
+
+        if (teamViews.length === 0) {
+            return null;
+        }
+
+        const index = teamViews.findIndex(({ _id }) => _id === teamID);
+        if (index === -1) {
+            return <NOT_FOUND />;
+        }
+
+        return (
+            <DetailedTeamView
+                teamData={teamViews[index]}
+                onVote={handleOnVote}
+                isUpvoted={upvotedTeams.includes(teamID)}
+                upvotes={teamViews[index].upvotes}
+            />
+        );
+    }
+
     return (
-        <div className={styles.wrapper}>
-            {teamViews.map((teamView) => (
-                <TeamView
-                    key={teamView._id}
-                    teamID={teamView._id}
-                    creatorName={teamView.creatorUsername}
-                    teamName={teamView.teamName}
-                    description={teamView.description}
-                    party={teamView.party}
-                    onVote={handleOnVote}
-                    isUpvoted={upvotedTeams.includes(teamView._id)}
-                    upvotes={teamView.upvotes}
-                />
-            ))}
-        </div>
+        // <Router>
+        <Switch>
+            <Route path="/teams/:id">
+                <IdentifyTeamView />
+            </Route>
+            <Route>
+                <div className={styles.wrapper}>
+                    {teamViews.map((teamView) => (
+                        <TeamView
+                            key={teamView._id}
+                            teamData={teamView}
+                            onVote={handleOnVote}
+                            isUpvoted={upvotedTeams.includes(teamView._id)}
+                            upvotes={teamView.upvotes}
+                        />
+                    ))}
+                </div>
+            </Route>
+        </Switch>
     );
 }

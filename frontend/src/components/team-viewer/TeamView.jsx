@@ -35,7 +35,12 @@ function PartySprites({ party }) {
     );
 }
 
-export default function TeamView({ teamID, creatorName, teamName, description, party, onVote, isUpvoted, upvotes }) {
+export default function TeamView({
+    teamData: { _id: teamID, creatorName, teamName, description, party },
+    onVote,
+    isUpvoted,
+    upvotes,
+}) {
     const [formattedParty, setFormattedParty] = useState([]);
     useEffect(() => {
         async function fetchData() {
