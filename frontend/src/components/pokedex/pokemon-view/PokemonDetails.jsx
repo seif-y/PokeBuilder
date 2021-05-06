@@ -3,10 +3,12 @@ import { getPokemonInformation } from "../../../pokeapi/pokemon";
 import LoadingAnimation from "../../global/LoadingAnimation";
 import styles from "./PokemonDetails.module.css";
 import Modal from "../../global/Modal";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { PokemonDataContext } from "../../../pokeapi/PokemonDataContextProvider";
 import PokeType from "../../global/PokeType";
 import { formatName } from "../../../util/names";
+import StatChart from "./StatChart";
+import { getSingleTypeColor } from "../../../util/types";
 
 
 export default function PokemonDetails({name}) {
@@ -25,7 +27,6 @@ export default function PokemonDetails({name}) {
         setThisPokemon(allPokemonViews ? allPokemonViews.find(pkmn => pkmn.name === name) : null)
     }, [allPokemonViews, name])
 
-    console.log(thisPokemon)
     let capitalisedName = formatName(name);
 
     let topBarContent;
@@ -71,17 +72,14 @@ export default function PokemonDetails({name}) {
                     <div className={styles.topBar}>{topBarContent}</div>
                 }
             >
-                {/*<Link to={`/pokedex/pikachu`}>*/}
-                {/*    pikachu*/}
-                {/*</Link>*/}
-                <PokemonDescription name={name} />
+                <PokemonDescription name={name} firstType={thisPokemon ? thisPokemon.types[0] : null}/>
             </Modal>
         </div>
     );
 }
 
 
-function PokemonDescription({name}) {
+function PokemonDescription({name, firstType}) {
     let pokemon = {}
 
     const [pokemonInfo, setPokemonInfo] = useState(null);
@@ -94,10 +92,20 @@ function PokemonDescription({name}) {
         updatePokemonInfo();
     }, [name]);
 
+    let color;
+    color = firstType ? getSingleTypeColor(firstType) : "#aaaaaa"
+
     if (pokemonInfo) {
         return (
-            <div className={styles.description}>
-                <span>{pokemonInfo.description}</span>
+            <div className={styles.bottomContentContainer}>
+                <div className={styles.subHeader}>Description</div>
+                <div className={styles.description}>
+                    <p>{pokemonInfo.description}</p>
+                </div>
+                <div className={styles.subHeader}>Base Stats</div>
+                <div className={styles.statChartContainer}>
+                    <StatChart stats={pokemonInfo.baseStats} size={240} color={color}/>
+                </div>
             </div>
         );
     } else {
