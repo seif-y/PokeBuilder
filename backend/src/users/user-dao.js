@@ -45,6 +45,7 @@ async function getJwtForUser(username, password, callback) {
     User.findOne({ username }).then((dbUser) => {
         if (!dbUser) {
             callback({ success: false, errMsg: "Could not find user" });
+            return;
         }
 
         bcrypt.compare(password, dbUser.password).then((isMatch) => {
