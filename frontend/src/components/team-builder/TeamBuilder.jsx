@@ -2,6 +2,7 @@ import { Button } from "@material-ui/core";
 import React, { useState } from "react";
 import TextArea from "../global/TextArea";
 import TeamMember from "./team-selector/TeamMember";
+import SnackbarMessage from "../global/SnackbarMessage";
 import styles from "./TeamBuilder.module.css";
 import { getAuthConfig, getToken } from "../../util/auth";
 import axios from "axios";
@@ -11,7 +12,11 @@ export default function TeamBuilder() {
     const [team, setTeam] = useState(Array(6));
     const [name, setName] = useState();
     const [description, setDescription] = useState();
+    const [showError, setShowError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState();
+
     const history = useHistory();
+
     function saveTeam() {
         let body = {
             teamName: name,
@@ -25,7 +30,12 @@ export default function TeamBuilder() {
             .then((res) => {
                 history.push(`/teams/${res.data._id}`);
             })
-            .catch((err) => {});
+            .catch((err) => {
+                setErrorMessage(
+                    "Could not create team. Make sure that you are logged in and that all required fields are filled."
+                );
+                setShowError(true);
+            });
     }
 
     function updateTeam(index, teamMember) {
@@ -55,6 +65,7 @@ export default function TeamBuilder() {
             <input className={styles.teamNameInput} placeholder="Team Name" onChange={(e) => setName(e.target.value)} />
             <div className={styles.teamContainer}>{renderTeamSlots()}</div>
             <TextArea classes={styles.descriptionInput} placeholder="Team description" onChange={setDescription} />
+            <SnackbarMessage show={showError} setShow={setShowError} duration={3000} message={errorMessage} />
         </div>
     );
 }
