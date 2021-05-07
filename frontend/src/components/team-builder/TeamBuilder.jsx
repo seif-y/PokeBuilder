@@ -11,7 +11,7 @@ import { useHistory } from "react-router";
 export default function TeamBuilder() {
     const [team, setTeam] = useState(Array(6));
     const [name, setName] = useState();
-    const [description, setDescription] = useState();
+    const [description, setDescription] = useState("");
     const [showError, setShowError] = useState(false);
     const [errorMessage, setErrorMessage] = useState();
 
@@ -21,7 +21,9 @@ export default function TeamBuilder() {
         let body = {
             teamName: name,
             description: description,
-            party: team,
+            party: team.filter((pokemon) => {
+                return pokemon != null;
+            }),
         };
 
         // Make POST request to teams endpoint.
