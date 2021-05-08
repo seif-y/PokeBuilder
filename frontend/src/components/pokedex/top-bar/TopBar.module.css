@@ -1,11 +1,11 @@
 .topBar {
+    height: var(--topBarHeight);
     box-sizing: border-box;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     padding: 10px calc(var(--stickySpacing) / 2);
-    background-color: red;
-
+    background: linear-gradient(225deg, rgb(29, 29, 29) 0%, rgb(62, 62, 62) 100%);
     position: fixed;
     top: 0;
     width: calc(100% - var(--sideNavBarWidth));

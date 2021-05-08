@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PokeType from "../../global/PokeType";
-import Modal from "../../global/Modal";
 import TextArea from "../../global/TextArea";
 import TeamMemberSearch from "./TeamMemberSearch";
 import styles from "./TeamMember.module.css";
@@ -72,9 +71,11 @@ export default function TeamMember({ index, onUpdate }) {
             <div className={styles.container} onClick={() => (pokemon ? null : setShowModal(true))}>
                 {renderPokemon()}
             </div>
-            <Modal show={showModal} dismissOnClickOutside onCancel={() => setShowModal(false)}>
-                <TeamMemberSearch onSelect={(pokemon) => choosePokemon(pokemon)} />
-            </Modal>
+            <TeamMemberSearch
+                onSelect={(pokemon) => choosePokemon(pokemon)}
+                showModal={showModal}
+                hideModal={() => setShowModal(false)}
+            />
         </React.Fragment>
     );
 }

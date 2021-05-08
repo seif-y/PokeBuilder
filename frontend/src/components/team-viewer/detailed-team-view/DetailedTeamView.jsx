@@ -16,12 +16,14 @@ function Heading({ loggedIn, teamData: { _id: teamID, teamName, creatorUsername,
     /* TODO duplicate code from TeamViewer */
     /* We highlight upvotes by detecting whether a teamID is included in upvotedTeams */
     const [upvotedTeams, setUpvotedTeams] = useState([]);
+
     async function fetchAndSetUpvotedTeams(token) {
         const userID = getUserID(token);
         const USER_ENDPOINT = `/api/users/${userID}`;
         const res = await axios.get(USER_ENDPOINT, getAuthConfig(token));
         setUpvotedTeams(res.data.upvotedTeams);
     }
+
     useEffect(() => {
         if (loggedIn) {
             const token = getToken();
@@ -31,6 +33,7 @@ function Heading({ loggedIn, teamData: { _id: teamID, teamName, creatorUsername,
 
     // todo ask backend for a GET upvotes only endpoint?
     const [upvoteCount, setUpvoteCount] = useState(initialUpvotes);
+
     async function fetchAndSetUpvoteCount() {
         const TEAM_ENDPOINT = `/api/teams/${teamID}`;
         const res = await axios.get(TEAM_ENDPOINT);
@@ -68,6 +71,7 @@ function Party({ party = [] }) {
             const newParty = await formatParty(party);
             setFormattedParty(() => newParty);
         }
+
         if (party.length !== 0) {
             fetchData();
         }

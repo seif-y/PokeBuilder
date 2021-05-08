@@ -47,6 +47,7 @@ export default function TeamView({
             const newParty = await formatParty(party);
             setFormattedParty(() => newParty);
         }
+
         if (party.length !== 0) {
             fetchData();
         }

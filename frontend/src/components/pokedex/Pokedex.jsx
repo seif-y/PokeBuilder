@@ -1,25 +1,37 @@
-import { useState, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import PokemonCard from "./PokemonCardView";
-import { getPokemonViewList } from "../../pokeapi/pokemon";
 import styles from "./Pokedex.module.css";
 import SearchBar from "../global/SearchBar";
 import TopBar from "./top-bar/TopBar";
 import TypeFilter from "./top-bar/TypeFilter";
+import PokeType from "../global/PokeType";
+import LoadingAnimation from "../global/LoadingAnimation";
+import { PokemonDataContext } from "../../pokeapi/PokemonDataContextProvider";
 
 function GridOfPokemon({ pokemon }) {
+    if (pokemon === null) {
+        return (
+            <div className={styles.centerContent}>
+                <LoadingAnimation />
+            </div>
+        );
+    }
     const isEmpty = pokemon.length === 0;
+
     return isEmpty ? (
         <div className={styles.pokemonDisplay}>No results found</div>
     ) : (
         <div className={`${styles.pokemonDisplay} ${styles.grid}`}>
-            {pokemon.map(({ id, name, sprite, types }) => (
-                <PokemonCard key={id} id={id} name={name} sprite={sprite} types={types} />
-            ))}
+            {pokemon.map(({ id, name, sprite, types }) => {
+                return (
+                    <div className={styles.pokemonCard}>
+                        <PokemonCard key={id} id={id} name={name} sprite={sprite} types={types} />
+                    </div>
+                );
+            })}
         </div>
     );
 }
-
-let allPokemonViews = [];
 
 // Global object used to decide which pokemon to display
 const filter = {
@@ -28,14 +40,12 @@ const filter = {
 };
 
 export default function Pokedex() {
-    const [pokemonViews, setPokemonViews] = useState([]);
+    let allPokemonViews = useContext(PokemonDataContext);
+    const [pokemonViews, setPokemonViews] = useState(null);
+
     useEffect(() => {
-        const updatePokemonViews = async () => {
-            allPokemonViews = await getPokemonViewList();
-            setPokemonViews(allPokemonViews);
-        };
-        updatePokemonViews();
-    }, []);
+        setPokemonViews(allPokemonViews);
+    }, [allPokemonViews]);
 
     function handleOnSearch(query) {
         filter.name = query;
@@ -48,6 +58,9 @@ export default function Pokedex() {
     }
 
     function runFilters() {
+        if (!pokemonViews) {
+            return;
+        }
         // Always show the pokemon if filter properties are empty
         const nameMatches = (filterName, name) => filterName === "" || name.startsWith(filterName);
         const typesMatch = (filterTypes, types) =>
@@ -60,6 +73,8 @@ export default function Pokedex() {
         );
     }
 
+    const filtersOn = filter.types.length > 0;
+
     return (
         <>
             <TopBar>
@@ -67,6 +82,15 @@ export default function Pokedex() {
                 <SearchBar onSearch={handleOnSearch} />
                 <TypeFilter onFiltersUpdated={handleOnFiltersUpdated} />
             </TopBar>
+            <div className={filtersOn ? styles.filtersBarActive : styles.filtersBar}>
+                {filter.types.map((type) => {
+                    return (
+                        <div>
+                            <PokeType typeName={type} size={"small"} />
+                        </div>
+                    );
+                })}
+            </div>
             <GridOfPokemon pokemon={pokemonViews} />
         </>
     );

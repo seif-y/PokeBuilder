@@ -1,5 +1,4 @@
 .tableContainer {
-    margin-top: 20px;
     border: 2px solid lightgray;
     height: 400px;
     width: 80vw;
@@ -42,4 +41,33 @@
     width: auto;
     margin: 4px 0 4px 0;
     text-align: center;
+}
+
+.centerContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.topBarContainer {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.text {
+    color: white;
+    font-family: Roboto;
+    text-shadow: 0px 2px 2px #262626;
+    font-size: 20px;
+    left: 30px;
+    white-space: nowrap;
+}
+
+.searchBar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { getAllTypes } from "../../../util/types";
 import styles from "./TypeFilter.module.css";
 import { FilterList as FilterIcon } from "@material-ui/icons";
@@ -56,9 +56,13 @@ export default function TypeFilter({ onFiltersUpdated }) {
     return (
         <>
             <FilterIcon className={styles.filter} onClick={() => setShowModal((modalIsShown) => !modalIsShown)} />
-            <Modal show={showModal} dismissOnClickOutside onCancel={() => handleOnCancel(false)}>
+            <Modal
+                show={showModal}
+                dismissOnClickOutside
+                onCancel={() => handleOnCancel(false)}
+                titleBarChildren={<div className={styles.text}>Filter by Types</div>}
+            >
                 <div className={styles.typeGrid}>
-                    <div>Filter by Types</div>
                     <PokeTypes />
                     <button className={styles.leftButton} onClick={() => handleOnCancel(false)}>
                         Apply Filters
