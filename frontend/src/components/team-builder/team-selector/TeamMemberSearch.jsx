@@ -18,6 +18,14 @@ export default function TeamMemberSearch({ onSelect, showModal, hideModal }) {
         setPokemonViews(allPokemonViews.filter((pokemon) => pokemon.name.startsWith(query)));
     }
 
+    function handleClose(pokemon) {
+        if (pokemon) {
+            onSelect(pokemon);
+        }
+        setPokemonViews(allPokemonViews);
+        hideModal();
+    }
+
     function renderPokemonList() {
         if (pokemonViews.length < 1) {
             return <p>No results found</p>;
@@ -27,7 +35,7 @@ export default function TeamMemberSearch({ onSelect, showModal, hideModal }) {
             <table className={styles.table} cellSpacing="0">
                 <tbody>
                     {pokemonViews.map((pokemon) => (
-                        <tr key={pokemon.name} className={styles.tableRow} onClick={() => onSelect(pokemon)}>
+                        <tr key={pokemon.name} className={styles.tableRow} onClick={() => handleClose(pokemon)}>
                             <td className={styles.pokemonSprite}>
                                 <img src={pokemon.sprite} alt={pokemon.name} />
                             </td>
@@ -44,7 +52,7 @@ export default function TeamMemberSearch({ onSelect, showModal, hideModal }) {
         <Modal
             show={showModal}
             dismissOnClickOutside
-            onCancel={() => hideModal()}
+            onCancel={() => handleClose()}
             title={""}
             titleBarChildren={
                 <div className={styles.topBarContainer}>
