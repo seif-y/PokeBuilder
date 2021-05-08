@@ -30,6 +30,7 @@
 
 .pokemonID {
     text-align: center;
+    min-width: 40px;
 }
 
 .pokemonSprite {

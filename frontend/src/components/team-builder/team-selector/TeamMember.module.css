@@ -28,6 +28,43 @@
     margin-right: 20px;
 }
 
+.teamMemberContainer {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    animation: expand-in 0.3s;
+}
+
+@keyframes expand-in {
+    0% {
+        -webkit-transform: scale(0.8);
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.spriteContainer {
+    display: flex;
+    align-items: center;
+}
+
+.bgCircle {
+    background: linear-gradient(225deg, #1d1d1d 0%, #3e3e3e 100%);
+    opacity: 30%;
+    width: 100px;
+    height: 100px;
+    z-index: -1;
+    position: relative;
+    border-radius: 50%;
+    right: 120px;
+    margin-right: -110px;
+}
+
 .pokemonInfo {
     display: flex;
     flex-direction: column;
@@ -62,7 +99,8 @@
 .notesArea {
     width: 90%;
     height: 62px;
-    padding: 0;
+    padding: 6px;
     font-family: inherit;
-    border-radius: 4px;
+    border-radius: 6px;
+    border: none;
 }

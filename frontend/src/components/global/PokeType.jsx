@@ -17,7 +17,7 @@ export default function PokeType({ typeName, onClick = () => {}, size = "medium"
     };
 
     const sizeStyles = {
-        small: { width: "55px", fontSize: "small" },
+        small: { width: "57px", fontSize: "small" },
         medium: { width: "70px", fontSize: "medium" },
     };
 

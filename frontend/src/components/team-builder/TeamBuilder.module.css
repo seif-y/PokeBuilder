@@ -39,6 +39,8 @@
 
     border: none;
     border-radius: 2rem;
+
+    font-weight: bold;
 }
 
 .hSpacer {
@@ -54,7 +56,7 @@
     height: 100px;
     width: 75%;
     font-family: inherit;
-    font-size: large;
+    font-size: 0.95rem;
     outline: none;
     border: none;
 }

@@ -62,7 +62,7 @@ export default function TeamBuilder() {
             <TopBar title="TEAM BUILDER">
                 <input
                     className={styles.teamNameInput}
-                    placeholder="Team Name"
+                    placeholder="Team name"
                     onChange={(e) => setName(e.target.value)}
                 />
                 <div className={styles.hSpacer} />

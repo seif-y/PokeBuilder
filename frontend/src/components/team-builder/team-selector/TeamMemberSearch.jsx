@@ -32,7 +32,7 @@ export default function TeamMemberSearch({ onSelect, showModal, hideModal }) {
                                 <img src={pokemon.sprite} alt={pokemon.name} />
                             </td>
                             <td className={styles.pokemonName}>{formatName(pokemon.name)}</td>
-                            <td className={styles.pokemonID}>#{pokemon.id}</td>
+                            <td className={styles.pokemonID}>#{pokemon.id} </td>
                         </tr>
                     ))}
                 </tbody>
