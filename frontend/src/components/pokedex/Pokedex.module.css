@@ -2,7 +2,6 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
-    align-items: center;
     padding: 10px;
 }
 
@@ -40,18 +39,6 @@
     top: var(--topBarHeight);
     width: calc(100% - var(--sideNavBarWidth));
     z-index: 2;
-    animation: slide-out-bottom 0.3s both;
-}
-
-@keyframes slide-out-bottom {
-    0% {
-        height: 16px;
-        transform-origin: bottom center;
-    }
-    100% {
-        height: 0px;
-        transform-origin: bottom center;
-    }
 }
 
 .filtersBarActive {

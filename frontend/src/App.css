@@ -8,8 +8,6 @@
     text-align: center;
     /* Same as width of sidebar*/
     margin-left: var(--sideNavBarWidth);
-    /* Same as width of scrollbar */
-    margin-right: var(--scrollBarWidth);
 }
 
 .not-found-image {
