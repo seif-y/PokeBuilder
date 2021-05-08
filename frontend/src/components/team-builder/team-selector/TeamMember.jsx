@@ -16,7 +16,7 @@ export default function TeamMember({ index, onUpdate }) {
     useEffect(() => {
         if (pokemon) {
             onUpdate(index, {
-                id: pokemon.id,
+                pokemonID: pokemon.id,
                 notes: notes,
             });
         }

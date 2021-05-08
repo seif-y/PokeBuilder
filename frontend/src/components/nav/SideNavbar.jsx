@@ -5,7 +5,7 @@ import NavbarIcon from "./NavbarIcon";
 import Modal from "../global/Modal";
 import LoginForm from "../global/auth/LoginForm";
 import { AuthContext } from "../../App";
-import { Snackbar } from "@material-ui/core";
+import SnackbarMessage from "../global/SnackbarMessage";
 
 export default function SideNavbar() {
     const [showModal, setShowModal] = useState(false);
@@ -72,9 +72,7 @@ export default function SideNavbar() {
             >
                 <LoginForm onComplete={() => handleLogIn()} />
             </Modal>
-            <Snackbar open={showSnackbar} autoHideDuration={3000} onClose={() => setShowSnackbar(false)}>
-                <div className={styles.snackbarMessage}>{snackbarMessage}</div>
-            </Snackbar>
+            <SnackbarMessage show={showSnackbar} setShow={setShowSnackbar} duration={3000} message={snackbarMessage} />
         </div>
     );
 }
