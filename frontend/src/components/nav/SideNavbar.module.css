@@ -18,6 +18,7 @@
 
 .navbarIconContainer:hover {
     background: rgba(255, 255, 255, 0.26);
+    cursor: pointer;
 }
 
 .navbarIconContainer:active {
@@ -50,4 +51,9 @@
     -webkit-user-drag: none;
     -webkit-user-select: none;
     -ms-user-select: none;
+}
+
+.loginModal {
+    width: 80%;
+    max-width: 360px;
 }
