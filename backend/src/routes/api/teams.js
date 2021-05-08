@@ -1,13 +1,6 @@
 import express from "express";
 import passportRequestHandler from "../../auth/passportHandler";
-import {
-    createTeam,
-    retrieveTeam,
-    retrieveTeamList,
-    deleteTeam,
-    updateTeamUpvotes,
-    updateTeamDownvotes,
-} from "../../teams/team-dao";
+import { createTeam, retrieveTeam, retrieveTeamList, deleteTeam, updateTeamUpvotes } from "../../teams/team-dao";
 
 const HTTP_CREATED = 201;
 const HTTP_NOT_FOUND = 404;
@@ -76,25 +69,10 @@ router.delete("/:id", passportRequestHandler, async (req, res) => {
 router.patch("/:id/upvotes", passportRequestHandler, async (req, res) => {
     try {
         const { id } = req.params;
-        const upvotes = req.body.upvotes;
+        const increment = req.body.increment;
         const userID = req.user._id;
 
-        await updateTeamUpvotes(id, upvotes, userID);
-
-        res.sendStatus(HTTP_NO_CONTENT);
-    } catch {
-        res.status(HTTP_BAD_REQUEST).send("Invalid team id");
-    }
-});
-
-// Increase the team downvotes
-router.patch("/:id/downvotes", passportRequestHandler, async (req, res) => {
-    try {
-        const { id } = req.params;
-        let downvotes = req.body.downvotes;
-        const userID = req.user._id;
-
-        await updateTeamDownvotes(id, downvotes, userID);
+        await updateTeamUpvotes(id, increment, userID);
 
         res.sendStatus(HTTP_NO_CONTENT);
     } catch {

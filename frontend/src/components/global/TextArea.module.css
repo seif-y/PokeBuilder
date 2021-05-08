@@ -1,0 +1,16 @@
+.textArea {
+    box-sizing: border-box;
+    resize: none;
+    font-family: inherit;
+    border-radius: 20px;
+    border: 2px solid lightgray;
+    padding: 10px;
+}
+
+.textArea:focus {
+    outline: none;
+}
+
+.textArea::placeholder {
+    color: lightgray;
+}

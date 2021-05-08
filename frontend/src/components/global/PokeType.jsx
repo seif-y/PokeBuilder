@@ -8,7 +8,7 @@ import { getGradientTypeColor } from "../../util/types";
  * @param onClick: An optional argument function that is run on click
  * @param size: An optional string argument for either "small" or "medium" component sizes
  */
-export default function PokeType({ typeName, onClick, size = "medium" }) {
+export default function PokeType({ typeName, onClick = () => {}, size = "medium" }) {
     // Type names are stylized to use a max of 6 letters
     const shortenedTypeName = {
         electric: "electr",

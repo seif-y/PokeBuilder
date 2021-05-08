@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PokeType from "../../global/PokeType";
+import TextArea from "../../global/TextArea";
 import TeamMemberSearch from "./TeamMemberSearch";
 import styles from "./TeamMember.module.css";
 import CloseIcon from "@material-ui/icons/Close";
@@ -14,7 +15,7 @@ export default function TeamMember({ index, onUpdate }) {
     useEffect(() => {
         if (pokemon) {
             onUpdate(index, {
-                id: pokemon.id,
+                pokemonID: pokemon.id,
                 notes: notes,
             });
         }
@@ -47,12 +48,7 @@ export default function TeamMember({ index, onUpdate }) {
                     <div className={styles.pokemonInfo}>
                         <h3 className={styles.pokemonName}>{formatName(pokemon.name)}</h3>
                         <div className={styles.typeContainer}>{renderTypes()}</div>
-                        <textarea
-                            className={styles.notesArea}
-                            placeholder="Notes"
-                            onClick={(e) => e.stopPropagation()}
-                            onChange={(e) => setNotes(e.target.value)}
-                        />
+                        <TextArea classes={styles.notesArea} onChange={setNotes} placeholder="Notes" />
                     </div>
                     <CloseIcon color="action" className={styles.closeButton} onClick={(e) => clearPokemon(e)} />
                 </React.Fragment>
