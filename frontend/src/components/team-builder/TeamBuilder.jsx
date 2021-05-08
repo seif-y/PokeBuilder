@@ -1,4 +1,3 @@
-import { Button } from "@material-ui/core";
 import React, { useState } from "react";
 import TextArea from "../global/TextArea";
 import TeamMember from "./team-selector/TeamMember";
@@ -7,6 +6,7 @@ import styles from "./TeamBuilder.module.css";
 import { getAuthConfig, getToken } from "../../util/auth";
 import axios from "axios";
 import { useHistory } from "react-router";
+import Button from "../global/Button";
 
 export default function TeamBuilder() {
     const [team, setTeam] = useState(Array(6));
@@ -60,9 +60,7 @@ export default function TeamBuilder() {
         <div id="modal-root" className={styles.teamBuilderContainer}>
             <div className={styles.titleContainer}>
                 <h1> Team Builder </h1>
-                <Button variant="contained" onClick={() => saveTeam()}>
-                    Save
-                </Button>
+                <Button text="Save" color="white" onClick={() => saveTeam()} />
             </div>
             <input className={styles.teamNameInput} placeholder="Team Name" onChange={(e) => setName(e.target.value)} />
             <div className={styles.teamContainer}>{renderTeamSlots()}</div>

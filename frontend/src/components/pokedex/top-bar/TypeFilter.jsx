@@ -4,6 +4,7 @@ import styles from "./TypeFilter.module.css";
 import { FilterList as FilterIcon } from "@material-ui/icons";
 import Modal from "../../global/Modal";
 import PokeType from "../../global/PokeType";
+import Button from "../../global/Button";
 
 const allTypes = getAllTypes();
 
@@ -64,20 +65,22 @@ export default function TypeFilter({ onFiltersUpdated }) {
             >
                 <div className={styles.typeGrid}>
                     <PokeTypes />
-                    <button className={styles.leftButton} onClick={() => handleOnCancel(false)}>
-                        Apply Filters
-                    </button>
-                    <button
-                        className={styles.rightButton}
-                        onClick={() => {
-                            handleOnRemove();
-                            // There's a race condition when setting state
-                            // So we assert that it's true that types have been removed
-                            handleOnCancel(true);
-                        }}
-                    >
-                        Remove Filters
-                    </button>
+                </div>
+                <div className={styles.buttonsContainer}>
+                    <div className={styles.buttonWrapper}>
+                        <Button text={"Apply Filters"} onClick={() => handleOnCancel(false)} />
+                    </div>
+                    <div className={styles.buttonWrapper}>
+                        <Button
+                            text={"Remove Filters"}
+                            onClick={() => {
+                                handleOnRemove();
+                                // There's a race condition when setting state
+                                // So we assert that it's true that types have been removed
+                                handleOnCancel(true);
+                            }}
+                        />
+                    </div>
                 </div>
             </Modal>
         </>

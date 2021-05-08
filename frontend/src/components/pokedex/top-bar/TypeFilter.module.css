@@ -34,12 +34,13 @@
     margin-top: 5px;
 }
 
-.leftButton {
-    grid-column: 1 / span 3;
+.buttonsContainer {
+    display: flex;
+    justify-content: center;
 }
 
-.rightButton {
-    grid-column: 4 / span 3;
+.buttonWrapper {
+    padding: 20px 20px 0px 20px;
 }
 
 .text {
