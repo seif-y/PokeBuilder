@@ -17,7 +17,7 @@ test("SearchBar functions correctly", (done) => {
         }
     };
     render(<SearchBar onSearch={onInput} />);
-    const searchInput = screen.getByPlaceholderText("Search for a pokemon's name");
+    const searchInput = screen.getByPlaceholderText("Search by Pokémon name");
     userEvent.type(searchInput, "Pidgey");
 });
 

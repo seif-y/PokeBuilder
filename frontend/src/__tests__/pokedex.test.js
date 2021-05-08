@@ -17,7 +17,7 @@ describe("General Pokedex tests", () => {
     });
 
     test("Pokedex has a searchbar", () => {
-        const searchBar = screen.getByPlaceholderText("Search for a pokemon's name");
+        const searchBar = screen.getByPlaceholderText("Search by Pokémon name");
         expect(searchBar).toBeDefined();
     });
 });
