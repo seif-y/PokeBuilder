@@ -9,6 +9,7 @@ import PokeType from "../../global/PokeType";
 import { formatName } from "../../../util/names";
 import StatChart from "./StatChart";
 import { getSingleTypeColor } from "../../../util/types";
+import BlackHeadingTag from "../../global/BlackHeadingTag";
 
 
 export default function PokemonDetails({name}) {
@@ -32,13 +33,13 @@ export default function PokemonDetails({name}) {
     let topBarContent;
     if (!thisPokemon) {
         topBarContent = (
-            <div className={styles.centerContent}>
+            <div className={`${styles.centerContent} ${styles.topBar}`}>
                 <LoadingAnimation />
             </div>
         )
     } else {
         topBarContent = (
-            <div className={styles.content}>
+            <div className={styles.topBarContent}>
                 <img
                     className={styles.sprite}
                     src={thisPokemon.sprite}
@@ -46,7 +47,7 @@ export default function PokemonDetails({name}) {
                 />
                 <div className={styles.bgCircle} />
                 <div className={styles.pokeTitleContainer}>
-                    <div className={styles.nameAndIdContainer}>
+                    <div className={styles.flexCenterDiv}>
                         <span className={styles.name}>{capitalisedName}</span>
                         <div className={styles.idContainer}>
                             <span className={styles.id}>{`#${thisPokemon.id}`}</span>
@@ -98,18 +99,18 @@ function PokemonDescription({name, firstType}) {
     if (pokemonInfo) {
         return (
             <div className={styles.bottomContentContainer}>
-                <div className={styles.subHeader}>Description</div>
+                <BlackHeadingTag text={"Description"} />
                 <div className={styles.description}>
                     <p>{pokemonInfo.description}</p>
                 </div>
-                <div className={styles.subHeader}>Base Stats</div>
+                <BlackHeadingTag text={"Base Stats"} />
                 <div className={styles.statChartContainer}>
                     <StatChart stats={pokemonInfo.baseStats} size={240} color={color}/>
                 </div>
             </div>
         );
     } else {
-        return <div className={styles.centerContent}>
+        return <div className={`${styles.centerContent} ${styles.bottomContentContainer}`}>
             <LoadingAnimation />
         </div>
     }
