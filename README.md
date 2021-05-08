@@ -1,4 +1,4 @@
-# PokéBuilder
+# <img src="frontend/public/favicon.ico" alt="PokeBuilder Icon" height="30"/> PokéBuilder 
 
 PokéBuilder is a MERN web application that allows users to build and share Pokémon teams. Users can browse the Pokédex to look at Pokémon stats, types and descriptions. They can also view, upvote, and comment on posted teams.
 
