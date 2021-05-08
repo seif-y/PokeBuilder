@@ -24,11 +24,11 @@
 .white {
     color: black;
     text-shadow: 0px 0px 3px #bababa;
-    background: linear-gradient(225deg, #d7d7d7 0%, #ffffff 100%);
+    background: linear-gradient(225deg, #ffffff 0%, #b6b6b6 100%);
 }
 
 .white:hover {
-    background: linear-gradient(225deg, #bfbfbf 0%, #d7d7d7 100%);
+    background: linear-gradient(225deg, #cbcbcb 0%, #959595 100%);
 }
 
 .button:active {

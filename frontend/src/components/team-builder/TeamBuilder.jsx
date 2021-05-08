@@ -7,6 +7,7 @@ import { getAuthConfig, getToken } from "../../util/auth";
 import axios from "axios";
 import { useHistory } from "react-router";
 import Button from "../global/Button";
+import TopBar from "../global/TopBar";
 
 export default function TeamBuilder() {
     const [team, setTeam] = useState(Array(6));
@@ -57,15 +58,24 @@ export default function TeamBuilder() {
     }
 
     return (
-        <div id="modal-root" className={styles.teamBuilderContainer}>
-            <div className={styles.titleContainer}>
-                <h1> Team Builder </h1>
+        <div className={styles.teamBuilderContainer}>
+            <TopBar title="TEAM BUILDER">
+                <input
+                    className={styles.teamNameInput}
+                    placeholder="Team Name"
+                    onChange={(e) => setName(e.target.value)}
+                />
+                <div className={styles.hSpacer} />
                 <Button text="Save" color="white" onClick={() => saveTeam()} />
+            </TopBar>
+            <div className={styles.pageContent}>
+                <div className={styles.vSpacer} />
+                <div className={styles.teamContainer}>{renderTeamSlots()}</div>
+                <div className={styles.vSpacer} />
+                <TextArea classes={styles.descriptionInput} placeholder="Team description" onChange={setDescription} />
+                <div className={styles.vSpacer} />
+                <SnackbarMessage show={showError} setShow={setShowError} duration={3000} message={errorMessage} />
             </div>
-            <input className={styles.teamNameInput} placeholder="Team Name" onChange={(e) => setName(e.target.value)} />
-            <div className={styles.teamContainer}>{renderTeamSlots()}</div>
-            <TextArea classes={styles.descriptionInput} placeholder="Team description" onChange={setDescription} />
-            <SnackbarMessage show={showError} setShow={setShowError} duration={3000} message={errorMessage} />
         </div>
     );
 }

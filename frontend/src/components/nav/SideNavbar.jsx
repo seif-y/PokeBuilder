@@ -65,6 +65,7 @@ export default function SideNavbar() {
             />
             {renderAccountButton()}
             <Modal
+                titleBarChildren={<div className={styles.text}>Login</div>}
                 className={styles.loginModal}
                 show={showModal}
                 dismissOnClickOutside

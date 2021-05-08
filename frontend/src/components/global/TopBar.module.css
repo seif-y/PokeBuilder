@@ -11,3 +11,14 @@
     width: calc(100% - var(--sideNavBarWidth));
     z-index: 2;
 }
+
+.title {
+    color: white;
+    font-family: Roboto;
+    text-shadow: 0px 2px 2px #262626;
+    font-size: 40px;
+    font-weight: bold;
+    font-style: italic;
+    position: absolute;
+    left: 30px;
+}
