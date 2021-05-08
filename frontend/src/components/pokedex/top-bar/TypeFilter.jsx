@@ -60,9 +60,7 @@ export default function TypeFilter({ onFiltersUpdated }) {
                 show={showModal}
                 dismissOnClickOutside
                 onCancel={() => handleOnCancel(false)}
-                titleBarChildren={
-                    <div className={styles.text}>Filter by Types</div>
-                }
+                titleBarChildren={<div className={styles.text}>Filter by Types</div>}
             >
                 <div className={styles.typeGrid}>
                     <PokeTypes />

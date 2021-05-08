@@ -14,7 +14,6 @@ export default function TeamMemberSearch({ onSelect, showModal, hideModal }) {
         setPokemonViews(allPokemonViews);
     }, [allPokemonViews]);
 
-
     function filterResults(query) {
         setPokemonViews(allPokemonViews.filter((pokemon) => pokemon.name.startsWith(query)));
     }
@@ -27,15 +26,15 @@ export default function TeamMemberSearch({ onSelect, showModal, hideModal }) {
         return (
             <table className={styles.table} cellSpacing="0">
                 <tbody>
-                {pokemonViews.map((pokemon) => (
-                    <tr key={pokemon.name} className={styles.tableRow} onClick={() => onSelect(pokemon)}>
-                        <td className={styles.pokemonSprite}>
-                            <img src={pokemon.sprite} alt={pokemon.name} />
-                        </td>
-                        <td className={styles.pokemonName}>{formatName(pokemon.name)}</td>
-                        <td className={styles.pokemonID}>#{pokemon.id}</td>
-                    </tr>
-                ))}
+                    {pokemonViews.map((pokemon) => (
+                        <tr key={pokemon.name} className={styles.tableRow} onClick={() => onSelect(pokemon)}>
+                            <td className={styles.pokemonSprite}>
+                                <img src={pokemon.sprite} alt={pokemon.name} />
+                            </td>
+                            <td className={styles.pokemonName}>{formatName(pokemon.name)}</td>
+                            <td className={styles.pokemonID}>#{pokemon.id}</td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         );
@@ -58,13 +57,13 @@ export default function TeamMemberSearch({ onSelect, showModal, hideModal }) {
         >
             <div>
                 <div className={styles.tableContainer}>
-                    {
-                        pokemonViews ?
-                            renderPokemonList() :
-                            <div className={styles.centerContent}>
-                                <LoadingAnimation size="small" />
-                            </div>
-                    }
+                    {pokemonViews ? (
+                        renderPokemonList()
+                    ) : (
+                        <div className={styles.centerContent}>
+                            <LoadingAnimation size="small" />
+                        </div>
+                    )}
                 </div>
             </div>
         </Modal>

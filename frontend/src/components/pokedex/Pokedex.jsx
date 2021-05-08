@@ -8,7 +8,6 @@ import PokeType from "../global/PokeType";
 import LoadingAnimation from "../global/LoadingAnimation";
 import { PokemonDataContext } from "../../pokeapi/PokemonDataContextProvider";
 
-
 function GridOfPokemon({ pokemon }) {
     if (pokemon === null) {
         return (
@@ -37,16 +36,16 @@ function GridOfPokemon({ pokemon }) {
 // Global object used to decide which pokemon to display
 const filter = {
     name: "",
-    types: []
+    types: [],
 };
 
 export default function Pokedex() {
-    let allPokemonViews = useContext(PokemonDataContext)
+    let allPokemonViews = useContext(PokemonDataContext);
     const [pokemonViews, setPokemonViews] = useState(null);
 
     useEffect(() => {
-        setPokemonViews(allPokemonViews)
-    }, [allPokemonViews])
+        setPokemonViews(allPokemonViews);
+    }, [allPokemonViews]);
 
     function handleOnSearch(query) {
         filter.name = query;
@@ -60,7 +59,7 @@ export default function Pokedex() {
 
     function runFilters() {
         if (!pokemonViews) {
-            return
+            return;
         }
         // Always show the pokemon if filter properties are empty
         const nameMatches = (filterName, name) => filterName === "" || name.startsWith(filterName);
@@ -74,7 +73,7 @@ export default function Pokedex() {
         );
     }
 
-    const filtersOn = filter.types.length > 0
+    const filtersOn = filter.types.length > 0;
 
     return (
         <>
@@ -84,14 +83,13 @@ export default function Pokedex() {
                 <TypeFilter onFiltersUpdated={handleOnFiltersUpdated} />
             </TopBar>
             <div className={filtersOn ? styles.filtersBarActive : styles.filtersBar}>
-                {
-                    filter.types.map(type => {
-                        return (
-                            <div>
-                                <PokeType typeName={type} size={"small"}/>
-                            </div>
-                        );
-                    })}
+                {filter.types.map((type) => {
+                    return (
+                        <div>
+                            <PokeType typeName={type} size={"small"} />
+                        </div>
+                    );
+                })}
             </div>
             <GridOfPokemon pokemon={pokemonViews} />
         </>

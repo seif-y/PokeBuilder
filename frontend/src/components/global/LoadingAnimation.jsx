@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./LoadingAnimation.module.css";
 
-export default function LoadingAnimation({size="medium"}) {
+export default function LoadingAnimation({ size = "medium" }) {
     const sizeStyles = {
         small: { width: "20px", height: "20px" },
         medium: { width: "40px", height: "40px" },
@@ -17,12 +17,10 @@ export default function LoadingAnimation({size="medium"}) {
         <span className={styles.container}>
             <img
                 className={styles.img}
-                style={{...sizeStyle }}
+                style={{ ...sizeStyle }}
                 src={`${process.env.PUBLIC_URL}/icons/pokeball.png`}
                 alt="..."
             />
         </span>
-
     );
-
 }

@@ -11,22 +11,21 @@ import StatChart from "./StatChart";
 import { getSingleTypeColor } from "../../../util/types";
 import BlackHeadingTag from "../../global/BlackHeadingTag";
 
-
-export default function PokemonDetails({name}) {
+export default function PokemonDetails({ name }) {
     const [showModal, setShowModal] = useState(true);
     const history = useHistory();
 
     // Go back to the Pokedex page when clicking outside the modal
     function handleOnCancel() {
         history.push("/pokedex");
-        setShowModal(false)
+        setShowModal(false);
     }
 
     const [thisPokemon, setThisPokemon] = useState(null);
-    let allPokemonViews = useContext(PokemonDataContext)
+    let allPokemonViews = useContext(PokemonDataContext);
     useEffect(() => {
-        setThisPokemon(allPokemonViews ? allPokemonViews.find(pkmn => pkmn.name === name) : null)
-    }, [allPokemonViews, name])
+        setThisPokemon(allPokemonViews ? allPokemonViews.find((pkmn) => pkmn.name === name) : null);
+    }, [allPokemonViews, name]);
 
     let capitalisedName = formatName(name);
 
@@ -36,15 +35,11 @@ export default function PokemonDetails({name}) {
             <div className={`${styles.centerContent} ${styles.topBar}`}>
                 <LoadingAnimation />
             </div>
-        )
+        );
     } else {
         topBarContent = (
             <div className={styles.topBarContent}>
-                <img
-                    className={styles.sprite}
-                    src={thisPokemon.sprite}
-                    alt={`Pokémon #${thisPokemon.id}`}
-                />
+                <img className={styles.sprite} src={thisPokemon.sprite} alt={`Pokémon #${thisPokemon.id}`} />
                 <div className={styles.bgCircle} />
                 <div className={styles.pokeTitleContainer}>
                     <div className={styles.flexCenterDiv}>
@@ -60,7 +55,7 @@ export default function PokemonDetails({name}) {
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 
     return (
@@ -69,19 +64,16 @@ export default function PokemonDetails({name}) {
                 show={showModal}
                 dismissOnClickOutside
                 onCancel={() => handleOnCancel()}
-                titleBarChildren={
-                    <div className={styles.topBar}>{topBarContent}</div>
-                }
+                titleBarChildren={<div className={styles.topBar}>{topBarContent}</div>}
             >
-                <PokemonDescription name={name} firstType={thisPokemon ? thisPokemon.types[0] : null}/>
+                <PokemonDescription name={name} firstType={thisPokemon ? thisPokemon.types[0] : null} />
             </Modal>
         </div>
     );
 }
 
-
-function PokemonDescription({name, firstType}) {
-    let pokemon = {}
+function PokemonDescription({ name, firstType }) {
+    let pokemon = {};
 
     const [pokemonInfo, setPokemonInfo] = useState(null);
 
@@ -94,7 +86,7 @@ function PokemonDescription({name, firstType}) {
     }, [name]);
 
     let color;
-    color = firstType ? getSingleTypeColor(firstType) : "#aaaaaa"
+    color = firstType ? getSingleTypeColor(firstType) : "#aaaaaa";
 
     if (pokemonInfo) {
         return (
@@ -105,13 +97,15 @@ function PokemonDescription({name, firstType}) {
                 </div>
                 <BlackHeadingTag text={"Base Stats"} />
                 <div className={styles.statChartContainer}>
-                    <StatChart stats={pokemonInfo.baseStats} size={240} color={color}/>
+                    <StatChart stats={pokemonInfo.baseStats} size={240} color={color} />
                 </div>
             </div>
         );
     } else {
-        return <div className={`${styles.centerContent} ${styles.bottomContentContainer}`}>
-            <LoadingAnimation />
-        </div>
+        return (
+            <div className={`${styles.centerContent} ${styles.bottomContentContainer}`}>
+                <LoadingAnimation />
+            </div>
+        );
     }
 }

@@ -21,8 +21,7 @@ function App() {
                     <SideNavbar />
                     <div className="main-content">
                         <PokemonDataContextProvider>
-
-                            <Route path ="/pokedex/:name">
+                            <Route path="/pokedex/:name">
                                 <GetPokemonDetails />
                             </Route>
 
@@ -52,8 +51,8 @@ function App() {
 }
 
 function GetPokemonDetails() {
-    const {name} = useParams()
-    return <PokemonDetails name={name}></PokemonDetails>
+    const { name } = useParams();
+    return <PokemonDetails name={name}></PokemonDetails>;
 }
 
 export default App;

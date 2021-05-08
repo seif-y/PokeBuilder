@@ -15,22 +15,26 @@ export default function TeamViewer() {
 
     /* Most of the data that's needed to render a TeamView component is fetched here */
     const [teamViews, setTeamViews] = useState([]);
+
     async function fetchAndSetTeamViews() {
         const res = await axios.get("/api/teams");
         setTeamViews(res.data);
     }
+
     useEffect(() => {
         fetchAndSetTeamViews();
     }, [loggedIn]);
 
     /* We highlight upvotes by detecting whether a teamID is included in upvotedTeams */
     const [upvotedTeams, setUpvotedTeams] = useState([]);
+
     async function fetchAndSetUpvotedTeams(token) {
         const userID = getUserID(token);
         const USER_ENDPOINT = `/api/users/${userID}`;
         const res = await axios.get(USER_ENDPOINT, getAuthConfig(token));
         setUpvotedTeams(res.data.upvotedTeams);
     }
+
     useEffect(() => {
         if (loggedIn) {
             const token = getToken();
