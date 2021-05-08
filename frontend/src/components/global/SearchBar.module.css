@@ -1,6 +1,7 @@
 .barContainer {
     position: relative;
-    width: 18rem;
+    width: 15rem;
+    --placeHolderColour: #a9a9a9;
 }
 
 .searchBar {
@@ -8,9 +9,9 @@
     outline: none;
     overflow: hidden;
 
-    height: 2rem;
+    height: 1.8rem;
     width: 100%;
-    font-size: 1.1rem;
+    font-size: 0.85rem;
 
     padding-right: 2rem; /* Leave room for the searchIcon */
     padding-left: 0.75rem;
@@ -25,7 +26,7 @@
 
 .searchIcon {
     position: absolute;
-    top: 0.3rem;
-    right: 0.3rem;
+    top: 0.2rem;
+    right: 0.4rem;
     color: var(--placeHolderColour);
 }
