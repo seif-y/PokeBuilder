@@ -11,6 +11,10 @@
     margin: 85px auto 30px;
 }
 
+.resultNotFound {
+    text-align: center;
+}
+
 .centerContent {
     display: flex;
     justify-content: center;

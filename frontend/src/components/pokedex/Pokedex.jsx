@@ -19,7 +19,7 @@ function GridOfPokemon({ pokemon }) {
     const isEmpty = pokemon.length === 0;
 
     return isEmpty ? (
-        <div className={styles.pokemonDisplay}>No results found</div>
+        <div className={`${styles.resultNotFound} ${styles.pokemonDisplay}`}>No results found</div>
     ) : (
         <div className={`${styles.pokemonDisplay} ${styles.grid}`}>
             {pokemon.map(({ id, name, sprite, types }) => {
