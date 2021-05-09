@@ -1,63 +1,24 @@
 import axios from "axios";
 import { useCallback, useContext, useEffect, useState } from "react";
 import styles from "./DetailedTeamView.module.css";
-import { getToken, getAuthConfig, getUserID } from "../../../util/auth";
+import { getToken, getAuthConfig } from "../../../util/auth";
 import { AuthContext } from "../../../App.js";
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
 import ImmutableTeamMember from "./ImmutableTeamMember";
 import Body from "../util/style-components/Body";
-import Headline from "../util/style-components/Headline";
 import ShadowedBox from "../util/style-components/ShadowedBox";
 import UpvoteBox from "../util/upvotes/UpvoteBox";
 import BlackHeadingTag from "../../global/BlackHeadingTag";
-import { PokemonDataContext } from "../../../pokeapi/PokemonDataContextProvider";
+import SnackbarMessage from "../../global/SnackbarMessage";
 
-function Heading({ loggedIn, teamData: { _id: teamID, teamName, creatorUsername, upvotes: initialUpvotes } }) {
-    /* TODO duplicate code from TeamViewer */
-    /* We highlight upvotes by detecting whether a teamID is included in upvotedTeams */
-    const [upvotedTeams, setUpvotedTeams] = useState([]);
-
-    async function fetchAndSetUpvotedTeams(token) {
-        const userID = getUserID(token);
-        const USER_ENDPOINT = `/api/users/${userID}`;
-        const res = await axios.get(USER_ENDPOINT, getAuthConfig(token));
-        setUpvotedTeams(res.data.upvotedTeams);
-    }
-
-    useEffect(() => {
-        if (loggedIn) {
-            const token = getToken();
-            fetchAndSetUpvotedTeams(token);
-        }
-    }, [loggedIn]);
-
-    // todo ask backend for a GET upvotes only endpoint?
-    const [upvoteCount, setUpvoteCount] = useState(initialUpvotes);
-
-    async function fetchAndSetUpvoteCount() {
-        const TEAM_ENDPOINT = `/api/teams/${teamID}`;
-        const res = await axios.get(TEAM_ENDPOINT);
-        setUpvoteCount(res.data.upvotes);
-    }
-
-    async function handleOnVote(isUpvoted) {
-        if (loggedIn) {
-            const UPVOTE_ENDPOINT = `/api/teams/${teamID}/upvotes`;
-            const token = getToken();
-            const body = { increment: isUpvoted };
-            await axios.patch(UPVOTE_ENDPOINT, body, getAuthConfig(token));
-            fetchAndSetUpvotedTeams(token); // renders the highlights
-            fetchAndSetUpvoteCount(); // renders the new count
-        }
-    }
-
+function Heading({ teamData: { _id: teamID, teamName, creatorUsername, upvotes }, isUpvoted, onVote }) {
     return (
         <div className={`flex ${styles.heading}`}>
             <UpvoteBox
-                isUpvoted={loggedIn && upvotedTeams.includes(teamID)}
-                upvotes={upvoteCount}
-                onVote={handleOnVote}
+                isUpvoted={isUpvoted}
+                upvotes={upvotes}
+                onVote={(newIsUpvoted) => onVote(newIsUpvoted, teamID)}
             />
             <h1>{teamName}</h1>
             <div className={styles.rightHeaderContent}>
@@ -68,23 +29,9 @@ function Heading({ loggedIn, teamData: { _id: teamID, teamName, creatorUsername,
 }
 
 function Party({ party = [] }) {
-    const allPokemonViews = useContext(PokemonDataContext);
-    const [formattedParty, setFormattedParty] = useState([]);
-
-    // TODO: duplicate code from TeamView
-    useEffect(() => {
-        if (allPokemonViews) {
-            setFormattedParty(
-                party.map((pokemon) => {
-                    const pokemonView = allPokemonViews.find((element) => element.id === pokemon.pokemonID);
-                    return Object.assign({}, pokemon, pokemonView);
-                })
-            );
-        }
-    }, [party, allPokemonViews]);
     return (
         <div className={styles.sixPack}>
-            {formattedParty.map(({ _id, name, notes, sprite, types }) => (
+            {party.map(({ _id, name, notes, sprite, types }) => (
                 <ImmutableTeamMember key={_id} name={name} notes={notes} sprite={sprite} types={types} />
             ))}
         </div>
@@ -102,12 +49,9 @@ function Description({ text }) {
     );
 }
 
-export default function Render({ teamData }) {
-    return teamData ? <DetailedTeamView teamData={teamData} /> : null;
-}
-
-function DetailedTeamView({ teamData }) {
+export default function DetailedTeamView({ teamData, isUpvoted, onVote }) {
     const [loggedIn] = useContext(AuthContext);
+    const [showError, setShowError] = useState(false);
 
     const COMMENTS_ENDPOINT = `/api/teams/${teamData._id}/comments`;
     const [comments, setComments] = useState([]);
@@ -125,12 +69,20 @@ function DetailedTeamView({ teamData }) {
             const token = getToken();
             await axios.post(COMMENTS_ENDPOINT, { comment }, getAuthConfig(token));
             renderComments();
+        } else {
+            setShowError(true);
         }
     };
 
     return (
         <div className={styles.wrapper}>
-            <Heading loggedIn={loggedIn} teamData={teamData} />
+            <SnackbarMessage
+                show={showError}
+                setShow={setShowError}
+                duration={3000}
+                message="You must be logged in to comment"
+            />
+            <Heading teamData={teamData} onVote={onVote} isUpvoted={isUpvoted} />
             <div className={styles.teamContainer}>
                 <Party party={teamData.party} />
                 <Description text={teamData.description} />

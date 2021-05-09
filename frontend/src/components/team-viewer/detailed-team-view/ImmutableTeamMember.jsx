@@ -1,10 +1,7 @@
 import { formatName } from "../../../util/names";
 import PokeType from "../../global/PokeType";
-import Body from "../util/style-components/Body";
-import ShadowedBox from "../util/style-components/ShadowedBox";
 import styles from "./ImmutableTeamMember.module.css";
 import BlackHeadingTag from "../../global/BlackHeadingTag";
-import TextArea from "../../global/TextArea";
 import React from "react";
 
 function PokemonTypes({ types }) {

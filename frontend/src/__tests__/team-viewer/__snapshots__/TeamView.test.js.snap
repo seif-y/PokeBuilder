@@ -52,9 +52,40 @@ exports[`TeamView snapshot for test pokemon matches 1`] = `
       <div
         className="body undefined"
       >
-        This is not a real team. You have been deceived...
+        This is not a real team. You have been deceived
       </div>
-      <div />
+      <div>
+        <img
+          alt="#3"
+          className="partySprite"
+          title="undefined #3"
+        />
+        <img
+          alt="#6"
+          className="partySprite"
+          title="undefined #6"
+        />
+        <img
+          alt="#9"
+          className="partySprite"
+          title="undefined #9"
+        />
+        <img
+          alt="#12"
+          className="partySprite"
+          title="undefined #12"
+        />
+        <img
+          alt="#15"
+          className="partySprite"
+          title="undefined #15"
+        />
+        <img
+          alt="#18"
+          className="partySprite"
+          title="undefined #18"
+        />
+      </div>
     </a>
   </div>
 </div>
