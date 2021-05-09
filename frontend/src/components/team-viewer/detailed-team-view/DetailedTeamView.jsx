@@ -11,6 +11,7 @@ import Body from "../util/style-components/Body";
 import Headline from "../util/style-components/Headline";
 import ShadowedBox from "../util/style-components/ShadowedBox";
 import UpvoteBox from "../util/upvotes/UpvoteBox";
+import BlackHeadingTag from "../../global/BlackHeadingTag";
 
 function Heading({ loggedIn, teamData: { _id: teamID, teamName, creatorUsername, upvotes: initialUpvotes } }) {
     /* TODO duplicate code from TeamViewer */
@@ -58,7 +59,10 @@ function Heading({ loggedIn, teamData: { _id: teamID, teamName, creatorUsername,
                 upvotes={upvoteCount}
                 onVote={handleOnVote}
             />
-            <h1>{`${teamName} by ${creatorUsername}`}</h1>
+            <h1>{teamName}</h1>
+            <div className={styles.rightHeaderContent}>
+                <span className={styles.username}>{`by ${creatorUsername}`}</span>
+            </div>
         </div>
     );
 }
@@ -88,7 +92,9 @@ function Party({ party = [] }) {
 function Description({ text }) {
     return (
         <ShadowedBox>
-            <Headline>Description</Headline>
+            <div className={styles.usernameWrapper}>
+                <BlackHeadingTag text="Description" />
+            </div>
             <Body>{text}</Body>
         </ShadowedBox>
     );
@@ -123,14 +129,21 @@ function DetailedTeamView({ teamData }) {
     return (
         <div className={styles.wrapper}>
             <Heading loggedIn={loggedIn} teamData={teamData} />
-            <Party party={teamData.party} />
-            <Description text={teamData.description} />
-            <CommentForm onSubmitComment={handleOnSubmitComment} />
-            <>
-                {comments.map(({ _id, comment: body, username }) => (
-                    <Comment key={_id} body={body} username={username} />
-                ))}
-            </>
+            <div className={styles.teamContainer}>
+                <Party party={teamData.party} />
+                <Description text={teamData.description} />
+            </div>
+            <div className={styles.commentsWrapper}>
+                <div className={styles.headerWrapper}>
+                    <BlackHeadingTag text="Comments" size={400} leftAlign />
+                </div>
+                <>
+                    {comments.map(({ _id, comment: body, username }) => (
+                        <Comment key={_id} body={body} username={username} />
+                    ))}
+                </>
+                <CommentForm onSubmitComment={handleOnSubmitComment} />
+            </div>
         </div>
     );
 }

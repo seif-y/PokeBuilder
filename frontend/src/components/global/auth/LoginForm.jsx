@@ -53,7 +53,7 @@ export default function LoginForm({ onComplete }) {
                 onChange={(e) => setPassword(e.target.value)}
             />
             <Button text="Log In" onClick={() => logIn()} />
-            <Button text="Sign Up" onClick={() => signUp()} />
+            <Button text="Sign Up" onClick={() => signUp()} color="white" />
 
             <div className={styles.errMsg}>{errorMessage}</div>
         </div>

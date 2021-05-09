@@ -32,13 +32,13 @@
     display: flex;
     flex-direction: row;
     flex: 1;
-    animation: expand-in 0.3s;
+    animation: shrink-in 0.3s;
 }
 
-@keyframes expand-in {
+@keyframes shrink-in {
     0% {
-        -webkit-transform: scale(0.8);
-        transform: scale(0.8);
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2);
         opacity: 0;
     }
     100% {

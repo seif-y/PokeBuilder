@@ -9,7 +9,7 @@
     position: fixed;
     top: 0;
     width: calc(100% - var(--sideNavBarWidth));
-    z-index: 2;
+    z-index: 99;
 }
 
 .title {

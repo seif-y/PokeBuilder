@@ -79,6 +79,7 @@ export default function TypeFilter({ onFiltersUpdated }) {
                                 // So we assert that it's true that types have been removed
                                 handleOnCancel(true);
                             }}
+                            color="white"
                         />
                     </div>
                 </div>
