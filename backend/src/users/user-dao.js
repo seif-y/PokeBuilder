@@ -39,11 +39,6 @@ async function getTeamsByUser(userID) {
     return Team.find({ creator: userID });
 }
 
-async function deleteUser(id) {
-    await User.deleteOne({ _id: id });
-    await Team.deleteMany({ creator: id });
-}
-
 async function getJwtForUser(username, password, callback) {
     User.findOne({ username }).then((dbUser) => {
         if (!dbUser) {
@@ -67,4 +62,4 @@ async function getJwtForUser(username, password, callback) {
     });
 }
 
-export { createUser, retrieveUser, getTeamsByUser, deleteUser, getJwtForUser };
+export { createUser, retrieveUser, getTeamsByUser, getJwtForUser };
