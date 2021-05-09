@@ -10,6 +10,7 @@ import Body from "../util/style-components/Body";
 import ShadowedBox from "../util/style-components/ShadowedBox";
 import UpvoteBox from "../util/upvotes/UpvoteBox";
 import BlackHeadingTag from "../../global/BlackHeadingTag";
+import SnackbarMessage from "../../global/SnackbarMessage";
 
 function Heading({ teamData: { _id: teamID, teamName, creatorUsername, upvotes }, isUpvoted, onVote }) {
     return (
@@ -50,6 +51,7 @@ function Description({ text }) {
 
 export default function DetailedTeamView({ teamData, isUpvoted, onVote }) {
     const [loggedIn] = useContext(AuthContext);
+    const [showError, setShowError] = useState(false);
 
     const COMMENTS_ENDPOINT = `/api/teams/${teamData._id}/comments`;
     const [comments, setComments] = useState([]);
@@ -67,11 +69,19 @@ export default function DetailedTeamView({ teamData, isUpvoted, onVote }) {
             const token = getToken();
             await axios.post(COMMENTS_ENDPOINT, { comment }, getAuthConfig(token));
             renderComments();
+        } else {
+            setShowError(true);
         }
     };
 
     return (
         <div className={styles.wrapper}>
+            <SnackbarMessage
+                show={showError}
+                setShow={setShowError}
+                duration={3000}
+                message="You must be logged in to comment"
+            />
             <Heading teamData={teamData} onVote={onVote} isUpvoted={isUpvoted} />
             <div className={styles.teamContainer}>
                 <Party party={teamData.party} />

@@ -10,10 +10,12 @@ import LoadingAnimation from "../global/LoadingAnimation";
 import TeamView from "./TeamView";
 import NOT_FOUND from "../global/NOT_FOUND";
 import TopBar from "../global/TopBar";
+import SnackbarMessage from "../global/SnackbarMessage";
 
 export default function TeamViewer() {
     const [loggedIn] = useContext(AuthContext);
     const allPokemonViews = useContext(PokemonDataContext);
+    const [showError, setShowError] = useState(false);
 
     /* All the data that's needed to render a TeamView component is fetched here */
     const [teamViews, setTeamViews] = useState([]);
@@ -57,12 +59,14 @@ export default function TeamViewer() {
 
     async function handleOnVote(isUpvoted, teamID) {
         const UPVOTE_ENDPOINT = `/api/teams/${teamID}/upvotes`;
-        const token = getToken();
-        if (token) {
+        if (loggedIn) {
+            const token = getToken();
             const body = { increment: isUpvoted };
             await axios.patch(UPVOTE_ENDPOINT, body, getAuthConfig(token));
             fetchAndSetUpvotedTeams(token); // renders the highlights
             fetchAndSetTeamViews(); // gets the upvotes fresh from the server
+        } else {
+            setShowError(true);
         }
     }
 
@@ -91,7 +95,12 @@ export default function TeamViewer() {
     return (
         <>
             <TopBar title="TEAMS" />
-
+            <SnackbarMessage
+                show={showError}
+                setShow={setShowError}
+                duration={3000}
+                message="You must be logged in to upvote"
+            />
             {allPokemonViews ? (
                 <div className={styles.outerWrapper}>
                     <Switch>
