@@ -8,14 +8,14 @@ import { PokemonDataContext } from "../../pokeapi/PokemonDataContextProvider";
 import BlackHeadingTag from "../global/BlackHeadingTag";
 
 function Details({ creatorUsername, teamName, description }) {
-    const CHAR_LIMIT = 400;
+    const CHAR_LIMIT = 150;
     return (
         <>
             <Headline classes={`flex ${styles.title}`}>
                 <BlackHeadingTag text={teamName} size={300} leftAlign />
                 <span className={styles.creator}>{`by ${creatorUsername}`}</span>
             </Headline>
-            <Body>{description < CHAR_LIMIT ? description : `${description.slice(0, CHAR_LIMIT)}...`}</Body>
+            <Body>{description.length < CHAR_LIMIT ? description : `${description.slice(0, CHAR_LIMIT)}...`}</Body>
         </>
     );
 }
