@@ -1,0 +1,169 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TeamBuilder snapshot test 1`] = `
+<div
+  className="teamBuilderContainer"
+  id="modal-root"
+>
+  <div
+    className="titleContainer"
+  >
+    <h1>
+       Team Builder 
+    </h1>
+    <button
+      className="MuiButtonBase-root MuiButton-root MuiButton-contained"
+      disabled={false}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex={0}
+      type="button"
+    >
+      <span
+        className="MuiButton-label"
+      >
+        Save
+      </span>
+    </button>
+  </div>
+  <input
+    className="teamNameInput"
+    onChange={[Function]}
+    placeholder="Team Name"
+  />
+  <div
+    className="teamContainer"
+  >
+    <div
+      className="container"
+      onClick={[Function]}
+    >
+      <div
+        className="addIconContainer"
+      >
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root MuiSvgIcon-colorAction MuiSvgIcon-fontSizeLarge"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
+          />
+        </svg>
+      </div>
+    </div>
+    <div
+      className="container"
+      onClick={[Function]}
+    >
+      <div
+        className="addIconContainer"
+      >
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root MuiSvgIcon-colorAction MuiSvgIcon-fontSizeLarge"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
+          />
+        </svg>
+      </div>
+    </div>
+    <div
+      className="container"
+      onClick={[Function]}
+    >
+      <div
+        className="addIconContainer"
+      >
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root MuiSvgIcon-colorAction MuiSvgIcon-fontSizeLarge"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
+          />
+        </svg>
+      </div>
+    </div>
+    <div
+      className="container"
+      onClick={[Function]}
+    >
+      <div
+        className="addIconContainer"
+      >
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root MuiSvgIcon-colorAction MuiSvgIcon-fontSizeLarge"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
+          />
+        </svg>
+      </div>
+    </div>
+    <div
+      className="container"
+      onClick={[Function]}
+    >
+      <div
+        className="addIconContainer"
+      >
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root MuiSvgIcon-colorAction MuiSvgIcon-fontSizeLarge"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
+          />
+        </svg>
+      </div>
+    </div>
+    <div
+      className="container"
+      onClick={[Function]}
+    >
+      <div
+        className="addIconContainer"
+      >
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root MuiSvgIcon-colorAction MuiSvgIcon-fontSizeLarge"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
+          />
+        </svg>
+      </div>
+    </div>
+  </div>
+  <textarea
+    className="textArea descriptionInput"
+    onChange={[Function]}
+    onClick={[Function]}
+    placeholder="Team description"
+  />
+</div>
+`;

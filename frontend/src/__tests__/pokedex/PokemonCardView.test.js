@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
+import renderer from "react-test-renderer";
 import { StaticRouter } from "react-router";
-import Pokedex from "../components/pokedex/Pokedex";
-import PokemonCardView from "../components/pokedex/PokemonCardView";
+import PokemonCardView from "../../components/pokedex/PokemonCardView";
 
 const testMon = {
     name: "muk",
@@ -11,24 +11,15 @@ const testMon = {
     displayName: "Muk",
 };
 
-describe("General Pokedex tests", () => {
-    beforeEach(() => {
-        render(<Pokedex />);
-    });
+const testMonCard = (
+    <StaticRouter>
+        <PokemonCardView name={testMon.name} id={testMon.id} sprite={testMon.sprite} types={testMon.types} />
+    </StaticRouter>
+);
 
-    test("Pokedex has a searchbar", () => {
-        const searchBar = screen.getByPlaceholderText("Search by Pokémon name");
-        expect(searchBar).toBeDefined();
-    });
-});
-
-describe("PokemonCardView tests", () => {
+describe("PokemonCardView basic tests", () => {
     beforeEach(() => {
-        render(
-            <StaticRouter>
-                <PokemonCardView name={testMon.name} id={testMon.id} sprite={testMon.sprite} types={testMon.types} />
-            </StaticRouter>
-        );
+        render(testMonCard);
     });
 
     test("Pokemon card view contains pokemon name", () => {
@@ -45,4 +36,9 @@ describe("PokemonCardView tests", () => {
         const pokemonSprite = screen.getByAltText(`Pokémon #${testMon.id}`);
         expect(pokemonSprite).toBeDefined();
     });
+});
+
+test("PokemonCardView snapshot test", () => {
+    const tree = renderer.create(testMonCard).toJSON();
+    expect(tree).toMatchSnapshot();
 });

@@ -1,6 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import TeamBuilder from "../components/team-builder/TeamBuilder";
+import renderer from "react-test-renderer";
+import TeamBuilder from "../../components/team-builder/TeamBuilder";
 
 describe("General TeamBuilder Tests", () => {
     beforeEach(() => {
@@ -21,4 +22,9 @@ describe("General TeamBuilder Tests", () => {
         const saveButton = screen.getByText("Save");
         expect(saveButton).toBeDefined();
     });
+});
+
+test("TeamBuilder snapshot test", () => {
+    const tree = renderer.create(<TeamBuilder />).toJSON();
+    expect(tree).toMatchSnapshot();
 });
