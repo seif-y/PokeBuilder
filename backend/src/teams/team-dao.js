@@ -17,10 +17,6 @@ async function retrieveTeam(id) {
     return Team.findById(id);
 }
 
-async function deleteTeam(id) {
-    await Team.deleteOne({ _id: id });
-}
-
 async function updateTeamUpvotes(id, increment, userID) {
     let upvotes = NUM_OF_UPVOTES_PER_USER;
 
@@ -37,4 +33,4 @@ async function updateTeamUpvotes(id, increment, userID) {
     await Team.updateOne({ _id: id }, { $inc: { upvotes: upvotes } });
 }
 
-export { createTeam, retrieveTeam, retrieveTeamList, deleteTeam, updateTeamUpvotes };
+export { createTeam, retrieveTeam, retrieveTeamList, updateTeamUpvotes };

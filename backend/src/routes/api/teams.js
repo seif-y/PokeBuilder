@@ -1,6 +1,6 @@
 import express from "express";
 import passportRequestHandler from "../../auth/passportHandler";
-import { createTeam, retrieveTeam, retrieveTeamList, deleteTeam, updateTeamUpvotes } from "../../teams/team-dao";
+import { createTeam, retrieveTeam, retrieveTeamList, updateTeamUpvotes } from "../../teams/team-dao";
 
 const HTTP_CREATED = 201;
 const HTTP_NOT_FOUND = 404;
@@ -49,17 +49,6 @@ router.get("/:id", async (req, res) => {
         } else {
             res.sendStatus(HTTP_NOT_FOUND);
         }
-    } catch {
-        res.status(HTTP_BAD_REQUEST).send("Invalid team id");
-    }
-});
-
-// Delete team
-router.delete("/:id", passportRequestHandler, async (req, res) => {
-    try {
-        const { id } = req.params;
-        await deleteTeam(id);
-        res.sendStatus(HTTP_NO_CONTENT);
     } catch {
         res.status(HTTP_BAD_REQUEST).send("Invalid team id");
     }
