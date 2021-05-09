@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import renderer from "react-test-renderer";
-import { StaticRouter } from "react-router";
+import { MemoryRouter } from "react-router";
 import PokemonCardView from "../../components/pokedex/PokemonCardView";
 
 const testMon = {
@@ -12,9 +12,9 @@ const testMon = {
 };
 
 const testMonCard = (
-    <StaticRouter>
+    <MemoryRouter>
         <PokemonCardView name={testMon.name} id={testMon.id} sprite={testMon.sprite} types={testMon.types} />
-    </StaticRouter>
+    </MemoryRouter>
 );
 
 describe("PokemonCardView basic tests", () => {

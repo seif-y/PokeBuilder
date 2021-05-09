@@ -1,4 +1,4 @@
-import { StaticRouter } from "react-router";
+import { MemoryRouter } from "react-router";
 import TeamView from "../../components/team-viewer/TeamView";
 import renderer from "react-test-renderer";
 
@@ -15,9 +15,9 @@ const team = {
 test("TeamView snapshot for test pokemon matches", () => {
     const tree = renderer
         .create(
-            <StaticRouter>
+            <MemoryRouter>
                 <TeamView teamData={team} />
-            </StaticRouter>
+            </MemoryRouter>
         )
         .toJSON();
     expect(tree).toMatchSnapshot();
