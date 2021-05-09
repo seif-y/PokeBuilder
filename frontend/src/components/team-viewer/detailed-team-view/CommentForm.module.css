@@ -1,0 +1,21 @@
+.flex {
+    display: flex;
+}
+
+.commentForm {
+    padding: 10px;
+    flex-flow: column nowrap;
+    align-items: flex-end;
+}
+
+.commentForm * {
+    outline: none;
+}
+
+.form {
+    width: 100%;
+    resize: vertical;
+    font-size: 14px;
+    margin-bottom: 10px;
+    border: none;
+}

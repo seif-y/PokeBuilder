@@ -1,0 +1,68 @@
+.wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+}
+
+.commentsWrapper {
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+.teamContainer {
+    --shadowColor: rgba(0, 0, 0, 0.29);
+    box-shadow: 0px 0px 10px 2px var(--shadowColor);
+    -webkit-box-shadow: 0px 0px 10px 2px var(--shadowColor);
+    -moz-box-shadow: 0px 0px 10px 2px var(--shadowColor);
+    padding: 10px 20px 10px 20px;
+    border-radius: 0 0 10px 10px;
+}
+
+.headerWrapper {
+    margin: 20px 0px;
+}
+
+.usernameWrapper {
+    margin-top: -30px;
+    z-index: 2;
+    position: relative;
+}
+
+.heading {
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    width: 100%;
+    background: linear-gradient(225deg, rgb(29, 29, 29) 0%, rgb(62, 62, 62) 100%);
+    color: white;
+    border-radius: 10px 10px 0px 0px;
+    --shadowColor: rgba(0, 0, 0, 0.29);
+    box-shadow: 0px 0px 10px 2px var(--shadowColor);
+    -webkit-box-shadow: 0px 0px 10px 2px var(--shadowColor);
+    -moz-box-shadow: 0px 0px 10px 2px var(--shadowColor);
+}
+
+.rightHeaderContent {
+    display: flex;
+    flex: 1;
+    flex-direction: row-reverse;
+}
+
+.username {
+    padding: 20px;
+    font-style: italic;
+    font-size: 20px;
+}
+
+.sixPack {
+    display: grid;
+    grid-row-gap: 10px;
+    grid-column-gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    margin-bottom: 20px;
+}

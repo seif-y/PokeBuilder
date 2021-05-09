@@ -1,0 +1,72 @@
+.navbar {
+    min-height: 100vh;
+    width: var(--sideNavBarWidth);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: linear-gradient(225deg, rgba(29, 29, 29, 0.8) 0%, rgba(62, 62, 62, 0.8) 100%);
+    position: fixed;
+    overflow-x: hidden;
+    z-index: 99;
+}
+
+.navbarIconContainer {
+    max-width: 50px;
+    padding: 10px;
+    transition: 0.1s;
+}
+
+.navbarIconContainer:hover {
+    background: rgba(255, 255, 255, 0.26);
+    cursor: pointer;
+}
+
+.navbarIconContainer:active {
+    transform: scale(0.9, 0.9);
+}
+
+.navbarIconImage {
+    max-width: 100%;
+}
+
+.activeNavLink {
+    /* This class will be applied to a nav link in the sidebar when it is active */
+    background: #ffdda5;
+    transition: 0.3s;
+}
+
+.bottomSpacer {
+    height: 100%;
+}
+
+.logo {
+    max-width: 30px;
+    padding: 18px;
+}
+
+.unselectable {
+    user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+.loginModal {
+    width: 80%;
+    max-width: 360px;
+}
+
+.text {
+    color: white;
+    font-family: Roboto;
+    text-shadow: 0px 2px 2px #262626;
+    font-size: 20px;
+    left: 30px;
+    white-space: nowrap;
+}
+
+::placeholder {
+    color: var(--placeHolderColour);
+}

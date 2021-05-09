@@ -1,0 +1,10 @@
+.root {
+    display: flex;
+    min-width: 100%;
+}
+
+.main-content {
+    flex-grow: 1;
+    margin-left: var(--sideNavBarWidth);
+    /* Same as width of sidebar*/
+}

@@ -1,0 +1,64 @@
+.modalContainerBg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #00000099;
+    z-index: 100;
+    outline: none;
+    border: none;
+    animation: fade-in 0.3s both;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.titleBar {
+    background: linear-gradient(225deg, rgb(29, 29, 29) 0%, rgb(62, 62, 62) 100%);
+    border-radius: 10px 10px 0px 0px;
+    display: flex;
+    box-shadow: 0px 2px 3px #262626;
+    padding: 10px 20px 10px 20px;
+    align-items: center;
+}
+
+
+.modalContainer {
+    height: auto;
+    animation: expand-in 0.3s both;
+}
+
+@keyframes expand-in {
+    0% {
+        -webkit-transform: scale(0.8);
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.content {
+    padding: 30px;
+    background: white;
+    border-radius: 0px 0px 10px 10px;
+    box-shadow: 0px 2px 3px #262626;
+    max-height: calc(100vh - 310px);
+    overflow-y: auto;
+}

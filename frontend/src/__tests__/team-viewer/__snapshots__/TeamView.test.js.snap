@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TeamView snapshot for test pokemon matches 1`] = `
+<div
+  className="shadowedBox flex"
+>
+  <div
+    className="flex upvoteBox"
+  >
+    <svg
+      aria-hidden={true}
+      className="MuiSvgIcon-root  arrow clickable MuiSvgIcon-fontSizeLarge"
+      focusable="false"
+      onClick={[Function]}
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M12 8V4l8 8-8 8v-4H4V8z"
+      />
+    </svg>
+    0
+  </div>
+  <div
+    className="content clickable"
+  >
+    <a
+      className="link"
+      href="/teams/304u012h5k436h"
+      onClick={[Function]}
+    >
+      <div
+        className="headline flex title"
+      >
+        <div
+          className="header"
+          style={
+            Object {
+              "paddingLeft": 10,
+              "textAlign": "left",
+              "width": 300,
+            }
+          }
+        >
+          Test Team
+        </div>
+        <span
+          className="creator"
+        >
+          by TestUser
+        </span>
+      </div>
+      <div
+        className="body undefined"
+      >
+        This is not a real team. You have been deceived
+      </div>
+      <div>
+        <img
+          alt="#3"
+          className="partySprite"
+          title="undefined #3"
+        />
+        <img
+          alt="#6"
+          className="partySprite"
+          title="undefined #6"
+        />
+        <img
+          alt="#9"
+          className="partySprite"
+          title="undefined #9"
+        />
+        <img
+          alt="#12"
+          className="partySprite"
+          title="undefined #12"
+        />
+        <img
+          alt="#15"
+          className="partySprite"
+          title="undefined #15"
+        />
+        <img
+          alt="#18"
+          className="partySprite"
+          title="undefined #18"
+        />
+      </div>
+    </a>
+  </div>
+</div>
+`;

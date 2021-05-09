@@ -1,0 +1,52 @@
+.filter {
+    margin-left: 20px;
+    cursor: pointer;
+    color: white;
+}
+
+/* 3 rows of 6 = 18 types */
+.typeGrid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    justify-items: center;
+}
+
+/* The poketypes */
+.typeWrapper {
+    opacity: 30%;
+    user-select: none;
+}
+
+.typeWrapper.typeIsClicked {
+    opacity: 100%;
+}
+
+/* The poketypes and the buttons */
+.typeWrapper:hover,
+.typeGrid button:hover {
+    cursor: pointer;
+}
+
+.typeGrid button {
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.buttonsContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.buttonWrapper {
+    padding: 20px 20px 0px 20px;
+}
+
+.text {
+    color: white;
+    text-shadow: 0px 2px 2px #262626;
+    font-size: 20px;
+    left: 30px;
+    white-space: nowrap;
+}

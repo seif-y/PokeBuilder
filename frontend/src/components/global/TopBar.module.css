@@ -1,0 +1,23 @@
+.topBar {
+    height: var(--topBarHeight);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px calc(var(--stickySpacing) / 2);
+    background: linear-gradient(225deg, rgb(29, 29, 29) 0%, rgb(62, 62, 62) 100%);
+    position: fixed;
+    top: 0;
+    width: calc(100% - var(--sideNavBarWidth));
+    z-index: 99;
+}
+
+.title {
+    color: white;
+    text-shadow: 0px 2px 2px #262626;
+    font-size: 40px;
+    font-weight: bold;
+    font-style: italic;
+    position: absolute;
+    left: 30px;
+}

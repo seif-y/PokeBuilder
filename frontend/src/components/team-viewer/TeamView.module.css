@@ -1,0 +1,29 @@
+.clickable {
+    cursor: pointer;
+}
+
+.link {
+    color: inherit;
+    text-decoration: inherit;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.link:last-child {
+    margin-bottom: 0;
+}
+
+.title {
+    justify-content: space-between;
+    font-size: 16px;
+}
+
+.creator {
+    font-weight: normal;
+    font-style: italic;
+    margin-right: 10px;
+}
+
+.partySprite {
+    max-width: 20px;
+}

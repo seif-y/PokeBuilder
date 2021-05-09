@@ -1,0 +1,95 @@
+.pokemonSprite {
+    max-height: 100px;
+    margin-right: 20px;
+}
+
+.pokemonInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 1;
+}
+
+.teamMemberContainer {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    border-radius: 10px;
+    padding: 5px;
+    --shadowColor: rgba(0, 0, 0, 0.29);
+    box-shadow: 0px 0px 10px 2px var(--shadowColor);
+    -webkit-box-shadow: 0px 0px 10px 2px var(--shadowColor);
+    -moz-box-shadow: 0px 0px 10px 2px var(--shadowColor);
+    animation: grow-in 0.3s;
+}
+
+@keyframes grow-in {
+    0% {
+        -webkit-transform: scale(0.8);
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.spriteContainer {
+    display: flex;
+    align-items: center;
+}
+
+.bgCircle {
+    background: linear-gradient(225deg, #1d1d1d 0%, #3e3e3e 100%);
+    opacity: 30%;
+    width: 100px;
+    height: 100px;
+    z-index: -1;
+    position: relative;
+    border-radius: 50%;
+    right: 120px;
+    margin-right: -110px;
+}
+
+.pokemonInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 1;
+    padding: 10px;
+}
+
+.pokemonName {
+    margin: 0;
+}
+
+.typeContainer {
+    display: flex;
+    flex-direction: row;
+    margin-left: -2px;
+    margin-bottom: 5px;
+}
+
+.closeButton {
+    border-radius: 8px;
+    margin-left: auto;
+    margin-top: 20px;
+    align-self: flex-start;
+    transition: 0.3s !important;
+}
+
+.closeButton:hover {
+    background-color: lightgray;
+}
+
+.notesArea {
+    background-color: white;
+    width: 300px;
+    height: 44px;
+    padding: 6px;
+    font-family: inherit;
+    border-radius: 6px;
+    border: none;
+}
