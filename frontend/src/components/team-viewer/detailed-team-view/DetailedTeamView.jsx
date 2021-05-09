@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useCallback, useContext, useEffect, useState } from "react";
 import styles from "./DetailedTeamView.module.css";
-import { formatParty } from "../../../pokeapi/pokemon";
 import { getToken, getAuthConfig, getUserID } from "../../../util/auth";
 import { AuthContext } from "../../../App.js";
 import Comment from "./Comment";
@@ -11,6 +10,7 @@ import Body from "../util/style-components/Body";
 import Headline from "../util/style-components/Headline";
 import ShadowedBox from "../util/style-components/ShadowedBox";
 import UpvoteBox from "../util/upvotes/UpvoteBox";
+import { PokemonDataContext } from "../../../pokeapi/PokemonDataContextProvider";
 
 function Heading({ loggedIn, teamData: { _id: teamID, teamName, creatorUsername, upvotes: initialUpvotes } }) {
     /* TODO duplicate code from TeamViewer */
@@ -64,18 +64,20 @@ function Heading({ loggedIn, teamData: { _id: teamID, teamName, creatorUsername,
 }
 
 function Party({ party = [] }) {
+    const allPokemonViews = useContext(PokemonDataContext);
     const [formattedParty, setFormattedParty] = useState([]);
-    // todo duplicate code from TeamView.jsx
-    useEffect(() => {
-        async function fetchData() {
-            const newParty = await formatParty(party);
-            setFormattedParty(() => newParty);
-        }
 
-        if (party.length !== 0) {
-            fetchData();
+    // TODO: duplicate code from TeamView
+    useEffect(() => {
+        if (allPokemonViews) {
+            setFormattedParty(
+                party.map((pokemon) => {
+                    const pokemonView = allPokemonViews.find((element) => element.id === pokemon.pokemonID);
+                    return Object.assign({}, pokemon, pokemonView);
+                })
+            );
         }
-    }, [party]);
+    }, [party, allPokemonViews]);
     return (
         <div className={styles.sixPack}>
             {formattedParty.map(({ _id, name, notes, sprite, types }) => (
