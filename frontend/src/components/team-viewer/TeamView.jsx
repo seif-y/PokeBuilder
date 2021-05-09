@@ -23,9 +23,9 @@ function Details({ creatorUsername, teamName, description }) {
 function PartySprites({ party }) {
     return (
         <div>
-            {party.map(({ pokemonID, name, sprite }) => (
+            {party.map(({ pokemonID, name, sprite }, index) => (
                 <img
-                    key={pokemonID}
+                    key={index}
                     className={styles.partySprite}
                     src={sprite}
                     title={`${name} #${pokemonID}`}
