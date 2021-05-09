@@ -1,10 +1,8 @@
 import Body from "./util/style-components/Body";
 import Headline from "./util/style-components/Headline";
 import UpvotableContent from "./util/upvotes/UpvotableContent";
-import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./TeamView.module.css";
-import { PokemonDataContext } from "../../pokeapi/PokemonDataContextProvider";
 import BlackHeadingTag from "../global/BlackHeadingTag";
 
 function Details({ creatorUsername, teamName, description }) {
@@ -42,19 +40,6 @@ export default function TeamView({
     isUpvoted,
     upvotes,
 }) {
-    const allPokemonViews = useContext(PokemonDataContext);
-    const [formattedParty, setFormattedParty] = useState([]);
-    useEffect(() => {
-        if (allPokemonViews) {
-            setFormattedParty(
-                party.map((pokemon) => {
-                    const pokemonView = allPokemonViews.find((element) => element.id === pokemon.pokemonID);
-                    return Object.assign({}, pokemon, pokemonView);
-                })
-            );
-        }
-    }, [party, allPokemonViews]);
-
     return (
         <UpvotableContent
             classes={styles.clickable}
@@ -64,7 +49,7 @@ export default function TeamView({
         >
             <Link className={styles.link} to={`/teams/${teamID}`}>
                 <Details creatorUsername={creatorUsername} teamName={teamName} description={description} />
-                <PartySprites party={formattedParty} />
+                <PartySprites party={party} />
             </Link>
         </UpvotableContent>
     );

@@ -4,27 +4,37 @@ import { useContext, useEffect, useState } from "react";
 import { Switch, Route, useParams } from "react-router-dom";
 import { getToken, getAuthConfig, getUserID } from "../../util/auth";
 import { AuthContext } from "../../App.js";
+import { PokemonDataContext } from "../../pokeapi/PokemonDataContextProvider";
 import DetailedTeamView from "./detailed-team-view/DetailedTeamView";
+import LoadingAnimation from "../global/LoadingAnimation";
 import TeamView from "./TeamView";
 import NOT_FOUND from "../global/NOT_FOUND";
 import TopBar from "../global/TopBar";
 
-// todo refactor useEffect into a useFetch hook
-
 export default function TeamViewer() {
     const [loggedIn] = useContext(AuthContext);
+    const allPokemonViews = useContext(PokemonDataContext);
 
-    /* Most of the data that's needed to render a TeamView component is fetched here */
+    /* All the data that's needed to render a TeamView component is fetched here */
     const [teamViews, setTeamViews] = useState([]);
 
     async function fetchAndSetTeamViews() {
-        const res = await axios.get("/api/teams");
-        setTeamViews(res.data);
+        if (allPokemonViews) {
+            const teamViews = (await axios.get("/api/teams")).data;
+            teamViews.forEach((teamView) => {
+                teamView.party = teamView.party.map((pokemon) => {
+                    const pokemonView = allPokemonViews.find((element) => element.id === pokemon.pokemonID);
+                    return Object.assign({}, pokemon, pokemonView);
+                });
+            });
+            setTeamViews(teamViews);
+        }
     }
 
     useEffect(() => {
         fetchAndSetTeamViews();
-    }, [loggedIn]);
+        // eslint-disable-next-line
+    }, [loggedIn, allPokemonViews]);
 
     /* We highlight upvotes by detecting whether a teamID is included in upvotedTeams */
     const [upvotedTeams, setUpvotedTeams] = useState([]);
@@ -81,26 +91,33 @@ export default function TeamViewer() {
     return (
         <>
             <TopBar title="TEAMS" />
-            <div className={styles.outerWrapper}>
-                <Switch>
-                    <Route path="/teams/:id">
-                        <IdentifyTeamView />
-                    </Route>
-                    <Route>
-                        <div className={styles.wrapper}>
-                            {teamViews.map((teamView) => (
-                                <TeamView
-                                    key={teamView._id}
-                                    teamData={teamView}
-                                    onVote={handleOnVote}
-                                    isUpvoted={upvotedTeams.includes(teamView._id)}
-                                    upvotes={teamView.upvotes}
-                                />
-                            ))}
-                        </div>
-                    </Route>
-                </Switch>
-            </div>
+
+            {allPokemonViews ? (
+                <div className={styles.outerWrapper}>
+                    <Switch>
+                        <Route path="/teams/:id">
+                            <IdentifyTeamView />
+                        </Route>
+                        <Route>
+                            <div className={styles.wrapper}>
+                                {teamViews.map((teamView) => (
+                                    <TeamView
+                                        key={teamView._id}
+                                        teamData={teamView}
+                                        onVote={handleOnVote}
+                                        isUpvoted={upvotedTeams.includes(teamView._id)}
+                                        upvotes={teamView.upvotes}
+                                    />
+                                ))}
+                            </div>
+                        </Route>
+                    </Switch>
+                </div>
+            ) : (
+                <div className={styles.centerContent}>
+                    <LoadingAnimation />
+                </div>
+            )}
         </>
     );
 }

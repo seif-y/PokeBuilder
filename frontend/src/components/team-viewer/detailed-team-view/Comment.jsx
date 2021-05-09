@@ -3,7 +3,6 @@ import ShadowedBox from "../util/style-components/ShadowedBox";
 import BlackHeadingTag from "../../global/BlackHeadingTag";
 import styles from "./Comment.module.css";
 
-// todo time posted
 export default function Comment({ body, username }) {
     return (
         <ShadowedBox>
