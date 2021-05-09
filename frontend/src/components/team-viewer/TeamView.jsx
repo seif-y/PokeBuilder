@@ -1,10 +1,10 @@
 import Body from "./util/style-components/Body";
 import Headline from "./util/style-components/Headline";
 import UpvotableContent from "./util/upvotes/UpvotableContent";
-import { formatParty } from "../../pokeapi/pokemon";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./TeamView.module.css";
+import { PokemonDataContext } from "../../pokeapi/PokemonDataContextProvider";
 
 function Details({ creatorUsername, teamName, description }) {
     const CHAR_LIMIT = 400;
@@ -41,17 +41,18 @@ export default function TeamView({
     isUpvoted,
     upvotes,
 }) {
+    const allPokemonViews = useContext(PokemonDataContext);
     const [formattedParty, setFormattedParty] = useState([]);
     useEffect(() => {
-        async function fetchData() {
-            const newParty = await formatParty(party);
-            setFormattedParty(() => newParty);
+        if (allPokemonViews) {
+            setFormattedParty(
+                party.map((pokemon) => {
+                    const pokemonView = allPokemonViews.find((element) => element.id === pokemon.pokemonID);
+                    return Object.assign({}, pokemon, pokemonView);
+                })
+            );
         }
-
-        if (party.length !== 0) {
-            fetchData();
-        }
-    }, [party]);
+    }, [party, allPokemonViews]);
 
     return (
         <UpvotableContent

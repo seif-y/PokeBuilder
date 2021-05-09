@@ -33,34 +33,14 @@ function GridOfPokemon({ pokemon }) {
     );
 }
 
-// Global object used to decide which pokemon to display
-const filter = {
-    name: "",
-    types: [],
-};
-
 export default function Pokedex() {
     let allPokemonViews = useContext(PokemonDataContext);
     const [pokemonViews, setPokemonViews] = useState(null);
+    const [nameFilter, setNameFilter] = useState("");
+    const [typeFilter, setTypeFilter] = useState([]);
 
     useEffect(() => {
-        setPokemonViews(allPokemonViews);
-    }, [allPokemonViews]);
-
-    function handleOnSearch(query) {
-        filter.name = query;
-        runFilters();
-    }
-
-    function handleOnFiltersUpdated(types) {
-        filter.types = types;
-        runFilters();
-    }
-
-    function runFilters() {
-        if (!pokemonViews) {
-            return;
-        }
+        if (!allPokemonViews) return;
         // Always show the pokemon if filter properties are empty
         const nameMatches = (filterName, name) => filterName === "" || name.startsWith(filterName);
         const typesMatch = (filterTypes, types) =>
@@ -68,12 +48,20 @@ export default function Pokedex() {
         setPokemonViews(() =>
             allPokemonViews.filter(
                 ({ name: pokemonName, types: pokemonTypes }) =>
-                    nameMatches(filter.name, pokemonName) && typesMatch(filter.types, pokemonTypes)
+                    nameMatches(nameFilter, pokemonName) && typesMatch(typeFilter, pokemonTypes)
             )
         );
+    }, [nameFilter, typeFilter, allPokemonViews]);
+
+    function handleOnSearch(query) {
+        setNameFilter(query);
     }
 
-    const filtersOn = filter.types.length > 0;
+    function handleOnFiltersUpdated(types) {
+        setTypeFilter(types);
+    }
+
+    const filtersOn = typeFilter.length > 0;
 
     return (
         <>
@@ -82,7 +70,7 @@ export default function Pokedex() {
                 <TypeFilter onFiltersUpdated={handleOnFiltersUpdated} />
             </TopBar>
             <div className={filtersOn ? styles.filtersBarActive : styles.filtersBar}>
-                {filter.types.map((type) => {
+                {typeFilter.map((type) => {
                     return (
                         <div>
                             <PokeType typeName={type} size={"small"} />
