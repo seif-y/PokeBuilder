@@ -1,5 +1,5 @@
 import express from "express";
-import { createUser, retrieveUser, getTeamsByUser, getJwtForUser } from "../../users/user-dao";
+import { createUser, getJwtForUser, getTeamsByUser, retrieveUser } from "../../users/user-dao";
 
 const HTTP_CREATED = 201;
 const HTTP_NOT_FOUND = 404;

@@ -4,11 +4,9 @@ import mongoose from "mongoose";
 import express from "express";
 import axios from "axios";
 
-const HTTP_BAD_REQUEST = 400;
-
 let mongod, app, server;
 let user1, user2;
-let team1, team2;
+let team1;
 let comment1, comment2;
 
 /**
@@ -82,7 +80,7 @@ beforeEach(async () => {
         ],
     };
 
-    await teamsColl.insertMany([team1]);
+    await teamsColl.insertOne(team1);
 
     comment1 = {
         comment: "I had a great time making this team!",
