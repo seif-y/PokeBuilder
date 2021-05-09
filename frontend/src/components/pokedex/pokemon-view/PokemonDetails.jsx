@@ -73,13 +73,11 @@ export default function PokemonDetails({ name }) {
 }
 
 function PokemonDescription({ name, firstType }) {
-    let pokemon = {};
-
     const [pokemonInfo, setPokemonInfo] = useState(null);
 
     useEffect(() => {
         const updatePokemonInfo = async () => {
-            pokemon = await getPokemonInformation(name);
+            const pokemon = await getPokemonInformation(name);
             setPokemonInfo(pokemon);
         };
         updatePokemonInfo();

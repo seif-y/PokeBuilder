@@ -13,6 +13,7 @@ export default function TeamMember({ index, onUpdate }) {
     const [notes, setNotes] = useState("");
     const [showModal, setShowModal] = useState(false);
 
+    // ESLint warning disabled for this hook. We only want this to update on changes to pokemon and notes, and not any other props/state
     useEffect(() => {
         if (pokemon) {
             onUpdate(index, {
@@ -20,6 +21,7 @@ export default function TeamMember({ index, onUpdate }) {
                 notes: notes,
             });
         }
+        // eslint-disable-next-line
     }, [pokemon, notes]);
 
     function renderTypes() {

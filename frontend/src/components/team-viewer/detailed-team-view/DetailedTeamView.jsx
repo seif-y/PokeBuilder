@@ -7,7 +7,6 @@ import Comment from "./Comment";
 import CommentForm from "./CommentForm";
 import ImmutableTeamMember from "./ImmutableTeamMember";
 import Body from "../util/style-components/Body";
-import Headline from "../util/style-components/Headline";
 import ShadowedBox from "../util/style-components/ShadowedBox";
 import UpvoteBox from "../util/upvotes/UpvoteBox";
 import BlackHeadingTag from "../../global/BlackHeadingTag";

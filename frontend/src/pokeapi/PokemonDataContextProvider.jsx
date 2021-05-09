@@ -10,8 +10,10 @@ const PokemonDataContextProvider = ({ children }) => {
         setPokemonViewsMap(pokemon);
     };
 
+    // ESLint warning ignored here, because we only want to run useEffect once for this component.
     useEffect(() => {
         updatePokemonViews();
+        // eslint-disable-next-line
     }, []);
 
     return <PokemonDataContext.Provider value={pokemonViewsMap}>{children}</PokemonDataContext.Provider>;

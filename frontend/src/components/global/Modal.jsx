@@ -8,7 +8,7 @@ export default function Modal({ dismissOnClickOutside, onCancel, children, show,
     // Fixes bug where modal is loaded in before the modal-root is, causing a crash
     React.useEffect(() => {
         setDomReady(true);
-    });
+    }, []);
 
     if (!show) {
         return null;
