@@ -15,6 +15,13 @@
 
 .title {
     justify-content: space-between;
+    font-size: 16px;
+}
+
+.creator {
+    font-weight: normal;
+    font-style: italic;
+    margin-right: 10px;
 }
 
 .partySprite {

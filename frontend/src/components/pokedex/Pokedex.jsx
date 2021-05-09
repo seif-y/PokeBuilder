@@ -1,53 +1,46 @@
-import { useState, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import PokemonCard from "./PokemonCardView";
-import { getPokemonViewList } from "../../pokeapi/pokemon";
 import styles from "./Pokedex.module.css";
 import SearchBar from "../global/SearchBar";
-import TopBar from "./top-bar/TopBar";
+import TopBar from "../global/TopBar";
 import TypeFilter from "./top-bar/TypeFilter";
+import PokeType from "../global/PokeType";
+import LoadingAnimation from "../global/LoadingAnimation";
+import { PokemonDataContext } from "../../pokeapi/PokemonDataContextProvider";
 
 function GridOfPokemon({ pokemon }) {
+    if (pokemon === null) {
+        return (
+            <div className={styles.centerContent}>
+                <LoadingAnimation />
+            </div>
+        );
+    }
     const isEmpty = pokemon.length === 0;
+
     return isEmpty ? (
         <div className={styles.pokemonDisplay}>No results found</div>
     ) : (
         <div className={`${styles.pokemonDisplay} ${styles.grid}`}>
-            {pokemon.map(({ id, name, sprite, types }) => (
-                <PokemonCard key={id} id={id} name={name} sprite={sprite} types={types} />
-            ))}
+            {pokemon.map(({ id, name, sprite, types }) => {
+                return (
+                    <div className={styles.pokemonCard}>
+                        <PokemonCard key={id} id={id} name={name} sprite={sprite} types={types} />
+                    </div>
+                );
+            })}
         </div>
     );
 }
 
-let allPokemonViews = [];
-
-// Global object used to decide which pokemon to display
-const filter = {
-    name: "",
-    types: [],
-};
-
 export default function Pokedex() {
-    const [pokemonViews, setPokemonViews] = useState([]);
+    let allPokemonViews = useContext(PokemonDataContext);
+    const [pokemonViews, setPokemonViews] = useState(null);
+    const [nameFilter, setNameFilter] = useState("");
+    const [typeFilter, setTypeFilter] = useState([]);
+
     useEffect(() => {
-        const updatePokemonViews = async () => {
-            allPokemonViews = await getPokemonViewList();
-            setPokemonViews(allPokemonViews);
-        };
-        updatePokemonViews();
-    }, []);
-
-    function handleOnSearch(query) {
-        filter.name = query;
-        runFilters();
-    }
-
-    function handleOnFiltersUpdated(types) {
-        filter.types = types;
-        runFilters();
-    }
-
-    function runFilters() {
+        if (!allPokemonViews) return;
         // Always show the pokemon if filter properties are empty
         const nameMatches = (filterName, name) => filterName === "" || name.startsWith(filterName);
         const typesMatch = (filterTypes, types) =>
@@ -55,18 +48,36 @@ export default function Pokedex() {
         setPokemonViews(() =>
             allPokemonViews.filter(
                 ({ name: pokemonName, types: pokemonTypes }) =>
-                    nameMatches(filter.name, pokemonName) && typesMatch(filter.types, pokemonTypes)
+                    nameMatches(nameFilter, pokemonName) && typesMatch(typeFilter, pokemonTypes)
             )
         );
+    }, [nameFilter, typeFilter, allPokemonViews]);
+
+    function handleOnSearch(query) {
+        setNameFilter(query);
     }
+
+    function handleOnFiltersUpdated(types) {
+        setTypeFilter(types);
+    }
+
+    const filtersOn = typeFilter.length > 0;
 
     return (
         <>
-            <TopBar>
-                <span className={styles.title}>DEX</span>
+            <TopBar title="DEX">
                 <SearchBar onSearch={handleOnSearch} />
                 <TypeFilter onFiltersUpdated={handleOnFiltersUpdated} />
             </TopBar>
+            <div className={filtersOn ? styles.filtersBarActive : styles.filtersBar}>
+                {typeFilter.map((type) => {
+                    return (
+                        <div>
+                            <PokeType typeName={type} size={"small"} />
+                        </div>
+                    );
+                })}
+            </div>
             <GridOfPokemon pokemon={pokemonViews} />
         </>
     );

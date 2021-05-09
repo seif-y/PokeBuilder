@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TeamView snapshot for test pokemon matches 1`] = `
+<div
+  className="shadowedBox flex"
+>
+  <div
+    className="flex upvoteBox"
+  >
+    <svg
+      aria-hidden={true}
+      className="MuiSvgIcon-root  arrow clickable MuiSvgIcon-fontSizeLarge"
+      focusable="false"
+      onClick={[Function]}
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M12 8V4l8 8-8 8v-4H4V8z"
+      />
+    </svg>
+    0
+  </div>
+  <div
+    className="content clickable"
+  >
+    <a
+      className="link"
+      href="/teams/304u012h5k436h"
+      onClick={[Function]}
+    >
+      <div
+        className="headline flex title"
+      >
+        <div
+          className="header"
+          style={
+            Object {
+              "paddingLeft": 10,
+              "textAlign": "left",
+              "width": 300,
+            }
+          }
+        >
+          Test Team
+        </div>
+        <span
+          className="creator"
+        >
+          by TestUser
+        </span>
+      </div>
+      <div
+        className="body undefined"
+      >
+        This is not a real team. You have been deceived...
+      </div>
+      <div />
+    </a>
+  </div>
+</div>
+`;

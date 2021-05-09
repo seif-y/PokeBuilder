@@ -3,6 +3,9 @@ import PokeType from "../../global/PokeType";
 import Body from "../util/style-components/Body";
 import ShadowedBox from "../util/style-components/ShadowedBox";
 import styles from "./ImmutableTeamMember.module.css";
+import BlackHeadingTag from "../../global/BlackHeadingTag";
+import TextArea from "../../global/TextArea";
+import React from "react";
 
 function PokemonTypes({ types }) {
     return (
@@ -20,13 +23,18 @@ function PokemonTypes({ types }) {
  */
 export default function ImmutableTeamMember({ name, notes, sprite, types }) {
     return (
-        <ShadowedBox classes={`flex ${styles.immutableTeamMember}`}>
-            <img src={sprite} alt={name} className={styles.pokemonSprite} />
-            <div className={styles.pokemonInfo}>
-                <h3 className={styles.pokemonName}>{formatName(name)}</h3>
-                <PokemonTypes types={types} />
-                <Body>{notes}</Body>
+        <div className={styles.teamMemberContainer}>
+            <div className={styles.spriteContainer}>
+                <img src={sprite} alt={name} className={styles.pokemonSprite} />
+                <div className={styles.bgCircle} />
             </div>
-        </ShadowedBox>
+            <div className={styles.pokemonInfo}>
+                <BlackHeadingTag text={formatName(name)} />
+                <div className={styles.typeContainer}>
+                    <PokemonTypes types={types} />
+                </div>
+                <div className={styles.notesArea}>{notes}</div>
+            </div>
+        </div>
     );
 }

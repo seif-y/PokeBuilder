@@ -1,6 +1,7 @@
 .filter {
     margin-left: 20px;
     cursor: pointer;
+    color: white;
 }
 
 /* 3 rows of 6 = 18 types */
@@ -8,11 +9,6 @@
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     justify-items: center;
-}
-
-/* The heading */
-.typeGrid div:first-child {
-    grid-column: 1 / span 6;
 }
 
 /* The poketypes */
@@ -38,10 +34,20 @@
     margin-top: 5px;
 }
 
-.leftButton {
-    grid-column: 1 / span 3;
+.buttonsContainer {
+    display: flex;
+    justify-content: center;
 }
 
-.rightButton {
-    grid-column: 4 / span 3;
+.buttonWrapper {
+    padding: 20px 20px 0px 20px;
+}
+
+.text {
+    color: white;
+    font-family: Roboto;
+    text-shadow: 0px 2px 2px #262626;
+    font-size: 20px;
+    left: 30px;
+    white-space: nowrap;
 }

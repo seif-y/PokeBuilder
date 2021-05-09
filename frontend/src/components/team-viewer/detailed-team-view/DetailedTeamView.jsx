@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useCallback, useContext, useEffect, useState } from "react";
 import styles from "./DetailedTeamView.module.css";
-import { formatParty } from "../../../pokeapi/pokemon";
 import { getToken, getAuthConfig, getUserID } from "../../../util/auth";
 import { AuthContext } from "../../../App.js";
 import Comment from "./Comment";
@@ -11,17 +10,21 @@ import Body from "../util/style-components/Body";
 import Headline from "../util/style-components/Headline";
 import ShadowedBox from "../util/style-components/ShadowedBox";
 import UpvoteBox from "../util/upvotes/UpvoteBox";
+import BlackHeadingTag from "../../global/BlackHeadingTag";
+import { PokemonDataContext } from "../../../pokeapi/PokemonDataContextProvider";
 
 function Heading({ loggedIn, teamData: { _id: teamID, teamName, creatorUsername, upvotes: initialUpvotes } }) {
     /* TODO duplicate code from TeamViewer */
     /* We highlight upvotes by detecting whether a teamID is included in upvotedTeams */
     const [upvotedTeams, setUpvotedTeams] = useState([]);
+
     async function fetchAndSetUpvotedTeams(token) {
         const userID = getUserID(token);
         const USER_ENDPOINT = `/api/users/${userID}`;
         const res = await axios.get(USER_ENDPOINT, getAuthConfig(token));
         setUpvotedTeams(res.data.upvotedTeams);
     }
+
     useEffect(() => {
         if (loggedIn) {
             const token = getToken();
@@ -31,6 +34,7 @@ function Heading({ loggedIn, teamData: { _id: teamID, teamName, creatorUsername,
 
     // todo ask backend for a GET upvotes only endpoint?
     const [upvoteCount, setUpvoteCount] = useState(initialUpvotes);
+
     async function fetchAndSetUpvoteCount() {
         const TEAM_ENDPOINT = `/api/teams/${teamID}`;
         const res = await axios.get(TEAM_ENDPOINT);
@@ -55,23 +59,29 @@ function Heading({ loggedIn, teamData: { _id: teamID, teamName, creatorUsername,
                 upvotes={upvoteCount}
                 onVote={handleOnVote}
             />
-            <h1>{`${teamName} by ${creatorUsername}`}</h1>
+            <h1>{teamName}</h1>
+            <div className={styles.rightHeaderContent}>
+                <span className={styles.username}>{`by ${creatorUsername}`}</span>
+            </div>
         </div>
     );
 }
 
 function Party({ party = [] }) {
+    const allPokemonViews = useContext(PokemonDataContext);
     const [formattedParty, setFormattedParty] = useState([]);
-    // todo duplicate code from TeamView.jsx
+
+    // TODO: duplicate code from TeamView
     useEffect(() => {
-        async function fetchData() {
-            const newParty = await formatParty(party);
-            setFormattedParty(() => newParty);
+        if (allPokemonViews) {
+            setFormattedParty(
+                party.map((pokemon) => {
+                    const pokemonView = allPokemonViews.find((element) => element.id === pokemon.pokemonID);
+                    return Object.assign({}, pokemon, pokemonView);
+                })
+            );
         }
-        if (party.length !== 0) {
-            fetchData();
-        }
-    }, [party]);
+    }, [party, allPokemonViews]);
     return (
         <div className={styles.sixPack}>
             {formattedParty.map(({ _id, name, notes, sprite, types }) => (
@@ -84,7 +94,9 @@ function Party({ party = [] }) {
 function Description({ text }) {
     return (
         <ShadowedBox>
-            <Headline>Description</Headline>
+            <div className={styles.usernameWrapper}>
+                <BlackHeadingTag text="Description" />
+            </div>
             <Body>{text}</Body>
         </ShadowedBox>
     );
@@ -119,14 +131,21 @@ function DetailedTeamView({ teamData }) {
     return (
         <div className={styles.wrapper}>
             <Heading loggedIn={loggedIn} teamData={teamData} />
-            <Party party={teamData.party} />
-            <Description text={teamData.description} />
-            <CommentForm onSubmitComment={handleOnSubmitComment} />
-            <>
-                {comments.map(({ _id, comment: body, username }) => (
-                    <Comment key={_id} body={body} username={username} />
-                ))}
-            </>
+            <div className={styles.teamContainer}>
+                <Party party={teamData.party} />
+                <Description text={teamData.description} />
+            </div>
+            <div className={styles.commentsWrapper}>
+                <div className={styles.headerWrapper}>
+                    <BlackHeadingTag text="Comments" size={400} leftAlign />
+                </div>
+                <>
+                    {comments.map(({ _id, comment: body, username }) => (
+                        <Comment key={_id} body={body} username={username} />
+                    ))}
+                </>
+                <CommentForm onSubmitComment={handleOnSubmitComment} />
+            </div>
         </div>
     );
 }

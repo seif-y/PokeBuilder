@@ -1,27 +1,44 @@
-import { Button } from "@material-ui/core";
 import React, { useState } from "react";
 import TextArea from "../global/TextArea";
 import TeamMember from "./team-selector/TeamMember";
+import SnackbarMessage from "../global/SnackbarMessage";
 import styles from "./TeamBuilder.module.css";
+import { getAuthConfig, getToken } from "../../util/auth";
+import axios from "axios";
+import { useHistory } from "react-router";
+import Button from "../global/Button";
+import TopBar from "../global/TopBar";
 
 export default function TeamBuilder() {
     const [team, setTeam] = useState(Array(6));
     const [name, setName] = useState();
-    const [description, setDescription] = useState();
+    const [description, setDescription] = useState("");
+    const [showError, setShowError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState();
+
+    const history = useHistory();
 
     function saveTeam() {
-        // TODO: Once user auth is implemented, set 'creator' to the username of the logged in user
         let body = {
-            creator: "anonymous",
-            name: name,
+            teamName: name,
             description: description,
-            party: team,
+            party: team.filter((pokemon) => {
+                return pokemon != null;
+            }),
         };
 
-        //TODO: Do any required data verification on the frontend.
-
-        //TODO: Make POST request to teams endpoint.
-        console.log(body);
+        // Make POST request to teams endpoint.
+        axios
+            .post("/api/teams", body, getAuthConfig(getToken()))
+            .then((res) => {
+                history.push(`/teams/${res.data._id}`);
+            })
+            .catch((err) => {
+                setErrorMessage(
+                    "Could not create team. Make sure that you are logged in and that all required fields are filled."
+                );
+                setShowError(true);
+            });
     }
 
     function updateTeam(index, teamMember) {
@@ -41,16 +58,24 @@ export default function TeamBuilder() {
     }
 
     return (
-        <div id="modal-root" className={styles.teamBuilderContainer}>
-            <div className={styles.titleContainer}>
-                <h1> Team Builder </h1>
-                <Button variant="contained" onClick={() => saveTeam()}>
-                    Save
-                </Button>
+        <div className={styles.teamBuilderContainer}>
+            <TopBar title="TEAM BUILDER">
+                <input
+                    className={styles.teamNameInput}
+                    placeholder="Team name"
+                    onChange={(e) => setName(e.target.value)}
+                />
+                <div className={styles.hSpacer} />
+                <Button text="Save" color="white" onClick={() => saveTeam()} />
+            </TopBar>
+            <div className={styles.pageContent}>
+                <div className={styles.vSpacer} />
+                <div className={styles.teamContainer}>{renderTeamSlots()}</div>
+                <div className={styles.vSpacer} />
+                <TextArea classes={styles.descriptionInput} placeholder="Team description" onChange={setDescription} />
+                <div className={styles.vSpacer} />
+                <SnackbarMessage show={showError} setShow={setShowError} duration={3000} message={errorMessage} />
             </div>
-            <input className={styles.teamNameInput} placeholder="Team Name" onChange={(e) => setName(e.target.value)} />
-            <div className={styles.teamContainer}>{renderTeamSlots()}</div>
-            <TextArea classes={styles.descriptionInput} placeholder="Team description" onChange={setDescription} />
         </div>
     );
 }
