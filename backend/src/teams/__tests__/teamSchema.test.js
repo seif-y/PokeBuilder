@@ -212,7 +212,7 @@ it("adds a team without crashing", async () => {
     expect(fromDb.upvotes).toBe(0);
 });
 
-it("fails when creator id not included", async () => {
+it("fails when creator id is not included", async () => {
     const team = new Team({
         creatorUsername: "Sree",
         teamName: "Sree's Stars",
@@ -253,7 +253,7 @@ it("fails when creator id not included", async () => {
     return expect(team.save()).rejects.toThrow();
 });
 
-it("fails when team name not included", async () => {
+it("fails when team name is not included", async () => {
     const team = new Team({
         creator: user1._id,
         creatorUsername: "Sree",
@@ -294,7 +294,7 @@ it("fails when team name not included", async () => {
     return expect(team.save()).rejects.toThrow();
 });
 
-it("fails when pokemon id not included", async () => {
+it("fails when pokemon id is not included", async () => {
     const team = new Team({
         creator: user1._id,
         creatorUsername: "Sree",
