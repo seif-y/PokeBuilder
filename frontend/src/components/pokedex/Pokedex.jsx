@@ -21,7 +21,7 @@ function GridOfPokemon({ pokemon }) {
     return isEmpty ? (
         <div className={`${styles.resultNotFound} ${styles.pokemonDisplay}`}>No results found</div>
     ) : (
-        <div className={`${styles.pokemonDisplay} ${styles.grid}`}>
+        <div className={`${styles.pokemonDisplay} ${styles.flex}`}>
             {pokemon.map(({ id, name, sprite, types }) => {
                 return (
                     <div key={id} className={styles.pokemonCard}>
