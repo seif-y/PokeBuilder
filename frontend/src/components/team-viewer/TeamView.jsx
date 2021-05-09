@@ -5,14 +5,15 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./TeamView.module.css";
 import { PokemonDataContext } from "../../pokeapi/PokemonDataContextProvider";
+import BlackHeadingTag from "../global/BlackHeadingTag";
 
 function Details({ creatorUsername, teamName, description }) {
     const CHAR_LIMIT = 400;
     return (
         <>
             <Headline classes={`flex ${styles.title}`}>
-                <span>{teamName}</span>
-                <span>{`creator: ${creatorUsername}`}</span>
+                <BlackHeadingTag text={teamName} size={300} leftAlign />
+                <span className={styles.creator}>{`by ${creatorUsername}`}</span>
             </Headline>
             <Body>{description < CHAR_LIMIT ? description : `${description.slice(0, CHAR_LIMIT)}...`}</Body>
         </>

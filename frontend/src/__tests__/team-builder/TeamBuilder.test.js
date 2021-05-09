@@ -18,7 +18,7 @@ describe("General TeamBuilder Tests", () => {
     });
 
     test("TeamBuilder contains team name input", () => {
-        const teamNameInput = screen.getByPlaceholderText("Team Name");
+        const teamNameInput = screen.getByPlaceholderText("Team name");
         expect(teamNameInput).toBeDefined();
     });
 

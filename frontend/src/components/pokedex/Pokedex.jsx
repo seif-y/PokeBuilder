@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import PokemonCard from "./PokemonCardView";
 import styles from "./Pokedex.module.css";
 import SearchBar from "../global/SearchBar";
-import TopBar from "./top-bar/TopBar";
+import TopBar from "../global/TopBar";
 import TypeFilter from "./top-bar/TypeFilter";
 import PokeType from "../global/PokeType";
 import LoadingAnimation from "../global/LoadingAnimation";
@@ -65,8 +65,7 @@ export default function Pokedex() {
 
     return (
         <>
-            <TopBar>
-                <span className={styles.title}>DEX</span>
+            <TopBar title="DEX">
                 <SearchBar onSearch={handleOnSearch} />
                 <TypeFilter onFiltersUpdated={handleOnFiltersUpdated} />
             </TopBar>

@@ -19,28 +19,30 @@ export default function PokemonCardView({ id, name, sprite, types }) {
     let capitalisedName = formatName(name);
 
     return (
-        <div className={styles.container}>
-            <Link className={styles.link} to={`/pokedex/${name}`}>
-                <div className={styles.content}>
-                    <img
-                        className={styles.sprite}
-                        style={pokemonSpritesToMirror.includes(id) ? { transform: "scale(-1, 1)" } : null}
-                        src={sprite}
-                        alt={`Pokémon #${id}`}
-                    />
-                    <div className={styles.bgCircle} />
-                    <div className={styles.nameContainer}>
-                        <span className={styles.name}>{capitalisedName}</span>
+        <div className={styles.animation}>
+            <div className={styles.container}>
+                <Link className={styles.link} to={`/pokedex/${name}`}>
+                    <div className={styles.content}>
+                        <img
+                            className={styles.sprite}
+                            style={pokemonSpritesToMirror.includes(id) ? { transform: "scale(-1, 1)" } : null}
+                            src={sprite}
+                            alt={`Pokémon #${id}`}
+                        />
+                        <div className={styles.bgCircle} />
+                        <div className={styles.nameContainer}>
+                            <span className={styles.name}>{capitalisedName}</span>
+                        </div>
+                        <div className={styles.types}>
+                            <PokeType typeName={types[0]} size="small" />
+                            {types[1] ? <PokeType typeName={types[1]} size="small" /> : null}
+                        </div>
+                        <div className={styles.idContainer}>
+                            <div>{`#${id}`}</div>
+                        </div>
                     </div>
-                    <div className={styles.types}>
-                        <PokeType typeName={types[0]} size="small" />
-                        {types[1] ? <PokeType typeName={types[1]} size="small" /> : null}
-                    </div>
-                    <div className={styles.idContainer}>
-                        <div>{`#${id}`}</div>
-                    </div>
-                </div>
-            </Link>
+                </Link>
+            </div>
         </div>
     );
 }

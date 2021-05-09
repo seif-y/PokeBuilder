@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
-import { Button } from "@material-ui/core";
 import styles from "./LoginForm.module.css";
 import axios from "axios";
 import { AuthContext } from "../../../App";
+import Button from "../Button";
 
 export default function LoginForm({ onComplete }) {
     const [username, setUsername] = useState();
@@ -52,12 +52,9 @@ export default function LoginForm({ onComplete }) {
                 placeholder="Password"
                 onChange={(e) => setPassword(e.target.value)}
             />
-            <Button className={styles.formButton} variant="contained" color="primary" onClick={() => logIn()}>
-                Log In
-            </Button>
-            <Button className={styles.formButton} variant="contained" color="primary" onClick={() => signUp()}>
-                Sign Up
-            </Button>
+            <Button text="Log In" onClick={() => logIn()} />
+            <Button text="Sign Up" onClick={() => signUp()} color="white" />
+
             <div className={styles.errMsg}>{errorMessage}</div>
         </div>
     );

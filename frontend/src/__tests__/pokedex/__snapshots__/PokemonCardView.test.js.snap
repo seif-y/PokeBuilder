@@ -2,60 +2,64 @@
 
 exports[`PokemonCardView snapshot test 1`] = `
 <div
-  className="container"
+  className="animation"
 >
-  <a
-    className="link"
-    href="/pokedex/muk"
-    onClick={[Function]}
+  <div
+    className="container"
   >
-    <div
-      className="content"
+    <a
+      className="link"
+      href="/pokedex/muk"
+      onClick={[Function]}
     >
-      <img
-        alt="Pokémon #89"
-        className="sprite"
-        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/89.png"
-        style={null}
-      />
       <div
-        className="bgCircle"
-      />
-      <div
-        className="nameContainer"
+        className="content"
       >
-        <span
-          className="name"
-        >
-          Muk
-        </span>
-      </div>
-      <div
-        className="types"
-      >
+        <img
+          alt="Pokémon #89"
+          className="sprite"
+          src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/89.png"
+          style={null}
+        />
         <div
-          className="container"
-          onClick={[Function]}
-          role="button"
-          style={
-            Object {
-              "background": "linear-gradient(225deg,#ce88cb 0%, #c577c4 20%, #bb68bd 40%, #b260b6 60%, #a458ab 80%, #944f9f 100%)",
-              "fontSize": "small",
-              "width": "55px",
-            }
-          }
+          className="bgCircle"
+        />
+        <div
+          className="nameContainer"
         >
-          POISON
+          <span
+            className="name"
+          >
+            Muk
+          </span>
+        </div>
+        <div
+          className="types"
+        >
+          <div
+            className="container"
+            onClick={[Function]}
+            role="button"
+            style={
+              Object {
+                "background": "linear-gradient(225deg,#ce88cb 0%, #c577c4 20%, #bb68bd 40%, #b260b6 60%, #a458ab 80%, #944f9f 100%)",
+                "fontSize": "small",
+                "width": "57px",
+              }
+            }
+          >
+            POISON
+          </div>
+        </div>
+        <div
+          className="idContainer"
+        >
+          <div>
+            #89
+          </div>
         </div>
       </div>
-      <div
-        className="idContainer"
-      >
-        <div>
-          #89
-        </div>
-      </div>
-    </div>
-  </a>
+    </a>
+  </div>
 </div>
 `;

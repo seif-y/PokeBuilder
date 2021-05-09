@@ -6,6 +6,7 @@ import styles from "./TeamMember.module.css";
 import CloseIcon from "@material-ui/icons/Close";
 import AddIcon from "@material-ui/icons/Add";
 import { formatName } from "../../../util/names";
+import BlackHeadingTag from "../../global/BlackHeadingTag";
 
 export default function TeamMember({ index, onUpdate }) {
     const [pokemon, setPokemon] = useState(null);
@@ -44,13 +45,18 @@ export default function TeamMember({ index, onUpdate }) {
         } else {
             return (
                 <React.Fragment>
-                    <img src={pokemon.sprite} alt={pokemon.name} className={styles.pokemonSprite} />
-                    <div className={styles.pokemonInfo}>
-                        <h3 className={styles.pokemonName}>{formatName(pokemon.name)}</h3>
-                        <div className={styles.typeContainer}>{renderTypes()}</div>
-                        <TextArea classes={styles.notesArea} onChange={setNotes} placeholder="Notes" />
+                    <div className={styles.teamMemberContainer}>
+                        <div className={styles.spriteContainer}>
+                            <img src={pokemon.sprite} alt={pokemon.name} className={styles.pokemonSprite} />
+                            <div className={styles.bgCircle} />
+                        </div>
+                        <div className={styles.pokemonInfo}>
+                            <BlackHeadingTag text={formatName(pokemon.name)} />
+                            <div className={styles.typeContainer}>{renderTypes()}</div>
+                            <TextArea classes={styles.notesArea} onChange={setNotes} placeholder="Notes" />
+                        </div>
+                        <CloseIcon color="action" className={styles.closeButton} onClick={(e) => clearPokemon(e)} />
                     </div>
-                    <CloseIcon color="action" className={styles.closeButton} onClick={(e) => clearPokemon(e)} />
                 </React.Fragment>
             );
         }

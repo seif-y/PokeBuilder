@@ -24,42 +24,84 @@ exports[`DetailedTeamView snapshot for test pokemon matches 1`] = `
       0
     </div>
     <h1>
-      Test Team by TestUser
+      Test Team
     </h1>
-  </div>
-  <div
-    className="sixPack"
-  />
-  <div
-    className="shadowedBox undefined"
-  >
     <div
-      className="headline undefined"
+      className="rightHeaderContent"
     >
-      Description
-    </div>
-    <div
-      className="body undefined"
-    >
-      This is not a real team. You have been deceived
+      <span
+        className="username"
+      >
+        by TestUser
+      </span>
     </div>
   </div>
   <div
-    className="shadowedBox flex commentForm"
+    className="teamContainer"
   >
-    <textarea
-      className="textArea form"
-      onChange={[Function]}
-      onClick={[Function]}
-      placeholder="Speak your mind..."
-      value=""
+    <div
+      className="sixPack"
     />
-    <button
-      className="submitButton"
-      onClick={[Function]}
+    <div
+      className="shadowedBox undefined"
     >
-      SUBMIT
-    </button>
+      <div
+        className="usernameWrapper"
+      >
+        <div
+          className="header"
+          style={
+            Object {
+              "width": 140,
+            }
+          }
+        >
+          Description
+        </div>
+      </div>
+      <div
+        className="body undefined"
+      >
+        This is not a real team. You have been deceived
+      </div>
+    </div>
+  </div>
+  <div
+    className="commentsWrapper"
+  >
+    <div
+      className="headerWrapper"
+    >
+      <div
+        className="header"
+        style={
+          Object {
+            "paddingLeft": 10,
+            "textAlign": "left",
+            "width": 400,
+          }
+        }
+      >
+        Comments
+      </div>
+    </div>
+    <div
+      className="shadowedBox flex commentForm"
+    >
+      <textarea
+        className="textArea form"
+        onChange={[Function]}
+        onClick={[Function]}
+        placeholder="Speak your mind..."
+        value=""
+      />
+      <div
+        className="button black"
+        onClick={[Function]}
+      >
+        Submit
+      </div>
+    </div>
   </div>
 </div>
 `;

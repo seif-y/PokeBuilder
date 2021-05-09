@@ -5,6 +5,7 @@ import styles from "./Modal.module.css";
 export default function Modal({ dismissOnClickOutside, onCancel, children, show, titleBarChildren }) {
     const [domReady, setDomReady] = React.useState(false);
 
+    // Fixes bug where modal is loaded in before the modal-root is, causing a crash
     React.useEffect(() => {
         setDomReady(true);
     });

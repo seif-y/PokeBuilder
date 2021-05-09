@@ -7,6 +7,7 @@ import { AuthContext } from "../../App.js";
 import DetailedTeamView from "./detailed-team-view/DetailedTeamView";
 import TeamView from "./TeamView";
 import NOT_FOUND from "../global/NOT_FOUND";
+import TopBar from "../global/TopBar";
 
 // todo refactor useEffect into a useFetch hook
 
@@ -78,24 +79,28 @@ export default function TeamViewer() {
     }
 
     return (
-        // <Router>
-        <Switch>
-            <Route path="/teams/:id">
-                <IdentifyTeamView />
-            </Route>
-            <Route>
-                <div className={styles.wrapper}>
-                    {teamViews.map((teamView) => (
-                        <TeamView
-                            key={teamView._id}
-                            teamData={teamView}
-                            onVote={handleOnVote}
-                            isUpvoted={upvotedTeams.includes(teamView._id)}
-                            upvotes={teamView.upvotes}
-                        />
-                    ))}
-                </div>
-            </Route>
-        </Switch>
+        <>
+            <TopBar title="TEAMS" />
+            <div className={styles.outerWrapper}>
+                <Switch>
+                    <Route path="/teams/:id">
+                        <IdentifyTeamView />
+                    </Route>
+                    <Route>
+                        <div className={styles.wrapper}>
+                            {teamViews.map((teamView) => (
+                                <TeamView
+                                    key={teamView._id}
+                                    teamData={teamView}
+                                    onVote={handleOnVote}
+                                    isUpvoted={upvotedTeams.includes(teamView._id)}
+                                    upvotes={teamView.upvotes}
+                                />
+                            ))}
+                        </div>
+                    </Route>
+                </Switch>
+            </div>
+        </>
     );
 }

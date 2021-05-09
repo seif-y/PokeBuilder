@@ -3,6 +3,7 @@ body {
     --stickySpacing: 40px;
     --scrollBarWidth: 10px;
     --topBarHeight: 55px;
+    --placeHolderColour: #c4c4c4;
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
         "Droid Sans", "Helvetica Neue", sans-serif;

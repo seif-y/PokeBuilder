@@ -12,5 +12,5 @@
 }
 
 .textArea::placeholder {
-    color: lightgray;
+    color: var(--placeHolderColour);
 }

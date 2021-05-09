@@ -1,12 +1,15 @@
 import Body from "../util/style-components/Body";
-import Headline from "../util/style-components/Headline";
 import ShadowedBox from "../util/style-components/ShadowedBox";
+import BlackHeadingTag from "../../global/BlackHeadingTag";
+import styles from "./Comment.module.css";
 
 // todo time posted
 export default function Comment({ body, username }) {
     return (
         <ShadowedBox>
-            <Headline>{username}</Headline>
+            <div className={styles.usernameWrapper}>
+                <BlackHeadingTag text={username} leftAlign />
+            </div>
             <Body>{body}</Body>
         </ShadowedBox>
     );
