@@ -16,7 +16,7 @@ npm install
 
 ### Running in Development
 
-In development environments, the backend and frontend must be running simultaneously for the application to work. These can be run using the command line, by typing the following commands in the `frontend` and `backend` directories:
+In development environments, the backend and frontend must be running simultaneously for the application to work. By default, the frontend runs on port 3000 and the backend runs on port 3001. These can be run using the command line, by typing the following command in both the `frontend` and `backend` directories:
 
 ```console
 npm start
@@ -26,7 +26,7 @@ By default, the frontend runs on `localhost:3000`, and the backend runs on `loca
 
 ### Running in Production
 
-In production, the backend will serve a static build of the frontend website. To build the frontend and run it through the backend, use the following commands from the project's root directory:
+In production, the backend will serve a static build of the frontend website. By default, the frontend and backend will both run on port 3001 in production To build the frontend and run it through the backend, use the following commands from the project's root directory:
 
 ```console
 npm run build --prefix frontend
