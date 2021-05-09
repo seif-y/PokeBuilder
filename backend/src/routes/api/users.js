@@ -28,7 +28,7 @@ router.post("/register", async (req, res) => {
             username: req.body.username,
             password: req.body.password,
             comments: [],
-            upvotedTeams: new Set(),
+            upvotedTeams: [],
         },
         (newUser, error) => {
             if (error) {
