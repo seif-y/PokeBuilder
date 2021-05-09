@@ -1,11 +1,10 @@
 import express from "express";
-import { createUser, retrieveUser, getTeamsByUser, deleteUser, getJwtForUser } from "../../users/user-dao";
-import passportRequestHandler from "../../auth/passportHandler";
+import { createUser, getJwtForUser, getTeamsByUser, retrieveUser } from "../../users/user-dao";
 
 const HTTP_CREATED = 201;
 const HTTP_NOT_FOUND = 404;
-const HTTP_NO_CONTENT = 204;
 const HTTP_BAD_REQUEST = 400;
+const HTTP_UNAUTHORIZED = 401;
 const HTTP_INTERNAL_SERVER_ERROR = 500;
 
 const DUPLICATE_USERNAME_ERROR_CODE = 11000;
@@ -42,19 +41,24 @@ router.post("/register", async (req, res) => {
                         res.status(HTTP_INTERNAL_SERVER_ERROR).send(error.message);
                 }
             } else {
-                res.status(HTTP_CREATED).header("Location", `/api/users/${newUser._id}`).json(newUser);
+                // The hashed password should not be revealed/returned when the user is created
+                let userObj = newUser.toObject();
+                delete userObj.password;
+
+                res.status(HTTP_CREATED).header("Location", `/api/users/${userObj._id}`).json(userObj);
             }
         }
     );
 });
 
+// User login
 router.post("/login", async (req, res) => {
     try {
         getJwtForUser(req.body.username, req.body.password, (body) => {
             if (body.success) {
                 res.status(HTTP_CREATED).send(body);
             } else {
-                res.status(HTTP_BAD_REQUEST).send(body);
+                res.status(HTTP_UNAUTHORIZED).send(body);
             }
         });
     } catch (error) {
@@ -63,14 +67,18 @@ router.post("/login", async (req, res) => {
 });
 
 // Retrieve single user
-router.get("/:id", passportRequestHandler, async (req, res) => {
+router.get("/:id", async (req, res) => {
     const { id } = req.params;
 
     try {
         const user = await retrieveUser(id);
 
         if (user) {
-            res.json(user);
+            // The hashed password should not be revealed/returned when the user is retrieved
+            let userObj = user.toObject();
+            delete userObj.password;
+
+            res.json(userObj);
         } else {
             res.sendStatus(HTTP_NOT_FOUND);
         }
@@ -91,17 +99,6 @@ router.get("/:id/teams", async (req, res) => {
         } else {
             res.sendStatus(HTTP_NOT_FOUND);
         }
-    } catch {
-        res.status(HTTP_BAD_REQUEST).send("Invalid user id");
-    }
-});
-
-// Delete user
-router.delete("/:id", async (req, res) => {
-    try {
-        const { id } = req.params;
-        await deleteUser(id);
-        res.sendStatus(HTTP_NO_CONTENT);
     } catch {
         res.status(HTTP_BAD_REQUEST).send("Invalid user id");
     }

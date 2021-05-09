@@ -2,6 +2,7 @@ import express from "express";
 import path from "path";
 import mongoose from "mongoose";
 import passport from "passport";
+import routes from "./routes";
 import configPassport from "./auth/passport";
 
 // Setup Express
@@ -20,7 +21,6 @@ const CONNECTION_STRING =
 app.use(express.json());
 
 // Setup our routes.
-import routes from "./routes";
 app.use("/", routes);
 
 // Make the "public" folder available statically

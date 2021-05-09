@@ -1,4 +1,4 @@
-import { Strategy, ExtractJwt } from "passport-jwt";
+import { ExtractJwt, Strategy } from "passport-jwt";
 import { User } from "../users/userSchema";
 
 const opts = { jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(), secretOrKey: "secret" };
