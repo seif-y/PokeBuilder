@@ -32,3 +32,17 @@ In production, the backend will serve a static build of the frontend website. By
 npm run build --prefix frontend
 npm start --production --prefix backend
 ```
+
+## Testing
+
+Test suites have been developed for both the frontend and the backend. To run the test suite for each module, run the following command in the `frontend` or `backend` folder:
+
+```console
+npm test
+```
+
+React Cosmos is also used for frontend testing. Fixtures files can be created to test React components in isolation. You can create a folder labelled `frontend/src/__fixtures__`, which will contain any React Cosmos fixtures. To use React Cosmos, run the following command in the `frontend` folder:
+
+```console
+npm run cosmos
+```
