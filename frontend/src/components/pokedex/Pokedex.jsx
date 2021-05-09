@@ -24,8 +24,8 @@ function GridOfPokemon({ pokemon }) {
         <div className={`${styles.pokemonDisplay} ${styles.grid}`}>
             {pokemon.map(({ id, name, sprite, types }) => {
                 return (
-                    <div className={styles.pokemonCard}>
-                        <PokemonCard key={id} id={id} name={name} sprite={sprite} types={types} />
+                    <div key={id} className={styles.pokemonCard}>
+                        <PokemonCard id={id} name={name} sprite={sprite} types={types} />
                     </div>
                 );
             })}
@@ -72,7 +72,7 @@ export default function Pokedex() {
             <div className={filtersOn ? styles.filtersBarActive : styles.filtersBar}>
                 {typeFilter.map((type) => {
                     return (
-                        <div>
+                        <div key={`filter${type}`}>
                             <PokeType typeName={type} size={"small"} />
                         </div>
                     );
